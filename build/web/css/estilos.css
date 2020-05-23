@@ -1,0 +1,25 @@
+.container{
+    border-radius:  10px;
+    margin-top: 50px;
+}
+
+.containercolor{
+    background-color:white;
+    background-image: url("http://www.hdfondos.eu/pictures/2015/0202/1/orig_72356.jpg");
+}
+
+.a{
+    border: 1px solid red;
+        width: 400px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+}
+
+.letras{
+    color:white;
+}
+
+body{
+    background-color:black;
+}
+

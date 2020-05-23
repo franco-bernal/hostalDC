@@ -1,0 +1,61 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-image: url("https://static.epodreczniki.pl/portal/f/res-minimized/R1Lg6tTbTXGnZ/1/nEF3hmnPKLQL7aDCRUGDi7vwJk3BjgZV.jpg");
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+#cuadro{
+    width:330px;
+    background: #000000;
+    color:#ffffff;
+    margin:auto;
+    margin-top: 120px;
+    padding: 5px 5px 30px 5px;
+    border-top: 35px solid #141414;
+    border-right: 35px solid #141414;
+    border-left: 35px solid #141414;
+    border-radius: 6px; 
+    opacity: 0.7;
+}
+.entrada{
+    width:320px;
+    height: 35px;
+    border-radius: 6px;
+    font-family: verdana;
+    font-weight: 900;
+}
+#boton{
+    width: 324px;
+    height: 45px;
+    border-radius: 6px;
+    background: #c98455;
+    color: #ffffff;
+    font-size: 15px;
+}
+#boton2{
+    width: 100px;
+    border-radius: 6px;
+    background: #c98455;
+    color: #ffffff;
+
+}
+#titulo{
+    font-size: 30px;
+    font-family: decorative;
+    padding-left: 45px;
+}
+#subtitulo1{
+    padding-left: 80px;
+}
+#subtitulo2{
+    padding-left: 107px;
+}
+#marca{
+    font-size: 15px;
+    padding-left: 190px;
+
+}
