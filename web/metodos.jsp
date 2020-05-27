@@ -22,16 +22,6 @@
         <h1>
             <%
                  Manejadora_usuario mane = new Manejadora_usuario();
-                try {
-
-                    Usuario r = mane.obtenerUsuario("Equi1nox2", "4321");
-                    out.print(r.getCorreo());
-
-                } catch (Exception e) {
-                    out.print(e);
-                }
-
-
             %>
         </h1>
 

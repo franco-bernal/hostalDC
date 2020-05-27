@@ -15,13 +15,13 @@ public class Habitacion {
     private String tipo_cama;
     private int precio;
     private String accesorio;
-    private char disponibilidad;
+    private String disponibilidad;
     private int ORDEN_compra_codigo_compra;
 
     public Habitacion() {
     }
 
-    public Habitacion(int num_hab, String tipo_cama, int precio, String accesorio, char disponibilidad, int ORDEN_compra_codigo_compra) {
+    public Habitacion(int num_hab, String tipo_cama, int precio, String accesorio, String disponibilidad, int ORDEN_compra_codigo_compra) {
         this.num_hab = num_hab;
         this.tipo_cama = tipo_cama;
         this.precio = precio;
@@ -62,11 +62,11 @@ public class Habitacion {
         this.accesorio = accesorio;
     }
 
-    public char getDisponibilidad() {
+    public String getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(char disponibilidad) {
+    public void setDisponibilidad(String disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
@@ -77,6 +77,7 @@ public class Habitacion {
     public void setORDEN_compra_codigo_compra(int ORDEN_compra_codigo_compra) {
         this.ORDEN_compra_codigo_compra = ORDEN_compra_codigo_compra;
     }
+
     
     
     
