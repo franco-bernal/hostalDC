@@ -80,26 +80,29 @@ public class ControlUsuario extends HttpServlet {
             } catch (Exception e) {
                 r = 0;
             }
+            //empleado
             if (r == 2) {
                 sesion.setAttribute("user", usu.getNom_usuario());
                 sesion.setAttribute("clave", usu.getClave());
                 sesion.setAttribute("tipo", usu.getTipo_usuario_permiso());
 
-                request.getRequestDispatcher("Principal.jsp").forward(request, response);
+                request.getRequestDispatcher("empleado_home.jsp").forward(request, response);
             }
+            //proveedor
             if (r == 3) {
                 sesion.setAttribute("user", usu.getNom_usuario());
                 sesion.setAttribute("clave", usu.getClave());
                 sesion.setAttribute("tipo", usu.getTipo_usuario_permiso());
 
-                request.getRequestDispatcher("Principal.jsp").forward(request, response);
+                request.getRequestDispatcher("proveedor_home.jsp").forward(request, response);
             }
+            //cliente
             if (r == 4) {
                 sesion.setAttribute("user", usu.getNom_usuario());
                 sesion.setAttribute("clave", usu.getClave());
                 sesion.setAttribute("tipo", usu.getTipo_usuario_permiso());
 
-                request.getRequestDispatcher("Principal.jsp").forward(request, response);
+                request.getRequestDispatcher("cliente_home.jsp").forward(request, response);
             }
         }
         if (accion.equals("Salir")) {

@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * @author Franco
  */
 public class DAOusuario_cli {
-
+//DEtalles
     public String ingresarCliente(UsuarioCli_detalle det) {
         Conexion c = new Conexion();
         String rs;

@@ -21,6 +21,7 @@ public class Manejadora_usuario {
     DAOusuario daoUsuario = new DAOusuario();
     DAOusuario_cli dao_det = new DAOusuario_cli();
 
+    
     //cargado con todos los clientes
     private ArrayList<Usuario> arrayUsuario = daoUsuario.ObtenerUsuario();
 
