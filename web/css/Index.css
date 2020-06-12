@@ -1,0 +1,167 @@
+.clear_float {
+  clear: both;
+}
+
+body{
+
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    align-items: center;
+    min-height: 40vh;
+
+}
+
+ /*<--texto quienessomos-->*/
+.bloque{
+    
+    padding: 20px;
+    margin-top: 150px;
+    border: 1px solid #515153;
+    text-align: center;    
+    box-shadow: 6px 6px 6px 6px black;
+    background-color:blanchedalmond;opacity:0.7;
+    outline: rgb(192, 221, 30) solid 5px;
+    margin-left: 150px;
+    margin-right: 150px;
+
+  }
+
+  /*<--imagen quienessomos-->*/
+.ima{
+  
+text-align: center;
+margin-bottom: 50px;
+
+
+}
+
+  /*<--foto en quienessomos-->*/
+  .imagen{
+  
+ text-align: center;
+ padding: 50px;
+ filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); 
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); 
+
+
+    }
+    
+/*<--boton volver-->*/
+.btnVolver{
+    float: right;
+    margin: 50px;
+    margin-top: 140px;
+    color:black;
+}
+
+ /*<--derechos reservados-->*/
+.derechos{
+text-align: center;
+padding: 8px;
+text-decoration-color: white;
+background:black;opacity: 0.6;
+margin-top: 200px;
+color: white;}
+
+ /*<--imagen de flecha-->*/
+.flecha{
+    padding: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+ /*<--cuadro de texto-->*/
+.tex{  
+  box-shadow: 10px 6px 6px 6px black;
+  background-color:blanchedalmond;opacity:0.7;
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  color:black;
+  padding: 18px;
+  width: 50;
+  outline: rgb(192, 221, 30) solid 5px;
+ }
+
+
+ /*<--letras-->*/
+
+.deconstructed {
+  position: relative;
+  text-align: center;
+  font-family: 'Cambay', sans-serif;
+  font-size: 10vw;
+  font-weight: 90;
+  letter-spacing: -0.02em;
+  line-height: 1.03em;
+ 
+}
+
+.deconstructed > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 2;
+  color: #ffff64;
+  pointer-events: none;
+
+}
+/*<--letras (efecto)-->*/
+
+.deconstructed > div:nth-child(1) {
+  -webkit-mask-image: linear-gradient(black 25%, transparent 25%);
+  mask-image: linear-gradient(black 25%, transparent 25%);
+  animation: deconstructed1 5s infinite;
+}
+
+.deconstructed > div:nth-child(2) {
+  -webkit-mask-image: linear-gradient(transparent 25%, black 25%, black 50%, transparent 50%);
+  mask-image: linear-gradient(transparent 25%, black 25%, black 50%, transparent 50%);
+  animation: deconstructed2 5s infinite;
+}
+
+.deconstructed > div:nth-child(3) {
+   -webkit-mask-image: linear-gradient(transparent 50%, black 50%, black 75%, transparent 75%);
+  mask-image: linear-gradient(transparent 50%, black 50%, black 75%, transparent 75%);
+  animation: deconstructed3 5s infinite;
+}
+
+.deconstructed > div:nth-child(4) {
+   -webkit-mask-image: linear-gradient(transparent 75%, black 75%);
+  mask-image: linear-gradient(transparent 75%, black 75%);
+  animation: deconstructed4 5s infinite;
+}
+
+@keyframes deconstructed1 {
+  0% {transform: translateX(100%);}
+  26% {transform: translateX(0%);}
+  83% {transform: translateX(-0.1%);}
+  100% {transform: translateX(-120%);}
+}
+
+@keyframes deconstructed2 {
+  0% {transform: translateX(100%);}
+  24% {transform: translateX(0.5%);}
+  82% {transform: translateX(-0.2%);}
+  100% {transform: translateX(-125%);}
+}
+
+@keyframes deconstructed3 {
+  0% {transform: translateX(100%);}
+  22% {transform: translateX(0%);}
+  81% {transform: translateX(0%);}
+  100% {transform: translateX(-130%);}
+}
+
+@keyframes deconstructed4 {
+  0% {transform: translateX(100%);}
+  20% {transform: translateX(0%);}
+  80% {transform: translateX(0%);}
+  100% {transform: translateX(-135%);}
+}
+

@@ -1,11 +1,45 @@
 .giga{
     height: 420px;
     width: 100%;
-    
+    background-image: url("https://holiadventure.com/media-store/imgresize/cover/uploads/hotel/89113/golden-tulip-aguas-claras-hotel-845.jpeg");
+    opacity: 0.8;
+    margin-top: 0px;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    font-size: 30px;
+    color:  blueviolet;
+    -webkit-text-stroke: 3px menutext ;
+
 }
+.mar{
+    margin-top: 100px;
+}
+.aba{
+    margin-bottom:100px;
+
+}
+
+.correr{
+    margin-top: -15px;
+}
+
+.ca{  
+    z-index:1000;
+    opacity: 0.8;
+    box-shadow: 20px 15px 150px darkblue;
+    position: fixed;
+
+}     
+
 .fue{
     font-size: 500%;
 
+}
+
+
+.fondo{
+    background-color: tomato;
 }
 .centrar{
     display: flex;

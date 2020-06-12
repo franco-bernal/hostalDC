@@ -37,7 +37,6 @@ public class ControlProveedor extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
       
     }
 
@@ -86,7 +85,7 @@ public class ControlProveedor extends HttpServlet {
             String nom = request.getParameter("txt_nom_emp");
             String rubro = request.getParameter("txt_rubro");
 
-            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo);
+            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo,0);
             UsuarioProveedor d = new UsuarioProveedor(rut, nom, rubro, id);
             out.print(mane_pro.ingresarProveedorCompleto(u, d));
             out.print("<hr>");

@@ -21,7 +21,6 @@ public class Manejadora_usuario {
     DAOusuario daoUsuario = new DAOusuario();
     DAOusuario_cli dao_det = new DAOusuario_cli();
 
-    
     //cargado con todos los clientes
     private ArrayList<Usuario> arrayUsuario = daoUsuario.ObtenerUsuario();
 
@@ -51,6 +50,7 @@ public class Manejadora_usuario {
                 u.setClave(arrayUsuario.get(i).getClave());
                 u.setCorreo(arrayUsuario.get(i).getCorreo());
                 u.setTipo_usuario_permiso(arrayUsuario.get(i).getTipo_usuario_permiso());
+                u.setConexion(arrayUsuario.get(i).getConexion());
                 return u;
             }
         }
@@ -63,6 +63,14 @@ public class Manejadora_usuario {
 
     public String ingresarUsuario(Usuario usu) {
         return daoUsuario.ingresarUsuario(usu);
+    }
+
+    public String Conec(int id,int tipo) {
+        if (daoUsuario.Conex(id,tipo) == "1") {
+            return "1";
+        } else {
+            return "0";
+        }
     }
 
 }

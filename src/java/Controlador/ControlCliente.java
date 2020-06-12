@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "ControlCliente", urlPatterns = {"/ControlCliente"})
 public class ControlCliente extends HttpServlet {
 
@@ -32,7 +31,11 @@ public class ControlCliente extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+                request.getRequestDispatcher("cliente_home.jsp").forward(request, response);
 
     }
 
@@ -82,7 +85,7 @@ public class ControlCliente extends HttpServlet {
             String telefono = request.getParameter("txt_tele_emp");
             String dir = request.getParameter("txt_dir_emp");
 
-            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo);
+            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo, 0);
             UsuarioCli_detalle d = new UsuarioCli_detalle(rut, nom, telefono, dir, id);
             out.print(mane_cli.ingresarClienteCompleto(u, d));
             out.print("<hr>");

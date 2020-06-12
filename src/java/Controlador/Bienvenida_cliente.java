@@ -5,10 +5,6 @@
  */
 package Controlador;
 
-import Modelo.Entidades.Usuario;
-import Modelo.Entidades.UsuarioEmpleado;
-import Modelo.Manejadoras.Manejadora_empleado;
-import Modelo.Manejadoras.Manejadora_usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Franco
  */
-@WebServlet(name = "ControlEmp", urlPatterns = {"/ControlEmp"})
-public class ControlEmp extends HttpServlet {
+@WebServlet(name = "Bienvenida_cliente", urlPatterns = {"/Bienvenida_cliente"})
+public class Bienvenida_cliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +31,6 @@ public class ControlEmp extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
     }
 
@@ -51,7 +46,12 @@ public class ControlEmp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Cache-Control", "no-cache");
+        request.getRequestDispatcher("b_cliente.jsp").forward(request, response);
+
     }
 
     /**
@@ -66,33 +66,6 @@ public class ControlEmp extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-        PrintWriter out = response.getWriter();
-        Manejadora_usuario mane_usu = new Manejadora_usuario();
-        Manejadora_empleado mane_emp = new Manejadora_empleado();
-
-        String accion = request.getParameter("accion");
-
-        //REGISTRO CLIENTE
-        if (accion.equals("RegistrarEmple")) {
-            int id = mane_usu.idMax() + 1;
-            String nom_usu = request.getParameter("txt_nom_emp");
-            String clave = request.getParameter("txt_clave");
-            String correo = request.getParameter("txt_correo_emp");
-            int tipo = 2;
-
-            String rut = request.getParameter("txt_rut_emp");
-            String nom = request.getParameter("txt_nom_emp");
-            String ape = request.getParameter("txt_ape_emp");
-
-
-            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo,0);
-            UsuarioEmpleado d = new UsuarioEmpleado(rut, nom, ape, id);
-            out.print(mane_emp.ingresarEmpleadoCompleto(u, d));
-            out.print("<hr>");
-            out.print("<h1>" + rut + " " + nom + " " + ape+ " " + id + "</h1>");
-            out.print("<h1>" + id + " " + nom_usu + " " + clave + " " + correo + " " + tipo + " </h1>");
-        }
     }
 
     /**

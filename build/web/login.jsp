@@ -7,6 +7,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="css/estilo.css" rel="stylesheet" type="text/css"/>
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires", 0);
+        %>
+
+       
     </head>
     <body>
         <div id="cuadro">
@@ -26,8 +34,7 @@
 
                 <div class="alert btn-outline-dark text-center letras" role="alert">
                     <p>
-                        <%
-                            Manejadora_usuario mane = new Manejadora_usuario();
+                        <%                            Manejadora_usuario mane = new Manejadora_usuario();
                             String nom;
                             String clave;
                             nom = request.getParameter("txt_nom");
@@ -42,7 +49,7 @@
                                 }
 
                             } catch (Exception ex) {
-                                out.print("");
+                                out.print("Ingrese los datos solicitados");
                             }
                         %>
                     </p>
@@ -59,7 +66,7 @@
 
             <p id="marca">Alojamiento y Servicio de Comedor para Empresas</p>
         </div>
-        <a class="btn btn-outline-success btn-sm letras" href="metodos.jsp" role="button">metodos</a>
+
 
     </body>
 </html>

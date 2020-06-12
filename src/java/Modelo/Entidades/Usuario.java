@@ -10,16 +10,18 @@ public class Usuario {
     private String clave;
     private String correo;
     private int tipo_usuario_permiso;
+    private int conexion;
 
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String nom_usuario, String clave, String correo, int tipo_usuario_permiso) {
+    public Usuario(int id_usuario, String nom_usuario, String clave, String correo, int tipo_usuario_permiso, int conexion) {
         this.id_usuario = id_usuario;
         this.nom_usuario = nom_usuario;
         this.clave = clave;
         this.correo = correo;
         this.tipo_usuario_permiso = tipo_usuario_permiso;
+        this.conexion = conexion;
     }
 
     public int getId_usuario() {
@@ -62,6 +64,13 @@ public class Usuario {
         this.tipo_usuario_permiso = tipo_usuario_permiso;
     }
 
+    public int getConexion() {
+        return conexion;
+    }
 
-    
+    public void setConexion(int conexion) {
+        this.conexion = conexion;
+    }
+
+
 }
