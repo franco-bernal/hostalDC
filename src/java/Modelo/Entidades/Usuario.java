@@ -21,7 +21,6 @@ public class Usuario {
         this.clave = clave;
         this.correo = correo;
         this.tipo_usuario_permiso = tipo_usuario_permiso;
-        this.conexion = conexion;
     }
 
     public int getId_usuario() {
@@ -64,7 +63,10 @@ public class Usuario {
         this.tipo_usuario_permiso = tipo_usuario_permiso;
     }
 
-    public int getConexion() {
+  
+   
+
+     public int getConexion() {
         return conexion;
     }
 

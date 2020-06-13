@@ -42,7 +42,6 @@
                 aint = sesion.getAttribute("tipo").toString();
                 id_usuario = Integer.parseInt(sesion.getAttribute("id").toString());
                 Usuario usu = u.buscarUsuarioNombreClave(usuario, clave);
-                con = usu.getConexion();
 
                 if (sesion.getAttribute("user").toString() == null) {
                     session.invalidate();
