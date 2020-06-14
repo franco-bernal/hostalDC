@@ -36,6 +36,24 @@ public class ControlUsuario extends HttpServlet {
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
+        
+        
+        
+        
+
+        Manejadora_usuario mane_usu = new Manejadora_usuario();
+        HttpSession sesion = request.getSession();
+
+        String accion = request.getParameter("accion");
+
+        if (accion.equals("Salir")) {
+
+            mane_usu.Conec(Integer.parseInt(sesion.getAttribute("id").toString()), 0);
+            sesion.invalidate();
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,7 +69,6 @@ public class ControlUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getRequestDispatcher("login.jsp").forward(request, response);
 
     }
 
@@ -75,12 +92,16 @@ public class ControlUsuario extends HttpServlet {
         String nom = request.getParameter("txt_nom");
         String clave = request.getParameter("txt_clave");
         Usuario usu = new Usuario();
-        if (nom != null || clave != null) {
-            usu = mane_usu.obtenerUsuario(nom, clave);
+
+        usu = mane_usu.obtenerUsuario(nom, clave);
+        if (usu == null) {
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
             sesion.setAttribute("id", usu.getId_usuario());
             sesion.setAttribute("user", usu.getNom_usuario());
             sesion.setAttribute("clave", usu.getClave());
             sesion.setAttribute("tipo", usu.getTipo_usuario_permiso());
+
         }
 
         int r;
@@ -94,47 +115,25 @@ public class ControlUsuario extends HttpServlet {
             }
             //empleado
             if (r == 2) {
-
                 request.getRequestDispatcher("empleado_home.jsp").forward(request, response);
             }
             //proveedor
             if (r == 3) {
-
                 request.getRequestDispatcher("proveedor_home.jsp").forward(request, response);
             }
             //cliente
             if (r == 4) {
-                sesion.setAttribute("sesion", mane_usu.Conec(usu.getId_usuario(), 1));
                 request.getRequestDispatcher("cliente_home.jsp").forward(request, response);
             }
-        }
-        if (accion.equals("Salir")) {
-
-            mane_usu.Conec(Integer.parseInt(sesion.getAttribute("id").toString()), 0);
-            sesion.invalidate();
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-
-        } else {
-            out.print("kee");
         }
 
     }
 
-    /*
-
-    
-    
-   
-
-     */
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
+    
+    
 }

@@ -21,7 +21,6 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Franco
  */
-@Path("/Obtener")
 public class DAOusuario {
 
     /*
@@ -31,8 +30,6 @@ public class DAOusuario {
     eliminar
      */
     //OBTENER
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
     public ArrayList<Usuario> ObtenerUsuario() {
         ArrayList<Usuario> usuArray = new ArrayList<Usuario>();
         try {

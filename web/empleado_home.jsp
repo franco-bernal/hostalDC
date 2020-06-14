@@ -163,8 +163,6 @@
                         </div>
                         <input type="email" class="form-control" name="txt_cantidad" placeholder="Cantidad" required="true" maxlength="30">
 
-                        <input type="text" class="form-control" name="txt_plazo_limite" placeholder="Plazo limite" required="true" maxlength="20">
-
                     </div>
                     <hr>
                     <div class="form-group form-check">

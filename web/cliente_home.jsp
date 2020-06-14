@@ -48,20 +48,18 @@
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
 
-                if (con != 1) {
-                    session.invalidate();
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                int tip = Integer.parseInt(aint);
+
+                if (tip == 4) {
+                    tipo = "Cliente";
                 } else {
-
-                    int tip = Integer.parseInt(aint);
-
-                    if (tip == 4) {
-                        tipo = "Cliente";
-                    } else {
-                        tipo = "salir";
-                    }
-
+                    tipo = "salir";
                 }
+                
+                if (tipo == "salir") {
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
+
             }
 
         %>
@@ -107,12 +105,6 @@
                         <p class="p-3 mb-2 bg-dark text-white ">Compra</p>
                         <input type="text" class="form-control" name="txt_f_inicio" placeholder="Desde" required="true" maxlength="18">
                         <input type="text" class="form-control" name="txt_f_fin" placeholder="Hasta" required="true" maxlength="20">
-                        <input type="email" class="form-control" name="txt_cantidad" placeholder="Cantidad de huespedes" required="true" maxlength="30">
-                        <div class="row mt-2">
-                            <p class="ml-3 mr-3 mt-2">+569 </p>
-                            <input type="tel" class="form-control col-3" name="txt_tele" pattern="[0-9]{8}" title="Ingrese solo números" placeholder="Celular" maxlength="8">
-                        </div>
-                        <input type="text" class="form-control" name="txt_dir_emp" placeholder="Direccion empresa" required="true" maxlength="30">
                         <div class="form-group">
                             <label for="sel1" class="mt-2">Tipo de habitacion</label>
                             <select class="form-control" name="select_ha" id="sel1">
