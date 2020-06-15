@@ -75,7 +75,7 @@ public class ControlEmp extends HttpServlet {
 
         //REGISTRO CLIENTE
         if (accion.equals("RegistrarEmple")) {
-            int id = mane_usu.idMax() + 1;
+            int id = mane_usu.idMax() +1;
             String nom_usu = request.getParameter("txt_nom_emp");
             String clave = request.getParameter("txt_clave");
             String correo = request.getParameter("txt_correo_emp");

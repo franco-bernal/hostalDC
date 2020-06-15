@@ -6,10 +6,8 @@
 package Modelo.Manejadoras;
 
 import Modelo.DAO.DAOusuario_empleado;
-import Modelo.DAO.DAOusuario_proveedor;
 import Modelo.Entidades.Usuario;
 import Modelo.Entidades.UsuarioEmpleado;
-import Modelo.Entidades.UsuarioProveedor;
 
 /**
  *
@@ -28,14 +26,18 @@ public class Manejadora_empleado {
         String nom = usu.getNom_usuario();
         String clave = usu.getClave();
 
-        String i = mane_usu.ingresarUsuario(usu);
 
-        if (mane_usu.obtenerUsuario(nom, clave) == null) {
+        if (mane_usu.verificar(nom) == false) {
+            
+                    String i = mane_usu.ingresarUsuario(usu);
+
             if (i.compareToIgnoreCase("1") == 0) {
                 return dao_emp.ingresarEmpleado(emp);
             } else {
                 return i;
             }
+            
+            
         } else {
             return "el usuario ya existe";
         }

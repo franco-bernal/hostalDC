@@ -1,0 +1,49 @@
+select * from empleado;
+select * from usuario;
+select * from cliente;
+select * from proveedor;
+
+
+delete from usuario where id_usuario='1';
+delete from usuario where id_usuario='2';
+delete from usuario where id_usuario='3';
+select * from empleado;
+select * from usuario order by id_usuario;
+select * from cliente;
+select * from proveedor;
+
+
+delete from usuario where id_usuario='1';
+delete from usuario where id_usuario='2';
+delete from usuario where id_usuario='3';
+delete from usuario where id_usuario='4';
+delete from usuario where id_usuario='5';
+delete from usuario where id_usuario='6';
+delete from usuario where id_usuario='7';
+delete from usuario where id_usuario='88';
+delete from usuario where id_usuario='89';
+delete from usuario where id_usuario='90';
+delete from usuario where id_usuario='87';
+
+
+delete from empleado where Usuario_id_usuario=1;
+delete from empleado where Usuario_id_usuario=2;
+delete from empleado where Usuario_id_usuario=3;
+delete from empleado where Usuario_id_usuario=4;
+delete from empleado where Usuario_id_usuario=5;
+delete from empleado where Usuario_id_usuario=6;
+delete from empleado where Usuario_id_usuario=7;
+
+
+
+
+delete from cliente where Usuario_id_usuario=1;
+
+
+delete from proveedor where Usuario_id_usuario=2;
+delete from proveedor where Usuario_id_usuario=5;
+
+
+INSERT INTO usuario VALUES (4,'123','123','f1ranco9bernal@hotmail.com',2,0);
+INSERT INTO empleado VALUES (123,'123','123',4);
+                                                                                                                                                                                                                                                                                                                                                  

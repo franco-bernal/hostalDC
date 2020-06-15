@@ -25,13 +25,9 @@ public class DAOusuario_empleado {
         try {
                 //inserto datos del usuario
                 Connection con = c.getConnection();
-                String query1 = "INSERT INTO empleado VALUES (?,?,?,?)";
+                String query1 = "INSERT INTO empleado VALUES ('"+emp.getRut()+"','"+emp.getNombre()+"','"+emp.getApellido()+"',"+emp.getUSUARIO_id_usuario()+")";
                 PreparedStatement ps = con.prepareStatement(query1);
                 ps = con.prepareStatement(query1);
-                ps.setString(1, emp.getRut());
-                ps.setString(2, emp.getNombre());
-                ps.setString(3, emp.getApellido());
-                ps.setInt(4, emp.getUSUARIO_id_usuario());
                 resultado=ps.executeUpdate()==1;
                 ps.close();
          
@@ -41,7 +37,7 @@ public class DAOusuario_empleado {
                 rs = "No se pudo ingresar";
             }
         } catch (SQLException ex) {
-            rs = "En metodo ingresar provedor, DAOusuario_Empleado  rut:"+emp.getRut() +" ERROR: "+ex.toString();
+            rs = "En metodo /ingresar provedor/DAOusuario_Empleado  || ERROR: "+ex.toString();
         }
         return rs;
     }

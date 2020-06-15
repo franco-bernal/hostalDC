@@ -56,6 +56,18 @@ public class Manejadora_usuario {
         }
         return null;
     }
+    
+     public boolean verificar(String nom) {
+        Usuario u = new Usuario();
+        for (int i = 0; i < arrayUsuario.size(); i++) {
+            if (nom.compareToIgnoreCase(arrayUsuario.get(i).getNom_usuario()) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
 
     public int idMax() {
         return daoUsuario.buscaridMax();

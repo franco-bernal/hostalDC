@@ -21,8 +21,8 @@
 
     </head>
     <body class="letras">
-        <h1 >Admin</h1>
-        <a class="btn btn-outline-danger" href="ControlUsuario" role="button">Ir al login</a>
+        <h1>Admin</h1>
+        <a class="btn btn-outline-danger" href="login.jsp" role="button">Ir al login</a>
 
         <hr>
         <h1>

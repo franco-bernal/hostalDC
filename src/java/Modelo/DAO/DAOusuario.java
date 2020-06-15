@@ -76,6 +76,9 @@ public class DAOusuario {
         return rs;
     }
 
+    
+    
+    
     public String Conex(int id_usuario, int tipo) {
         Conexion c = new Conexion();
         String rs;
