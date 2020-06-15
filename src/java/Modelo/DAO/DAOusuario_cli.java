@@ -25,14 +25,10 @@ public class DAOusuario_cli {
         try {
                 //inserto datos del usuario
                 Connection con = c.getConnection();
-                String query1 = "INSERT INTO cliente VALUES (?,?,?,?,?)";
+                String query1 = "INSERT INTO cliente VALUES ('"+det.getRut_emp()+"','"+det.getNom_emp()+"','"+det.getTele_emp()+"','"+det.getDir_emp()+"',"+det.getUsuario_id_usuario()+")";
                 PreparedStatement ps = con.prepareStatement(query1);
                 ps = con.prepareStatement(query1);
-                ps.setString(1, det.getRut_emp());
-                ps.setString(2, det.getNom_emp());
-                ps.setString(3, det.getTele_emp());
-                ps.setString(4, det.getDir_emp());
-                ps.setInt(5, det.getUsuario_id_usuario());
+                
                 resultado=ps.executeUpdate()==1;
                 ps.close();
          
@@ -42,7 +38,7 @@ public class DAOusuario_cli {
                 rs = "No se pudo ingresar";
             }
         } catch (SQLException ex) {
-            rs = ex.toString()+"  en metodo ingresar cliente, DAOusuario_cli "+det.getUsuario_id_usuario()+" n/ "+det.getRut_emp();
+            rs = ex.toString()+"  en metodo ingresar cliente/DAOusuario_cli "+det.getUsuario_id_usuario();
         }
         return rs;
     }

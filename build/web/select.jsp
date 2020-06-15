@@ -132,7 +132,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn btn-outline-danger letras" href="index.jsp" role="button">Volver</a>
+            <a class="btn btn-outline-danger letras" href="login.jsp" role="button">Volver</a>
             <hr>
             <h1 class="letras">HostalDC</h1>
         </div>

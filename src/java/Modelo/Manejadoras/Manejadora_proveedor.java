@@ -28,9 +28,10 @@ public class Manejadora_proveedor {
         String nom = usu.getNom_usuario();
         String clave = usu.getClave();
 
-        String i = mane_usu.ingresarUsuario(usu);
 
-        if (mane_usu.obtenerUsuario(nom, clave) == null) {
+        if (mane_usu.verificar(nom) == false) {
+                    String i = mane_usu.ingresarUsuario(usu);
+            
             if (i.compareToIgnoreCase("1") == 0) {
                 return dao_pro.ingresarProveedor(pro);
             } else {
