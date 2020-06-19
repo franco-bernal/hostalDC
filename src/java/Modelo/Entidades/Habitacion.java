@@ -12,22 +12,18 @@ package Modelo.Entidades;
 public class Habitacion {
     
     private int num_hab;
-    private String tipo_cama;
-    private int precio;
     private String accesorio;
     private String disponibilidad;
-    private int ORDEN_compra_codigo_compra;
-
+    private int TIPO_HAB_id_tipo_hab;
+            
     public Habitacion() {
     }
 
-    public Habitacion(int num_hab, String tipo_cama, int precio, String accesorio, String disponibilidad, int ORDEN_compra_codigo_compra) {
+    public Habitacion(int num_hab, String accesorio, String disponibilidad,  int TIPO_HAB_id_tipo_hab) {
         this.num_hab = num_hab;
-        this.tipo_cama = tipo_cama;
-        this.precio = precio;
         this.accesorio = accesorio;
         this.disponibilidad = disponibilidad;
-        this.ORDEN_compra_codigo_compra = ORDEN_compra_codigo_compra;
+        this.TIPO_HAB_id_tipo_hab = TIPO_HAB_id_tipo_hab;
     }
 
     public int getNum_hab() {
@@ -36,22 +32,6 @@ public class Habitacion {
 
     public void setNum_hab(int num_hab) {
         this.num_hab = num_hab;
-    }
-
-    public String getTipo_cama() {
-        return tipo_cama;
-    }
-
-    public void setTipo_cama(String tipo_cama) {
-        this.tipo_cama = tipo_cama;
-    }
-
-    public int getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
     }
 
     public String getAccesorio() {
@@ -70,16 +50,14 @@ public class Habitacion {
         this.disponibilidad = disponibilidad;
     }
 
-    public int getORDEN_compra_codigo_compra() {
-        return ORDEN_compra_codigo_compra;
+    public int getTIPO_HAB_id_tipo_hab() {
+        return TIPO_HAB_id_tipo_hab;
     }
 
-    public void setORDEN_compra_codigo_compra(int ORDEN_compra_codigo_compra) {
-        this.ORDEN_compra_codigo_compra = ORDEN_compra_codigo_compra;
+    public void setTIPO_HAB_id_tipo_hab(int TIPO_HAB_id_tipo_hab) {
+        this.TIPO_HAB_id_tipo_hab = TIPO_HAB_id_tipo_hab;
     }
 
-    
-    
     
     
 }

@@ -20,7 +20,7 @@
 
 
         <nav id="navbar-example2" class="navbar navbar-light bg-light ca " style="position: fixed;">
-            <%     
+            <%
                 HttpSession sesion = request.getSession();
                 String usuario = sesion.getAttribute("user").toString();
                 String aint = sesion.getAttribute("tipo").toString();
@@ -36,7 +36,9 @@
             %>
             <a class="navbar-brand " href="#"><%out.print(usuario);%></a>
             <ul class="nav nav-pills ">
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#recepcion">Recepcion huespedes</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#recepcion">Recepcion pedidos</a>
                 </li>
@@ -73,6 +75,9 @@
 
             <hr class="aba mar" id="recepcion">
 
+            <h1>pendiente:</h1>
+            <h1>1: en cliente:agregar cantidad habitaciones disponibles</h1>
+            <h1>2: recepcionar huespedes</h1>
 
             <h4  class="mb-5 mar">Recepcion pedidos </h4>
             <div class="container table-sm  col-lg-10 col-sm-12 col-xs-5 mb-5 mar"> 

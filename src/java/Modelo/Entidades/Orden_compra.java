@@ -6,33 +6,34 @@
 package Modelo.Entidades;
 
 import java.sql.Date;
+
 /**
  *
  * @author Franco
  */
 public class Orden_compra {
-    
+
     private int codigo_compra;
     private Date f_inicio;
     private Date f_fin;
     private Date f_compra;
-    private int cantidad;
     private int precio_total;
-    private int FACTURA_cod_factura;
-    private String Cliente_rut_emp;
+    private int tipo_hab;
+    private int tipo_min;
+    private String cliente_rut_emp;
 
     public Orden_compra() {
     }
 
-    public Orden_compra(int codigo_compra, Date f_inicio, Date f_fin, Date f_compra, int cantidad, int precio_total, int FACTURA_cod_factura, String Cliente_rut_emp) {
+    public Orden_compra(int codigo_compra, Date f_inicio, Date f_fin, Date f_compra, int precio_total, int tipo_hab, int tipo_min, String cliente_rut_emp) {
         this.codigo_compra = codigo_compra;
         this.f_inicio = f_inicio;
         this.f_fin = f_fin;
         this.f_compra = f_compra;
-        this.cantidad = cantidad;
         this.precio_total = precio_total;
-        this.FACTURA_cod_factura = FACTURA_cod_factura;
-        this.Cliente_rut_emp = Cliente_rut_emp;
+        this.tipo_hab = tipo_hab;
+        this.tipo_min = tipo_min;
+        this.cliente_rut_emp = cliente_rut_emp;
     }
 
     public int getCodigo_compra() {
@@ -67,14 +68,6 @@ public class Orden_compra {
         this.f_compra = f_compra;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public int getPrecio_total() {
         return precio_total;
     }
@@ -83,22 +76,30 @@ public class Orden_compra {
         this.precio_total = precio_total;
     }
 
-    public int getFACTURA_cod_factura() {
-        return FACTURA_cod_factura;
+    public int getTipo_hab() {
+        return tipo_hab;
     }
 
-    public void setFACTURA_cod_factura(int FACTURA_cod_factura) {
-        this.FACTURA_cod_factura = FACTURA_cod_factura;
+    public void setTipo_hab(int tipo_hab) {
+        this.tipo_hab = tipo_hab;
+    }
+
+    public int getTipo_min() {
+        return tipo_min;
+    }
+
+    public void setTipo_min(int tipo_min) {
+        this.tipo_min = tipo_min;
     }
 
     public String getCliente_rut_emp() {
-        return Cliente_rut_emp;
+        return cliente_rut_emp;
     }
 
-    public void setCliente_rut_emp(String Cliente_rut_emp) {
-        this.Cliente_rut_emp = Cliente_rut_emp;
+    public void setCliente_rut_emp(String cliente_rut_emp) {
+        this.cliente_rut_emp = cliente_rut_emp;
     }
-
-
-
+    
+    
+    
 }

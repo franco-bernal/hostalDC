@@ -3,27 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOusuario_proveedor.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOorden_compra.java</file>
+            <file>file:/C:/Users/Franco/Desktop/HostalDC/web/login.jsp</file>
+            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/Manejadoras/Manejadora_cliente.java</file>
             <file>file:/C:/Users/Franco/Desktop/HostalDC/web/cliente_home.jsp</file>
             <file>file:/C:/Users/Franco/Desktop/HostalDC/web/empleado_home.jsp</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOusuario_empleado.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Controlador/ControlUsuario.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOhuesped.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/Manejadoras/Manejadora_empleado.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/web/select.jsp</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/web/b_cliente.jsp</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/Manejadoras/Manejadora_cliente.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOusuario.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/NoCacheFilter.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/Manejadoras/Manejadora_proveedor.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/Manejadoras/Manejadora_usuario.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/Manejadoras/Manejadora_huesped.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOhabitacion.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Controlador/ControlCliente.java</file>
-            <file>file:/C:/Users/Franco/Desktop/HostalDC/src/java/Modelo/DAO/DAOusuario_cli.java</file>
         </group>
     </open-files>
 </project-private>

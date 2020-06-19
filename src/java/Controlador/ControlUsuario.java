@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Entidades.Usuario;
+import Modelo.Manejadoras.Manejadora_cliente;
 import Modelo.Manejadoras.Manejadora_usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,10 +37,6 @@ public class ControlUsuario extends HttpServlet {
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
-        
-        
-        
-        
 
         Manejadora_usuario mane_usu = new Manejadora_usuario();
         HttpSession sesion = request.getSession();
@@ -85,6 +82,7 @@ public class ControlUsuario extends HttpServlet {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
         Manejadora_usuario mane_usu = new Manejadora_usuario();
+        Manejadora_cliente mane_cli = new Manejadora_cliente();
         HttpSession sesion = request.getSession();
 
         String accion = request.getParameter("accion");
@@ -94,7 +92,7 @@ public class ControlUsuario extends HttpServlet {
 
         usu = mane_usu.obtenerUsuario(nom, clave);
         if (usu == null) {
-                        request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             sesion.setAttribute("id", usu.getId_usuario());
             sesion.setAttribute("user", usu.getNom_usuario());
@@ -122,6 +120,8 @@ public class ControlUsuario extends HttpServlet {
             }
             //cliente
             if (r == 4) {
+                String rut = mane_cli.obtenerRutUsuario(usu.getId_usuario());
+                sesion.setAttribute("rut", rut);
                 request.getRequestDispatcher("cliente_home.jsp").forward(request, response);
             }
         }
@@ -133,6 +133,4 @@ public class ControlUsuario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
-    
 }

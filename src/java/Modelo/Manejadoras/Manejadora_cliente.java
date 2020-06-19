@@ -4,6 +4,7 @@ package Modelo.Manejadoras;
 import Modelo.DAO.DAOusuario_cli;
 import Modelo.Entidades.Usuario;
 import Modelo.Entidades.UsuarioCli_detalle;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +14,19 @@ public class Manejadora_cliente {
 
     DAOusuario_cli dao_det = new DAOusuario_cli();
     Manejadora_usuario mane_usu = new Manejadora_usuario();
+    
+    
+     private ArrayList<UsuarioCli_detalle> arrayclien = dao_det.ObtenerClientes();
+
+    public ArrayList<UsuarioCli_detalle> getCliente() {
+        return arrayclien;
+    }
+
+    public void setArrayCliente(ArrayList<UsuarioCli_detalle> arraycli) {
+        this.arrayclien = arraycli;
+    }
+
+    
     /*
     ingresar
     */
@@ -37,4 +51,24 @@ public class Manejadora_cliente {
         
     }
 
+      public String obtenerRutUsuario(int id) {
+        Usuario u = new Usuario();
+        for (int i = 0; i < mane_usu.getUsu().size(); i++) {
+            if (id==arrayclien.get(i).getUsuario_id_usuario()) {
+                return arrayclien.get(i).getRut_emp();
+            }
+        }
+        return null;
+    }
+      
+        public int obtenerIdUsuario(String rut) {
+        Usuario u = new Usuario();
+        for (int i = 0; i < mane_usu.getUsu().size(); i++) {
+            if (rut.compareToIgnoreCase(arrayclien.get(i).getRut_emp())==0) {
+                return arrayclien.get(i).getUsuario_id_usuario();
+            }
+        }
+        return 0;
+    }
+    
 }

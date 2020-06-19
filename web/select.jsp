@@ -12,7 +12,7 @@
         <title>Tipo registro</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link href="css/Principal_admin.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <%
             response.setHeader("Cache-Control", "no-cache");
@@ -22,6 +22,12 @@
         %>
     </head>
     <body>
+        
+        
+ <div class="title">
+ <h1>Administración<br/>Hostal</h1>
+ </div>
+        
         <!-- 
          <a class="btn btn-info" href="registro.jsp" role="button">Registro clientes</a>
                     <hr>
@@ -132,10 +138,11 @@
                     </div>
                 </div>
             </div>
-            <a class="btn btn-outline-danger letras" href="login.jsp" role="button">Volver</a>
+            <a class="btn btn-outline-danger letras" href="select.jsp" role="button">Volver</a>
             <hr>
-            <h1 class="letras">HostalDC</h1>
-        </div>
+           
+            
+ 
 
 
 

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : login
+    Created on : 17-06-2020, 3:02:38
+    Author     : Enfoks
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Modelo.Manejadoras.Manejadora_usuario" %>
 
@@ -5,68 +10,72 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link href="css/estilo.css" rel="stylesheet" type="text/css"/>
+        <title>Login HDC</title>
+        <link href="css/login.css" rel="stylesheet" type="text/css"/>
         <%
             response.setHeader("Cache-Control", "no-cache");
             response.setHeader("Cache-Control", "no-store");
             response.setHeader("Pragma", "no-cache");
             response.setDateHeader("Expires", 0);
+            HttpSession sesion = request.getSession();
+            session.invalidate();
+
         %>
-
-       
     </head>
+
+
     <body>
-        <div id="cuadro">
-            <form action="ControlUsuario" method="POST">
-                <p id="titulo">Hostal Doña Clarita</p>
-                <hr>
-                <br/><br/>
-                <label id="subtitulo1">NOMBRE DE USUARIO</label>
-                <br/><br/>
-                <input type="text" class="entrada"  name="txt_nom" placeholder=" Ingrese nombre de usuario"  maxlength="30" required="true"/>
-                <br/><br/>
-                <label id="subtitulo2">CONTRASEÑA</label>
-                <br/><br/>
-                <input type="password" class="entrada" name="txt_clave" placeholder="Ingrese su contraseña" class="form-control"  maxlength="20" required="true"/>
-                <br/><br/>
-                <input type="submit"  id="boton"  name="accion" value="Ingresar"/>
 
-                <div class="alert btn-outline-dark text-center letras" role="alert">
-                    <p>
-                        <%                            Manejadora_usuario mane = new Manejadora_usuario();
-                            String nom;
-                            String clave;
-                            nom = request.getParameter("txt_nom");
-                            clave = request.getParameter("txt_clave");
+        <div class="login">
+            <form action="ControlUsuario" method="POST" class="box">
 
-                            try {
-                                if (nom.compareToIgnoreCase("") == 0 || clave.compareToIgnoreCase("") == 0) {
-                                    out.print("");
-                                }
-                                if (mane.obtenerUsuario(nom, clave) == null) {
-                                    out.print("no se encontró usuario");
-                                }
-
-                            } catch (Exception ex) {
-                                out.print("Ingrese los datos solicitados");
-                            }
-                        %>
-                    </p>
+                <img src="https://cdn3.iconfinder.com/data/icons/security-3-1/512/access-512.png" alt="">
+                <div class="input-box">
+                    <label >NOMBRE DE USUARIO</label>
+                    <input type="text" class="entrada"  name="txt_nom" placeholder=" Ingrese nombre de usuario"  maxlength="30" required="true"/>
                 </div>
 
-            </form>
-            <br/>
+                <div class="input-box">
+                    <label>CONTRASEÑA</label>
+                    <input type="password" class="entrada" name="txt_clave" placeholder="Ingrese su contraseña" class="form-control"  maxlength="20" required="true"/>
+                </div>
 
-            <form action="select.jsp">
+                <button name="accion" value="Ingresar" type="submit">Ingresar</button>
+                <div class="footer-box">
+                    <div class="alert btn-outline-dark text-center letras" role="alert">
+                        <p>
+                            <%                            Manejadora_usuario mane = new Manejadora_usuario();
+                                String nom;
+                                String clave;
+                                nom = request.getParameter("txt_nom");
+                                clave = request.getParameter("txt_clave");
 
-                <input type="submit" value="Registro"  id="boton2">
+                                try {
+                                    if (nom.compareToIgnoreCase("") == 0 || clave.compareToIgnoreCase("") == 0) {
+                                        out.print("");
+                                    }
+                                    if (mane.obtenerUsuario(nom, clave) == null) {
+                                        out.print("no se encontró usuario");
+                                    }
 
-            </form>
+                                } catch (Exception ex) {
+                                    out.print("");
+                                }
+                            %>
+                        </p>
+                    </div>
 
-            <p id="marca">Alojamiento y Servicio de Comedor para Empresas</p>
-        </div>
 
+                </div>
 
+                <div >
+                    <a href="select.jsp" class="boton verde">Registrar</a>
+                </div >
+
+                <div class="dere">           
+                    <p >Copyright&copy; 2020 - Todos los derechos reservados</p>
+            </form>   
+        </div>         
     </body>
+
 </html>

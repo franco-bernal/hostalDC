@@ -46,4 +46,45 @@ delete from proveedor where Usuario_id_usuario=5;
 
 INSERT INTO usuario VALUES (4,'123','123','f1ranco9bernal@hotmail.com',2,0);
 INSERT INTO empleado VALUES (123,'123','123',4);
+
+-----------
+-------------
+Necesario para las ordeNes de compra(los iNsert)
+
+
+select * from huesped;
+select * from ORDEN_COMPRA;
+
+select codigo_compra from ORDEN_COMPRA where CODIGO_COMPRA= (select max(CODIGO_COMPRA) from ORDEN_COMPRA);
+
+select * from tipo_hab;
+select * from HABITACION;
+select * from minuta;
+
+INSERT INTO tipo_hab VALUES (1,'individual',500);
+INSERT INTO tipo_hab VALUES (2,'compartida',1000);
+
+INSERT INTO HABITACION VALUES (0,'pendiente','pendiente',1);
+INSERT INTO HABITACION VALUES (1,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (2,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (3,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (4,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (5,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (6,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (7,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (8,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (9,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (10,'sin ventana','disponible',2);
+
+INSERT INTO TIPO_MINUTA VALUES (1,'especial',2000);
+INSERT INTO TIPO_MINUTA VALUES (2,'general',3000);
+INSERT INTO TIPO_MINUTA VALUES (3,'servicios ejecutivos',2500);
+
+INSERT INTO MINUTA VALUES (1,'papapa','11-06-2020','muchas papas y de comida comeran comida...',1);
+
+
+
+
+
+
                                                                                                                                                                                                                                                                                                                                                   

@@ -24,15 +24,13 @@ public class DAOhabitacion {
         try {
             //inserto datos del usuario
             Connection con = c.getConnection();
-            String query1 = "INSERT INTO habitacion VALUES (?,?,?,?,?,?)";
+            String query1 = "INSERT INTO habitacion VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query1);
             ps = con.prepareStatement(query1);
             ps.setInt(1, ha.getNum_hab());
-            ps.setString(2, ha.getTipo_cama());
-            ps.setInt(3, ha.getPrecio());
-            ps.setString(4, ha.getAccesorio());
-            ps.setString(5, ha.getDisponibilidad());
-            ps.setInt(6, ha.getORDEN_compra_codigo_compra());
+            ps.setString(2, ha.getAccesorio());
+            ps.setString(3, ha.getDisponibilidad());
+            ps.setInt(4, ha.getTIPO_HAB_id_tipo_hab());
             resultado = ps.executeUpdate() == 1;
             ps.close();
 
