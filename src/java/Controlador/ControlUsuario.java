@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.Entidades.Usuario;
 import Modelo.Manejadoras.Manejadora_cliente;
+import Modelo.Manejadoras.Manejadora_empleado;
 import Modelo.Manejadoras.Manejadora_usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -112,10 +113,15 @@ public class ControlUsuario extends HttpServlet {
             }
             //empleado
             if (r == 2) {
+                Manejadora_empleado ma_em = new Manejadora_empleado();
+                String rut = ma_em.obtenerRutEmpleado(usu.getId_usuario());
+                sesion.setAttribute("rut", rut);
                 request.getRequestDispatcher("empleado_home.jsp").forward(request, response);
+
             }
             //proveedor
             if (r == 3) {
+
                 request.getRequestDispatcher("proveedor_home.jsp").forward(request, response);
             }
             //cliente

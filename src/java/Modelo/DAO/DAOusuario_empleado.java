@@ -10,7 +10,9 @@ import Modelo.Entidades.UsuarioEmpleado;
 import Modelo.Entidades.UsuarioProveedor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -41,6 +43,27 @@ public class DAOusuario_empleado {
         }
         return rs;
     }
+    
+    
+     public ArrayList<UsuarioEmpleado> ObtenerEmpleados() {
+        ArrayList<UsuarioEmpleado> arrayEmp = new ArrayList<UsuarioEmpleado>();
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "select * from empleado";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                UsuarioEmpleado emp = new UsuarioEmpleado(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+                arrayEmp.add(emp);
+            }
+            ps.close();
+            return arrayEmp;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
     
     
 }

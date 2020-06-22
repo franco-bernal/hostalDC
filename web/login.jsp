@@ -17,8 +17,15 @@
             response.setHeader("Cache-Control", "no-store");
             response.setHeader("Pragma", "no-cache");
             response.setDateHeader("Expires", 0);
-            HttpSession sesion = request.getSession();
-            session.invalidate();
+           
+            HttpSession sesion; 
+            try{
+                sesion= request.getSession();
+            session.invalidate(); 
+            }catch(Exception e){
+               out.print("i");
+            }     
+            
 
         %>
     </head>
@@ -47,8 +54,13 @@
                             <%                            Manejadora_usuario mane = new Manejadora_usuario();
                                 String nom;
                                 String clave;
-                                nom = request.getParameter("txt_nom");
-                                clave = request.getParameter("txt_clave");
+                                try {
+                                    nom = request.getParameter("txt_nom");
+                                    clave = request.getParameter("txt_clave");
+                                } catch (Exception e) {
+                                    nom = "";
+                                    clave = "";
+                                }
 
                                 try {
                                     if (nom.compareToIgnoreCase("") == 0 || clave.compareToIgnoreCase("") == 0) {

@@ -29,23 +29,51 @@ public class Manejadora_orden {
     public String ingresarCompra(Orden_compra ord) {
         return daoOrd.ingresarOrden(ord);
     }
+    
+    public String actualizarPrecio(int cod,int precio){
+        return daoOrd.actualizarPrecio(cod, precio);
+    }
+    
 
     public int buscarCompra(int codigo) {
-    int rs=0000;
+        int rs = 0000;
         for (int i = 0; i < arrayOrden.size(); i++) {
             try {
                 if (codigo == arrayOrden.get(i).getCodigo_compra()) {
                     return arrayOrden.get(i).getCodigo_compra();
                 } else {
-                    rs=0;
+                    rs = 0;
                 }
             } catch (Exception e) {
-                rs= 0000404;
+                rs = 0000404;
             }
 
         }
-        return rs+codigo;
+        return rs + codigo;
 
     }
+
+    public Orden_compra devolverCompraCompleta(int codigo) {
+
+        for (int i = 0; i < arrayOrden.size(); i++) {
+            if (arrayOrden.get(i).getCodigo_compra() == codigo) {
+                return arrayOrden.get(i);
+            }
+        }
+        return null;
+    }
+    
+    
+    public int cantidadDeOrdenes(String rut){
+        int contador=0;
+        for(int i=0;i<arrayOrden.size();i++){
+            if(arrayOrden.get(i).getCliente_rut_emp().compareToIgnoreCase(rut)==0){
+                contador+=1;
+            }
+        }
+        return contador;
+    }
+    
+    
 
 }

@@ -1,0 +1,94 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-06-2020, 1:15:49
+    Author     : Enfoks
+*/
+
+.giga{
+    height: 250px;
+    width: 100%;
+    background-image: url("https://wallpaperstock.net/wallpapers/thumbs1/40997wide.jpg");
+    opacity: 0.8;
+    margin-top: 0px;
+    background-position: center center;
+    background-size: cover;
+ 
+    
+}
+
+.tipo{
+     margin-top: 5px;
+     font-size:25px;
+     color: black;
+     text-align: center;
+     font-family:sans-serif;
+     
+     
+}
+
+.usu{
+    font-size:40px;
+    color: black;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+
+
+.men{  
+    z-index:1000;
+  
+
+}     
+
+
+fomu1{
+   align-items: center; 
+   justify-content: center;
+   background-color:beige;
+   text-align: center;
+}
+
+.table > tbody > tr:hover {
+  background-color: #F2F2F2;
+  cursor: pointer;
+  background-color:beige;
+}
+
+.le{
+    font-size:20px;
+    
+}
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.fon{
+    
+    background-color:#ddd;
+}

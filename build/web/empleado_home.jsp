@@ -1,13 +1,17 @@
+<%@page import="Modelo.Entidades.UsuarioEmpleado"%>
+<%@page import="Modelo.Manejadoras.Manejadora_empleado"%>
+<%@page import="Modelo.Entidades.UsuarioCli_detalle"%>
+<%@page import="Modelo.Manejadoras.Manejadora_cliente"%>
+<%@page import="Modelo.Manejadoras.Manejadora_orden"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE html>
 <html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Home Empleado</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <link href="css/pruebas.css" rel="stylesheet" type="text/css"/>
+        <link href="css/empleado.css" rel="stylesheet" type="text/css"/>
         <%
             response.setHeader("Cache-Control", "no-cache");
             response.setHeader("Cache-Control", "no-store");
@@ -19,11 +23,13 @@
     <body  data-spy="scroll" class="text-capitalize "  data-target="#navbar-example2">
 
 
-        <nav id="navbar-example2" class="navbar navbar-light bg-light ca " style="position: fixed;">
+        <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
             <%
                 HttpSession sesion = request.getSession();
                 String usuario = sesion.getAttribute("user").toString();
                 String aint = sesion.getAttribute("tipo").toString();
+                String rut = sesion.getAttribute("rut").toString();
+
                 int tip = Integer.parseInt(aint);
                 String tipo;
 
@@ -33,113 +39,213 @@
                     tipo = "salir";
 
                 }
+
+                Manejadora_orden mane_ord = new Manejadora_orden();
+                Manejadora_cliente mane_cli = new Manejadora_cliente();
             %>
+
+
+
+
+
             <a class="navbar-brand " href="#"><%out.print(usuario);%></a>
-            <ul class="nav nav-pills ">
+            <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link" href="#recepcion">Recepcion huespedes</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#recepcion">Recepcion huespedes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#recepcion">Recepcion pedidos</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#pedidos">Recepcion pedidos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pedir">Generar pedido</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#pedir">Generar pedido</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#minuta">Agregar minuta</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#minuta">Agregar minuta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#lista">Lista de minutas</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#lista">Lista de minutas</a>
                 </li>
-                <form action="ControlUsuario" method="POST">
-                    <input action="ControlUsuario" class="btn btn-dark btn-block" type="submit" name="accion" value="Salir">
+                <form action="ControlUsuario">
+                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary" type="submit"  name="accion" value="Salir">
                 </form>
             </ul>
+
         </nav>
 
+        <div class="giga" data-spy="scroll">
+            <br>
+            <br>
+            <br>
 
-        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" >
 
-            <div  class="giga center-block text-center centrar">
-                <p   class="lead fue text-capitalize ">  <%out.print(usuario);%> </p>
+            <div  class="usu">
+                <p> <% out.print(usuario);%> </p>
             </div>
-            <div class="jumbotron jumbotron-fluid mb-5 " >
-                <div class="container">
-                    <h1 class="display-4">
-                        <%
-                            out.print(tipo);
-                        %>                  
-                    </h1>
+
+            <div  class="tipo">
+                <p> <% out.print(tipo);%> </p>
+            </div>
+
+        </div>
+
+        <div class="fon" data-spy="scroll" data-target="#navbar-example2" data-offset="0" >  
+
+
+
+            <h4  class="mb-5 mar" id="recepcion">Recepción Huespedes </h4>
+
+
+            <div  id="customers" class="container" >
+                <br>
+                <div >
+                    <div >
+                        <table class="table center-block">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Rut</th>
+                                    <th>Contacto</th>
+                                    <th>Recepcion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <%
+                                    if (mane_cli.getCliente().size() > 0) {
+                                        for (int i = 0; i < mane_cli.getCliente().size(); i++) {
+                                            if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0) {
+                                                out.print("<tr ><td style='cursor: not-allowed;'>" + mane_cli.getCliente().get(i).getNom_emp() + "</td>"
+                                                        + "<td editable-td field='apellidos'>" + mane_cli.getCliente().get(i).getRut_emp() + "</td>"
+                                                        + "<td editable-td field='apellidos'>" + mane_cli.getCliente().get(i).getTele_emp() + "</td>"
+                                                        + "<td editable-td  field='email'><button type='button' class='btn btn-success'>Recepcionar</button></td></tr>");
+                                            }
+
+                                        }
+                                    } else {
+                                        out.print("<td>no hay</td>");
+                                    }
+
+
+                                %>
+
+
+
+
+
+                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" />
+                            </tbody>
+                        </table>
+                        <br>
+                        <br
+
+                    </div>
                 </div>
             </div>
 
-            <hr class="aba mar" id="recepcion">
 
-            <h1>pendiente:</h1>
-            <h1>1: en cliente:agregar cantidad habitaciones disponibles</h1>
-            <h1>2: recepcionar huespedes</h1>
+            <!-- ....................... -->
 
-            <h4  class="mb-5 mar">Recepcion pedidos </h4>
-            <div class="container table-sm  col-lg-10 col-sm-12 col-xs-5 mb-5 mar"> 
-                <table class="table table-hover ">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Proveedor</th>
-                            <th scope="col">producto</th>
-                            <th scope="col">cantidad</th>
-                            <th scope="col">unidad</th>
-                            <th scope="col">enviado/recibido</th>
-                            <th scope="col">recibido</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table-dark">
-                            <th scope="row">1</th>
-                            <td>macdonal</td>
-                            <td>papas</td>
-                            <td>2</td>
-                            <td>kg</td>
-                            <td>31/02/20</td>
-                            <td class="row">
-                                <button type="button" class="btn btn-success">Recibido</button>
-                                <button type="button" class="btn btn-danger">falta</button>
+            <!--.........................-->
+            <h4  class="mb-5 mar" id="pedidos">Recepción pedidos </h4>
+
+
+            <div  id="customers" class="container" >
+
+                <br>
+                <div >
+                    <div >
+                        <table class="table center-block">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Proveedor</th>
+                                    <th>producto</th>
+                                    <th>cantidad</th>
+                                    <th>Estado</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    <td style="cursor: not-allowed;">
+                                        1
+                                    </td>
+                                    <td editable-td field="nombres">
+                                        Lider
+                                    </td>
+                                    <td editable-td field="apellidos">
+                                        Lechugas
+                                    </td>
+                                    <td editable-td  field="email">
+                                        2
+                                    </td>
+
+                                    <td class="row-center">
+                                        <button type="button"  class="btn btn-success">Recibido</button>
+                                        <button type="button" class="btn btn-danger">falta</button>
+
+                            <tbody>
+
+
+                            <td style="cursor: not-allowed;">
+                                1
+                            </td>
+                            <td editable-td field="">
+                                Marley coffee
+                            </td>
+                            <td editable-td field="">
+                                Cafe
+                            </td>
+                            <td editable-td  field="">
+                                2
                             </td>
 
-                        </tr>
-                        <tr class="table-success">
-                            <th scope="row">2</th>
-                            <td>Frutas y verdades</td>
-                            <td>peras</td>
-                            <td>5</td>
-                            <td>kg</td>
-                            <td>31/02/20</td>
-                            <td>Sí</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Frutas y verdades</td>
-                            <td>manzanas</td>
-                            <td>5</td>
-                            <td>kg</td>
-                            <td>01/02/20</td>
-                            <td>No</td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>AbcDin</td>
-                            <td>camas</td>
-                            <td>2</td>
-                            <td>Unidades</td>
-                            <td>01/02/20</td>
-                            <td>No</td>
+                            <td class="row-center">
+                                <button type="button" class="btn btn-success">Recibido</button>
+                                <button type="button" class="btn btn-danger">falta</button>
 
 
-                        </tr>
-                    </tbody>
-                </table>
+
+                            <tbody>
+
+
+                            <tbody>
+                                <tr >
+                                    <td style="cursor: not-allowed;">
+                                        2
+                                    </td>
+                                    <td editable-td field="nombres">
+                                        Falabella
+                                    </td>
+                                    <td editable-td field="apellidos">
+                                        Camas
+                                    </td>
+                                    <td editable-td  field="email">
+                                        4
+                                    </td>
+
+                                    <td class="row-center">
+                                        <button type="button" class="btn btn-success">Recibido</button>
+                                        <button type="button" class="btn btn-danger">falta</button>
+
+
+
+                            <tbody>
+
+                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" />
+                            </tbody>
+                        </table>
+                        <br>
+                        <br
+
+                    </div>
+                </div>
             </div>
+
+
+
+
+
 
 
             <hr class="aba mar" id="pedir">
@@ -148,14 +254,14 @@
             <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
                 <form action="ControlCliente" method="POST">
                     <div class="col-sm">
-                        <p class="p-3 mb-2 bg-dark text-white text-center ">Llegados</p>
+                        <p class="p-3 mb-2 bg-dark text-white text-center ">Pedido</p>
                         <div class="form-group">
                             <label for="sel1" class="mt-2">Proveedores</label>
                             <select class="form-control" name="select_ha" id="sel1">
-                                <option>macdonal</option>
-                                <option>la esquina</option>
+                                <option>Lider</option>
+                                <option>Falabella</option>
                                 <option>AbcDin</option>
-                                <option>Frutas y verdades</option>
+                                <option>Coca-cola Andina</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -163,10 +269,13 @@
                             <select class="form-control" name="select_ha" id="sel1">
                                 <option>manjar</option>
                                 <option>azucar</option>
-                                <option>gel</option>
+                                <option>Televisor</option>
+                                <option>Camas</option>
+                                <option>Bebidas</option>
+                                <option>Jugos</option>
                             </select>
                         </div>
-                        <input type="email" class="form-control" name="txt_cantidad" placeholder="Cantidad" required="true" maxlength="30">
+                        <input type="cantidad" class="form-control" name="txt_cantidad" placeholder="Cantidad" required="true" maxlength="30">
 
                     </div>
                     <hr>
@@ -174,7 +283,7 @@
                         <input type="checkbox" class="form-check-input"  required="true">
                         <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
                     </div>
-                    <button type="submit" class="btn btn-dark btn-block" name="accion" value="RegistrarCli">Enviar a proveedor</button>
+                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarCli">Enviar a proveedor</button>
 
                 </form>
             </div>
@@ -198,11 +307,12 @@
                         <input type="checkbox" class="form-check-input"  required="true">
                         <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
                     </div>
-                    <button type="submit" class="btn btn-dark btn-block" name="accion" value="RegistrarCli">Enviar</button>
+                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarCli">Enviar Minuta</button>
 
                 </form>
                 <hr class="aba mar">
             </div>
+
 
 
             <hr class="aba mar" id="lista">
@@ -224,40 +334,23 @@
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>general</td>
-                            <td>pan</td>
-                            <td>papas fritas</td>
-                            <td>te</td>
-                            <td>pan</td>
+                            <td>General</td>
+                            <td>pan, te o cafe, huevos</td>
+                            <td>Tallarines y ensalada</td>
+                            <td>Te o cafe, pan</td>
+                            <td>Un sandwich de pan integral con filete de pollo</td>
 
                         </tr>
                         <tr>
                             <th scope="row">2</th>
                             <td>Especial</td>
-                            <td>pan</td>
-                            <td>papa</td>
-                            <td>te</td>
-                            <td>pan</td>
+                            <td>Pan, Te o cafe, jugo, Tostadas</td>
+                            <td>Entrada, Plato de fondo, ensalada y postre</td>
+                            <td>Pan, Te o cafe</td>
+                            <td>Crema de verduras.</td>
 
                         </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>general</td>
-                            <td>pan</td>
-                            <td>papa</td>
-                            <td>te</td>
-                            <td>pan</td>
 
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>general</td>
-                            <td>pan</td>
-                            <td>papa</td>
-                            <td>te</td>
-                            <td>pan</td>
-
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -267,27 +360,26 @@
 
             <!-- -->
         </div>
+    </div>
+
+
+</div>
 
 
 
 
 
+<%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
+        sesion.setAttribute("user", null);
+        sesion.invalidate();
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+%>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
-
-
-        <%
-            if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
-                sesion.setAttribute("user", null);
-                sesion.invalidate();
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-        %>
-
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-    </body>
+</body>
 </html>

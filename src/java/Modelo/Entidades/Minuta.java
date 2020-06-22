@@ -10,32 +10,21 @@ import java.sql.Date;
 public class Minuta {
 
     private int id_minuta;
+        private String titulo;
     private Date f_creado;
-    private Date f_inicio;
-    private Date f_fin;
-    private String titulo;
-    private String desayuno;
-    private String almuerzo;
-    private String once;
-    private String cena;
-    private int valor;
-    private int ORDEN_compra_codigo_compra;
+    private String detalle;
+    private int id_tipo_min;
+  
 
     public Minuta() {
     }
 
-    public Minuta(int id_minuta, Date f_creado, Date f_inicio, Date f_fin, String titulo, String desayuno, String almuerzo, String once, String cena, int valor, int ORDEN_compra_codigo_compra) {
+    public Minuta(int id_minuta, String titulo, Date f_creado, String detalle, int id_tipo_min) {
         this.id_minuta = id_minuta;
-        this.f_creado = f_creado;
-        this.f_inicio = f_inicio;
-        this.f_fin = f_fin;
         this.titulo = titulo;
-        this.desayuno = desayuno;
-        this.almuerzo = almuerzo;
-        this.once = once;
-        this.cena = cena;
-        this.valor = valor;
-        this.ORDEN_compra_codigo_compra = ORDEN_compra_codigo_compra;
+        this.f_creado = f_creado;
+        this.detalle = detalle;
+        this.id_tipo_min = id_tipo_min;
     }
 
     public int getId_minuta() {
@@ -46,30 +35,6 @@ public class Minuta {
         this.id_minuta = id_minuta;
     }
 
-    public Date getF_creado() {
-        return f_creado;
-    }
-
-    public void setF_creado(Date f_creado) {
-        this.f_creado = f_creado;
-    }
-
-    public Date getF_inicio() {
-        return f_inicio;
-    }
-
-    public void setF_inicio(Date f_inicio) {
-        this.f_inicio = f_inicio;
-    }
-
-    public Date getF_fin() {
-        return f_fin;
-    }
-
-    public void setF_fin(Date f_fin) {
-        this.f_fin = f_fin;
-    }
-
     public String getTitulo() {
         return titulo;
     }
@@ -78,53 +43,31 @@ public class Minuta {
         this.titulo = titulo;
     }
 
-    public String getDesayuno() {
-        return desayuno;
+    public Date getF_creado() {
+        return f_creado;
     }
 
-    public void setDesayuno(String desayuno) {
-        this.desayuno = desayuno;
+    public void setF_creado(Date f_creado) {
+        this.f_creado = f_creado;
     }
 
-    public String getAlmuerzo() {
-        return almuerzo;
+    public String getDetalle() {
+        return detalle;
     }
 
-    public void setAlmuerzo(String almuerzo) {
-        this.almuerzo = almuerzo;
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
-    public String getOnce() {
-        return once;
+    public int getId_tipo_min() {
+        return id_tipo_min;
     }
 
-    public void setOnce(String once) {
-        this.once = once;
+    public void setId_tipo_min(int id_tipo_min) {
+        this.id_tipo_min = id_tipo_min;
     }
 
-    public String getCena() {
-        return cena;
-    }
-
-    public void setCena(String cena) {
-        this.cena = cena;
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
-    public int getORDEN_compra_codigo_compra() {
-        return ORDEN_compra_codigo_compra;
-    }
-
-    public void setORDEN_compra_codigo_compra(int ORDEN_compra_codigo_compra) {
-        this.ORDEN_compra_codigo_compra = ORDEN_compra_codigo_compra;
-    }
+    
     
     
 

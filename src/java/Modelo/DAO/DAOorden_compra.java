@@ -49,7 +49,7 @@ public class DAOorden_compra {
                 rs = "No se pudo ingresar";
             }
         } catch (SQLException ex) {
-            rs = ex.toString() + "  en metodo ingresar orden, DAOorden_compra " + ord.getCodigo_compra() + " n/ " + ord.getCliente_rut_emp();
+            rs = ex.toString() + "  en metodo ingresar orden, DAOorden_compra Rut:" + ord.getCliente_rut_emp() + " ha:" + ord.getTipo_hab() + " mi:" + ord.getTipo_min();
         }
         return rs;
     }
@@ -125,11 +125,33 @@ public class DAOorden_compra {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, rut);
             resultado = ps.executeUpdate() == 1;
-            r="true";
+            r = "true";
             ps.close();
 
         } catch (SQLException ex) {
-           r="Exception en DAOorden_compra/limpiarCompras err:"+ex.toString()+" fin/.";
+            r = "Exception en DAOorden_compra/limpiarCompras err:" + ex.toString() + " fin/.";
+        }
+
+        return r;
+    }
+    
+    
+        public String actualizarPrecio(int codigo, int precio) {
+            boolean resultado = false;
+            String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+
+            String query = " update ORDEN_COMPRA set precio_total="+precio+" where CODIGO_COMPRA="+codigo;
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOorden_compra/actualizarPrecio err:" + ex.toString() + " fin/.";
         }
 
         return r;

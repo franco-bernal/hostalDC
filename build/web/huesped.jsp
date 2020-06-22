@@ -4,6 +4,9 @@
     Author     : Franco
 --%>
 
+<%@page import="Modelo.Manejadoras.Manejadora_hab"%>
+<%@page import="Modelo.Manejadoras.Manejadora_minuta"%>
+<%@page import="Modelo.Entidades.Orden_compra"%>
 <%@page import="Modelo.Entidades.Huesped"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Manejadoras.Manejadora_orden"%>
@@ -33,6 +36,11 @@
         <%            HttpSession hue = request.getSession();
             int codigo = Integer.parseInt(hue.getAttribute("cod").toString());
             Manejadora_orden mane_ord = new Manejadora_orden();
+            Orden_compra ord = mane_ord.devolverCompraCompleta(codigo);
+            hue.setAttribute("codigo_com", ord.getCodigo_compra());
+            int precio = ord.getPrecio_total();
+
+
         %>
 
         <div class="container col-lg-5 col-sm-12 col-xs-5"> 
@@ -52,14 +60,15 @@
 
 
             </form>
-
+            <hr>
             <form action="AgregarHuesped" method="Post">
                 <button type="submit" class="btn btn-dark btn-block" name="accion" value="Cancelar">Cancelar y volver</button>
             </form>
+            <hr>
+            <a href="cliente_home.jsp"  class="btn btn-dark btn-block">Volver</a>
 
         </div>
         <hr>
-        <h1 class="text-center">Codigo<% out.print(mane_ord.buscarCompra(codigo));%></h1>
         <div class="container table-sm  col-lg-10 col-sm-12 col-xs-5 mb-5 mar"> 
             <table class="table table-hover ">
                 <thead>
@@ -71,8 +80,7 @@
                 </thead>
                 <tbody>
 
-                    <%
-                        Manejadora_huesped mane = new Manejadora_huesped();
+                    <%                        Manejadora_huesped mane = new Manejadora_huesped();
 
                         try {
                             for (int i = 0; i < mane.getHuesped().size(); i++) {
@@ -81,7 +89,6 @@
                                     out.print("<td>" + mane.getHuesped().get(i).getRut() + "</td>"
                                             + "<td>" + mane.getHuesped().get(i).getNombre() + "</td>"
                                             + "<td>" + mane.getHuesped().get(i).getApellido() + "</td>"
-                                            + "<td>" + mane.getHuesped().get(i).getORDEN_compra_codigo_compra() + "</td>"
                                             + "</tr>");
                                 } else {
                                     if (mane.getHuesped().size() == 0) {
@@ -93,11 +100,27 @@
                         } catch (Exception e) {
                             out.print(e);
                         }//
+
+                        int cod_com = Integer.parseInt(hue.getAttribute("codigo_com").toString());
+
+                        int tipo_mi = ord.getTipo_min();
+                        int tipo_ha = ord.getTipo_hab();
+
+                        Manejadora_minuta ma_mi = new Manejadora_minuta();
+                        Manejadora_hab ma_ha = new Manejadora_hab();
+
+                        int precio_mi = ma_mi.valorMinuta(tipo_mi);
+                        int precio_ha = ma_ha.valorHab(tipo_ha);
+
+
                     %>
+                
+                    <% out.print("<h1>precio total: " + precio+ " </h1><p>  | Valor minuta:"+precio_mi+ " | Valor habitacion:"+precio_ha+"</p>");%>
+               
                 </tbody>
             </table>
 
-           
+
 
         </div> 
 

@@ -6,8 +6,8 @@
 package Modelo.DAO;
 
 import Modelo.Conexion;
-import Modelo.Entidades.Habitacion;
-import Modelo.Entidades.Tipo_hab;
+import Modelo.Entidades.Minuta;
+import Modelo.Entidades.Tipo_minuta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,22 +18,24 @@ import java.util.ArrayList;
  *
  * @author Franco
  */
-public class DAOhabitacion {
+public class DAOminuta {
 
-    public String ingresarHabitacion(Habitacion ha) {
+    public String ingresarMinuta(Minuta mi) {
         Conexion c = new Conexion();
         String rs;
         boolean resultado;
         try {
             //inserto datos del usuario
             Connection con = c.getConnection();
-            String query1 = "INSERT INTO habitacion VALUES (?,?,?,?,?)";
+            String query1 = "INSERT INTO Minuta VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query1);
             ps = con.prepareStatement(query1);
-            ps.setInt(1, ha.getNum_hab());
-            ps.setString(2, ha.getAccesorio());
-            ps.setString(3, ha.getDisponibilidad());
-            ps.setInt(4, ha.getTIPO_HAB_id_tipo_hab());
+            ps.setInt(1, mi.getId_minuta());
+            ps.setString(2, mi.getTitulo());
+            ps.setDate(3, mi.getF_creado());
+            ps.setString(4, mi.getDetalle());
+            ps.setInt(5, mi.getId_tipo_min());
+
             resultado = ps.executeUpdate() == 1;
             ps.close();
 
@@ -43,49 +45,47 @@ public class DAOhabitacion {
                 rs = "No se pudo ingresar";
             }
         } catch (SQLException ex) {
-            rs = "En metodo ingresar habitacion, DAOhabitacion  .. ERROR: " + ex.toString();
+            rs = "En metodo ingresar Minuta, DAOMinuta  .. ERROR: " + ex.toString();
         }
         return rs;
     }
 
-    
-    public ArrayList<Habitacion> ObtenerHabitacion() {
-        ArrayList<Habitacion> arrayHab = new ArrayList<Habitacion>();
+    public ArrayList<Minuta> ObtenerMinuta() {
+        ArrayList<Minuta> arrayMin = new ArrayList<Minuta>();
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from habitacion";
+            String query = "select * from Minuta";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Habitacion hab = new Habitacion(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
-                arrayHab.add(hab);
+                Minuta min = new Minuta(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getString(4),rs.getInt(5));
+                arrayMin.add(min);
             }
             ps.close();
-            return arrayHab;
+            return arrayMin;
         } catch (SQLException ex) {
             return null;
         }
     }
 
-     public ArrayList<Tipo_hab> obtener_tipos_hab() {
-        ArrayList<Tipo_hab> arraytipo = new ArrayList<Tipo_hab>();
+    public ArrayList<Tipo_minuta> obtener_tipos_Min() {
+        ArrayList<Tipo_minuta> arrayTipo = new ArrayList<Tipo_minuta>();
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from tipo_hab";
+            String query = "select * from tipo_minuta";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Tipo_hab tipo = new Tipo_hab(rs.getInt(1), rs.getString(2),rs.getInt(3));
-                arraytipo.add(tipo);
+                Tipo_minuta tipo = new Tipo_minuta(rs.getInt(1), rs.getString(2), rs.getInt(3));
+                arrayTipo.add(tipo);
             }
             ps.close();
-            return arraytipo;
+            return arrayTipo;
         } catch (SQLException ex) {
             return null;
         }
     }
-    
-    
+
 }
