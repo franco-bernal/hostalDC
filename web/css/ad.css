@@ -1,0 +1,256 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-07-2020, 18:37:21
+    Author     : Enfoks
+*/
+
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+  }
+a { text-decoration: none;
+color: #ff6873;}
+
+.transition,  ul li i:before, ul li i:after, .contAcordeon {
+  transition: all 0.25s ease-in-out;
+}
+
+.flipIn, h1, ul li {
+  animation: flipdown 0.5s ease both;
+}
+
+.no-select, h2 {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  perspective: 900;
+  overflow-y: scroll;
+  background-color:white;
+  font-family: "Titillium Web", sans-serif;
+  color: rgba(48, 69, 92, 0.8);
+   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#accesos {
+  min-height: 0;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  margin: 50px 0;
+  transform: translate(-50%, 0);
+  box-shadow: 0 8px 0 0 #7ab602 inset;
+  background-color: #fefffa;
+  width: 90%;
+  padding: 0,5em;
+  max-width:960px;
+}
+
+@media (max-width: 550px) {
+  #accesos {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+
+}
+
+
+
+
+
+
+h1, h2 {
+  color: black;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 2.2em;
+  line-height: 1.2em;
+  letter-spacing: .08em;
+  font-weight: 80;
+}
+
+h2 {
+  font-size: 1.6em;
+  line-height: 1.5em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  display: block;
+  background-color: #fefffa;
+  margin: 0;
+  cursor: pointer;
+  padding: .5em;
+}
+
+.contAcordeon {
+    color: rgba(48, 69, 92, 0.8);
+    line-height: 1.5em;
+    letter-spacing: .05em;
+    position: relative;
+    overflow: hidden;
+    max-height: 200em;
+    opacity: 1;
+    transform: translate(0, 0);
+    margin-top: 1em;
+    z-index: 2;
+    padding: 0.3em;
+    width: 90%;
+    text-align: center;
+     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+@keyframes flipdown {
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateX(8deg);
+  }
+  83% {
+    transform: rotateX(6deg);
+  }
+  92% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
+}
+
+
+
+.boton{
+      text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+			text-align:center;
+                       float:right;
+			text-decoration: none;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      display:inline-block;
+			color:#363a45;
+			background:#7ab602;
+			padding: 7px 20px;
+			white-space: nowrap;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 100px;
+			margin: 10px 5px;
+			-webkit-transition: all 0.2s ease-in-out;
+			-ms-transition: all 0.2s ease-in-out;
+			-moz-transition: all 0.2s ease-in-out;
+			-o-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+}
+
+.verde{
+  background: #7ab602;
+  box-shadow: 0px 5px 0px 0px black;
+}
+
+.verde:hover{
+  background:#bbd406;
+}
+
+.verde:active{
+  box-shadow: 0px 2px 0px 0px #bbd406;
+}
+
+
+
+
+#accesos {
+  min-height: 0;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  margin: 90px 0;
+  transform: translate(-50%, 0);
+  box-shadow: 0 10px 0 0 #7ab602 inset;
+  background-color: #fefffa;
+  width: 100%;
+  padding: 1em;
+  max-width:960px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.acor{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+    
+ align: center;
+  min-height: 0;
+
+  position: relative;
+  left: 50%;
+  margin: 90px 0;
+  transform: translate(-50%, 0);
+  box-shadow: 0 10px 0 0 #7ab602 inset;
+  background-color: #fefffa;
+  width: 90%;
+  padding: 1em;
+  max-width:960px;
+ margin-top: 5px;
+ 
+}
+.dere{
+   text-align: center;
+   padding: 8px;
+   text-decoration-color: white;
+   background:#7ab602;
+   margin-top: 50px;
+   color: white;
+   
+}
+.agre{
+    
+   font-size: 10px;
+display: flex;
+  justify-content: center;
+  align-items: center;
+   right: 30px;
+     
+}
+
+
+.success {
+  border-color:#7ab602;
+  color:black;
+  background-color:white;
+}
+
+.success:hover {
+  background-color:#7ab602;
+  color: white;
+}
+
+

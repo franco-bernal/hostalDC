@@ -17,15 +17,15 @@
             response.setHeader("Cache-Control", "no-store");
             response.setHeader("Pragma", "no-cache");
             response.setDateHeader("Expires", 0);
-           
-            HttpSession sesion; 
-            try{
-                sesion= request.getSession();
-            session.invalidate(); 
-            }catch(Exception e){
-               out.print("i");
-            }     
-            
+
+            HttpSession sesion;
+            try {
+                sesion = request.getSession();
+                session.invalidate();
+            } catch (Exception e) {
+                out.print("exit");
+            }
+
 
         %>
     </head>
@@ -51,10 +51,12 @@
                 <div class="footer-box">
                     <div class="alert btn-outline-dark text-center letras" role="alert">
                         <p>
-                            <%                            Manejadora_usuario mane = new Manejadora_usuario();
-                                String nom;
-                                String clave;
+                            <%                            
+                                String nom="";
+                                String clave="";
+                                Manejadora_usuario mane=null;
                                 try {
+                                    mane = new Manejadora_usuario();
                                     nom = request.getParameter("txt_nom");
                                     clave = request.getParameter("txt_clave");
                                 } catch (Exception e) {
@@ -76,7 +78,7 @@
                             %>
                         </p>
                     </div>
-
+                        
 
                 </div>
 
@@ -86,6 +88,7 @@
 
                 <div class="dere">           
                     <p >Copyright&copy; 2020 - Todos los derechos reservados</p>
+                </div>
             </form>   
         </div>         
     </body>

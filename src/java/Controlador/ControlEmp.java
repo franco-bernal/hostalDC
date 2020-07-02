@@ -5,17 +5,22 @@
  */
 package Controlador;
 
+import Modelo.Entidades.Orden_compra;
 import Modelo.Entidades.Usuario;
 import Modelo.Entidades.UsuarioEmpleado;
 import Modelo.Manejadoras.Manejadora_empleado;
+import Modelo.Manejadoras.Manejadora_orden;
 import Modelo.Manejadoras.Manejadora_usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,9 +78,34 @@ public class ControlEmp extends HttpServlet {
 
         String accion = request.getParameter("accion");
 
+        if (accion.equals("recepcionar")) {
+            //request.getRequestDispatcher("empleado_home.jsp").forward(request, response);
+            String rut = request.getParameter("txt_rut");
+            Manejadora_orden ord = new Manejadora_orden();
+            ArrayList<Orden_compra> arrayC = ord.listaComprasPorRUT(rut);
+
+            if (arrayC.size() > 0) {
+                request.setAttribute("rut", rut);
+
+                RequestDispatcher rd = request.getRequestDispatcher("recepcion.jsp");
+                rd.include(request, response);
+            }else{
+                  out.print("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.print("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.print("<script>");
+                out.print("$(document).ready(function(){");
+                out.print("swal('No se encontró el rut indicado','Coincidencias: " + arrayC.size() + "','error');");
+                out.print("});");
+                out.print("</script>");
+                RequestDispatcher rd = request.getRequestDispatcher("empleado_home.jsp");
+                rd.include(request, response);
+            }
+
+        }
+
         //REGISTRO CLIENTE
         if (accion.equals("RegistrarEmple")) {
-            int id = mane_usu.idMax() +1;
+            int id = mane_usu.idMax() + 1;
             String nom_usu = request.getParameter("txt_nom_emp");
             String clave = request.getParameter("txt_clave");
             String correo = request.getParameter("txt_correo_emp");
@@ -85,13 +115,32 @@ public class ControlEmp extends HttpServlet {
             String nom = request.getParameter("txt_nom_emp");
             String ape = request.getParameter("txt_ape_emp");
 
-
-            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo,0);
+            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo, 0);
             UsuarioEmpleado d = new UsuarioEmpleado(rut, nom, ape, id);
-            out.print(mane_emp.ingresarEmpleadoCompleto(u, d));
-            out.print("<hr>");
-            out.print("<h1>" + rut + " " + nom + " " + ape+ " " + id + "</h1>");
-            out.print("<h1>" + id + " " + nom_usu + " " + clave + " " + correo + " " + tipo + " </h1>");
+
+            String rs = mane_emp.ingresarEmpleadoCompleto(u, d);
+            if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                out.print("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.print("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.print("<script>");
+                out.print("$(document).ready(function(){");
+                out.print("swal('Bien, " + nom + "!','" + rs + "','success');");
+                out.print("});");
+                out.print("</script>");
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.include(request, response);
+            } else {
+                out.print("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.print("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.print("<script>");
+                out.print("$(document).ready(function(){");
+                out.print("swal('Ocurrio algo','intenta otra vez por favor, " + rs + "','error');");
+                out.print("});");
+                out.print("</script>");
+                RequestDispatcher rd = request.getRequestDispatcher("select.jsp");
+                rd.include(request, response);
+            }
+
         }
     }
 

@@ -29,11 +29,10 @@ public class Manejadora_orden {
     public String ingresarCompra(Orden_compra ord) {
         return daoOrd.ingresarOrden(ord);
     }
-    
-    public String actualizarPrecio(int cod,int precio){
+
+    public String actualizarPrecio(int cod, int precio) {
         return daoOrd.actualizarPrecio(cod, precio);
     }
-    
 
     public int buscarCompra(int codigo) {
         int rs = 0000;
@@ -62,18 +61,27 @@ public class Manejadora_orden {
         }
         return null;
     }
-    
-    
-    public int cantidadDeOrdenes(String rut){
-        int contador=0;
-        for(int i=0;i<arrayOrden.size();i++){
-            if(arrayOrden.get(i).getCliente_rut_emp().compareToIgnoreCase(rut)==0){
-                contador+=1;
+
+    public ArrayList<Orden_compra> listaComprasPorRUT(String rut) {
+        ArrayList<Orden_compra> arrayC = new ArrayList<>();
+
+        for (int i = 0; i < arrayOrden.size(); i++) {
+            if (arrayOrden.get(i).getCliente_rut_emp().compareToIgnoreCase(rut) == 0) {
+                arrayC.add(arrayOrden.get(i));
+            }
+        }
+
+        return arrayC;
+    }
+
+    public int cantidadDeOrdenes(String rut) {
+        int contador = 0;
+        for (int i = 0; i < arrayOrden.size(); i++) {
+            if (arrayOrden.get(i).getCliente_rut_emp().compareToIgnoreCase(rut) == 0) {
+                contador += 1;
             }
         }
         return contador;
     }
-    
-    
 
 }

@@ -59,7 +59,7 @@ public class DAOorden_compra {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from orden_compra";
+            String query = "select * from orden_compra order by CODIGO_COMPRA";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

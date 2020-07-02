@@ -10,6 +10,7 @@ import Modelo.DAO.DAOusuario_proveedor;
 import Modelo.Entidades.Usuario;
 import Modelo.Entidades.UsuarioCli_detalle;
 import Modelo.Entidades.UsuarioProveedor;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +21,19 @@ public class Manejadora_proveedor {
     DAOusuario_proveedor dao_pro = new DAOusuario_proveedor();
     Manejadora_usuario mane_usu = new Manejadora_usuario();
 
+      //cargado con todos los clientes
+    private ArrayList<UsuarioProveedor> arrayPro = dao_pro.ObtenerProveedores();
+
+    public ArrayList<UsuarioProveedor> getProveedor() {
+        return arrayPro;
+    }
+
+    public void setProveedor(ArrayList<UsuarioProveedor> pro) {
+        this.arrayPro = pro;
+    }
+
+    
+    
     /*
     ingresar
      */

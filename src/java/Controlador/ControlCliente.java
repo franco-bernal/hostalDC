@@ -6,6 +6,7 @@ import Modelo.Manejadoras.Manejadora_cliente;
 import Modelo.Manejadoras.Manejadora_usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +31,6 @@ public class ControlCliente extends HttpServlet {
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
-        
 
     }
 
@@ -82,10 +82,28 @@ public class ControlCliente extends HttpServlet {
 
             Usuario u = new Usuario(id, nom_usu, clave, correo, tipo, 0);
             UsuarioCli_detalle d = new UsuarioCli_detalle(rut, nom, telefono, dir, id);
-            out.print(mane_cli.ingresarClienteCompleto(u, d));
-            out.print("<hr>");
-            out.print("<h1>" + rut + " " + nom + " " + telefono + " " + dir + " " + id + "</h1>");
-            out.print("<h1>" + id + " " + nom_usu + " " + clave + " " + correo + " " + tipo + " </h1>");
+            //out.print();
+            String rs=mane_cli.ingresarClienteCompleto(u, d);
+
+            if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                request.setAttribute("desde", "select.jsp");
+                request.setAttribute("pag", "login.jsp");
+                request.setAttribute("titulo", "Registrado!");
+                request.setAttribute("detalle", "Ya puedes iniciar con tu usuario: " + nom_usu);
+                request.setAttribute("sms", " ");
+                request.setAttribute("tipo", "success");
+                RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
+                rd.include(request, response);
+            }else{
+                 request.setAttribute("desde", "select.jsp");
+                request.setAttribute("pag", "select.jsp");
+                request.setAttribute("titulo", "Error de registro");
+                request.setAttribute("detalle", " ");
+                request.setAttribute("sms", rs);
+                request.setAttribute("tipo", "alert");
+                RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
+                rd.include(request, response);
+            }
 
         }
 
@@ -105,5 +123,4 @@ public class ControlCliente extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
 }

@@ -1,3 +1,8 @@
+<%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
+<%@page import="Modelo.Manejadoras.Manejadora_proveedor"%>
+<%@page import="Modelo.Entidades.Orden_compra"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Modelo.Util"%>
 <%@page import="Modelo.Entidades.UsuarioEmpleado"%>
 <%@page import="Modelo.Manejadoras.Manejadora_empleado"%>
 <%@page import="Modelo.Entidades.UsuarioCli_detalle"%>
@@ -8,40 +13,47 @@
 <!DOCTYPE html>
 <html >
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
         <title>Home Empleado</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="css/empleado.css" rel="stylesheet" type="text/css"/>
-        <%
-            response.setHeader("Cache-Control", "no-cache");
-            response.setHeader("Cache-Control", "no-store");
-            response.setHeader("Pragma", "no-cache");
-            response.setDateHeader("Expires", 0);
-        %>
+        <link href="css/Util.css" rel="stylesheet" type="text/css"/>
     </head>
 
-    <body  data-spy="scroll" class="text-capitalize "  data-target="#navbar-example2">
-
+    <body  data-spy="scroll" class="text-capitalize letras text-center "  data-target="#navbar-example2">
+        <%
+            try {
+        %>
 
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
             <%
-                HttpSession sesion = request.getSession();
-                String usuario = sesion.getAttribute("user").toString();
-                String aint = sesion.getAttribute("tipo").toString();
-                String rut = sesion.getAttribute("rut").toString();
+               
+                HttpSession sesion = null;
+                String usuario = "";
+                String aint = "";
+                String rut = "";
+                Manejadora_orden mane_ord = null;
+                Manejadora_cliente mane_cli = null;
+                String tipo = "";
 
+                try {
+                    mane_ord = new Manejadora_orden();
+                    mane_cli = new Manejadora_cliente();
+                    sesion = request.getSession();
+                    usuario = sesion.getAttribute("user").toString();
+                    aint = sesion.getAttribute("tipo").toString();
+                    rut = sesion.getAttribute("rut").toString();
+                } catch (Exception e) {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }
                 int tip = Integer.parseInt(aint);
-                String tipo;
 
                 if (tip == 2) {
                     tipo = "Empleado";
                 } else {
-                    tipo = "salir";
-
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
 
-                Manejadora_orden mane_ord = new Manejadora_orden();
-                Manejadora_cliente mane_cli = new Manejadora_cliente();
             %>
 
 
@@ -89,63 +101,103 @@
         </div>
 
         <div class="fon" data-spy="scroll" data-target="#navbar-example2" data-offset="0" >  
+            <!-- ....................... -->
+            <!-- ....................... -->
 
 
-
+            <!------------------------------------------------------------------------------------------->
+            <!-- ....................... -->
+            <!--Recepción Huespedes listado -->
             <h4  class="mb-5 mar" id="recepcion">Recepción Huespedes </h4>
 
 
-            <div  id="customers" class="container" >
-                <br>
-                <div >
-                    <div >
-                        <table class="table center-block">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Rut</th>
-                                    <th>Contacto</th>
-                                    <th>Recepcion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+            <div  id="customers" class="container " >
+                <div>
+                    <div>
+                        <%
+                            try {
+                                if (mane_cli.getCliente().size() > 0) {//tamaño de la lista de clientes completa
+                                    for (int i = 0; i < mane_cli.getCliente().size(); i++) {//cliente por cliente
+                                        if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0) {//se revisa si es mayor a 0 la cantidad
+                                            //acordeon boton
+                                            out.print("<div class='accordion' id='accordionExample'>"
+                                                    + "<div class='card'>"
+                                                    + "<div class='card-header' id='heading" + i + "'>"
+                                                    + "<h2 class='mb-0'>"
+                                                    + "<button class=' btn  btn-block text-center' type='button' data-toggle='collapse' data-target='#collapse" + i + "' aria-expanded='true' aria-controls='collapse" + i + "' >"
+                                                    + mane_cli.getCliente().get(i).getNom_emp() + " | " + mane_cli.getCliente().get(i).getRut_emp()
+                                                    + " </button>"
+                                                    + "</h2>"
+                                                    + "</div>");
+                                            /////////////////termino boton/////////////////////////////
+                                            out.print("<div id='collapse" + i + "'  aria-labelledby='heading" + i + "' data-parent='#accordionExample' >"
+                                                    + "<div>");
+                                            ///////////comienza el body////////////
+                                            Manejadora_orden ord = new Manejadora_orden();
+                                            ArrayList<Orden_compra> arrayC = ord.listaComprasPorRUT(mane_cli.getCliente().get(i).getRut_emp());//se rellena el arrayC con la lista buscada por rut
 
-                                <%
-                                    if (mane_cli.getCliente().size() > 0) {
-                                        for (int i = 0; i < mane_cli.getCliente().size(); i++) {
-                                            if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0) {
-                                                out.print("<tr ><td style='cursor: not-allowed;'>" + mane_cli.getCliente().get(i).getNom_emp() + "</td>"
-                                                        + "<td editable-td field='apellidos'>" + mane_cli.getCliente().get(i).getRut_emp() + "</td>"
-                                                        + "<td editable-td field='apellidos'>" + mane_cli.getCliente().get(i).getTele_emp() + "</td>"
-                                                        + "<td editable-td  field='email'><button type='button' class='btn btn-success'>Recepcionar</button></td></tr>");
+                                            //se colocan las columnas
+                                            out.print("<table class='table center-block container-fluid' >"
+                                                    + "<thead>"
+                                                    + "<tr>"
+                                                    + "<th>codigo</th>"
+                                                    + "<th>desde</th>"
+                                                    + "<th>hasta</th>"
+                                                    + "<th>fecha comprado</th>"
+                                                    + "</tr>"
+                                                    + "</thead>"
+                                                    + "<tbody>");
+                                            //fin columnas
+
+                                            for (int e = 0; e < arrayC.size(); e++) {//recorre la lista filtrada por rut
+
+                                                int id = mane_cli.obtenerIdUsuario(mane_cli.getCliente().get(i).getRut_emp());
+                                                String rut_o = mane_cli.obtenerRutUsuario(id);
+                                                Util util = new Util();
+                                                String nom_mi = "";
+                                                String nom_hab = "";
+                                                String cod = String.valueOf(arrayC.get(e).getCodigo_compra());
+                                                //nom_mi = util.tipo_min_nom(ord.getOrden().get(i).getTipo_min());
+                                                //nom_hab = util.tipo_hab_nom(ord.getOrden().get(i).getTipo_hab());
+
+                                                out.print("<tr>"
+                                                        + "<td> #" + cod + "</td>"
+                                                        + "<td>" + arrayC.get(e).getF_inicio() + "</td>"
+                                                        + "<td>" + arrayC.get(e).getF_fin() + "</td>"
+                                                        + "<td>" + arrayC.get(e).getF_compra() + "</td>"
+                                                        + "<td><a href='recep_ha.jsp?id=" + arrayC.get(e).getCodigo_compra() + "&rut=" + mane_cli.getCliente().get(i).getRut_emp() + "' class='btn btn-warning btn-sm'>rece</a></td>"
+                                                        + "</tr>");
                                             }
 
+                                            out.print("</tbody>"
+                                                    + "</table>"
+                                                    + "</div>"
+                                                    + "</div>"
+                                                    + "</div>");
+
                                         }
-                                    } else {
-                                        out.print("<td>no hay</td>");
                                     }
+                                } else {
+                                    out.print("<p>no hay clientes<p>");
+                                }
+                            } catch (Exception e) {
+                                request.getRequestDispatcher("login.jsp").forward(request, response);
+                            }
+                        %>
 
-
-                                %>
-
-
-
-
-
-                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" />
-                            </tbody>
-                        </table>
                         <br>
                         <br
-
+                            <hr>
                     </div>
                 </div>
             </div>
 
-
             <!-- ....................... -->
-
-            <!--.........................-->
+            <!--FIN: Recepción Huespedes listado -->
+            <!------------------------------------------------------------------------------------------->            
+            <!-- ....................... -->
+            <!-- ....................... -->
+            <!--Recepción pedidos Listado-->
             <h4  class="mb-5 mar" id="pedidos">Recepción pedidos </h4>
 
 
@@ -157,83 +209,50 @@
                         <table class="table center-block">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Proveedor</th>
-                                    <th>producto</th>
-                                    <th>cantidad</th>
+                                    <th>rubro</th>
+                                    <th>emitido</th>
                                     <th>Estado</th>
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr >
-                                    <td style="cursor: not-allowed;">
-                                        1
-                                    </td>
-                                    <td editable-td field="nombres">
-                                        Lider
-                                    </td>
-                                    <td editable-td field="apellidos">
-                                        Lechugas
-                                    </td>
-                                    <td editable-td  field="email">
-                                        2
-                                    </td>
 
-                                    <td class="row-center">
-                                        <button type="button"  class="btn btn-success">Recibido</button>
-                                        <button type="button" class="btn btn-danger">falta</button>
+                            <%
+                                Manejadora_proveedor mane_prov = new Manejadora_proveedor();
+                                Manejadora_pedidos mane_ped = new Manejadora_pedidos();
+                                String rutProveedor;
+                                String rutPedido;
+                                for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
 
-                            <tbody>
+                                    for (int e = 0; e < mane_ped.getPedido().size(); e++) {
 
+                                        rutProveedor = mane_prov.getProveedor().get(i).getRut();
+                                        rutPedido = mane_ped.getPedido().get(e).getProveedor_rut();
+                                        try {
 
-                            <td style="cursor: not-allowed;">
-                                1
-                            </td>
-                            <td editable-td field="">
-                                Marley coffee
-                            </td>
-                            <td editable-td field="">
-                                Cafe
-                            </td>
-                            <td editable-td  field="">
-                                2
-                            </td>
+                                            if (rutProveedor.compareToIgnoreCase(rutPedido) == 0) {
+                                                out.print("<tbody>"
+                                                        + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                        + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                        + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                        + "<td>"
+                                                        + "<button type='button' class='btn btn-success'>Recibido</button>"
+                                                        + "<button type='button' class='btn btn-danger'>falta</button>"
+                                                        + "</td>"
+                                                        + "</tbody>");
 
-                            <td class="row-center">
-                                <button type="button" class="btn btn-success">Recibido</button>
-                                <button type="button" class="btn btn-danger">falta</button>
+                                            }
+
+                                        } catch (Exception u) {
+
+                                        }
+                                    }
+
+                                }
 
 
+                            %>
 
-                            <tbody>
-
-
-                            <tbody>
-                                <tr >
-                                    <td style="cursor: not-allowed;">
-                                        2
-                                    </td>
-                                    <td editable-td field="nombres">
-                                        Falabella
-                                    </td>
-                                    <td editable-td field="apellidos">
-                                        Camas
-                                    </td>
-                                    <td editable-td  field="email">
-                                        4
-                                    </td>
-
-                                    <td class="row-center">
-                                        <button type="button" class="btn btn-success">Recibido</button>
-                                        <button type="button" class="btn btn-danger">falta</button>
-
-
-
-                            <tbody>
-
-                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" />
-                            </tbody>
                         </table>
                         <br>
                         <br
@@ -241,53 +260,53 @@
                     </div>
                 </div>
             </div>
+            <!--FIN: Recepción pedidos Listado-->
+            <!------------------------------------------------------------------------------------------->            
 
 
 
+            <!-- FORM PEDIDOS-->
+            <!-- herramientas para los pedidos -->
 
-
-
-
+            <!-- FIN herramientas para los pedidos -->
             <hr class="aba mar" id="pedir">
 
-            <h4  class=" mb-5 mar">generar pedido </h4>
+            <h4  class=" mb-5 mar">Generar pedido </h4>
             <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
-                <form action="ControlCliente" method="POST">
+
+                <form action="ControlPedido" method="post">
                     <div class="col-sm">
                         <p class="p-3 mb-2 bg-dark text-white text-center ">Pedido</p>
                         <div class="form-group">
-                            <label for="sel1" class="mt-2">Proveedores</label>
-                            <select class="form-control" name="select_ha" id="sel1">
-                                <option>Lider</option>
-                                <option>Falabella</option>
-                                <option>AbcDin</option>
-                                <option>Coca-cola Andina</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="sel1" class="mt-2">sus productos</label>
-                            <select class="form-control" name="select_ha" id="sel1">
-                                <option>manjar</option>
-                                <option>azucar</option>
-                                <option>Televisor</option>
-                                <option>Camas</option>
-                                <option>Bebidas</option>
-                                <option>Jugos</option>
-                            </select>
-                        </div>
-                        <input type="cantidad" class="form-control" name="txt_cantidad" placeholder="Cantidad" required="true" maxlength="30">
+                            <label for="sel1" class="mt-2">Seleccionar proveedor</label>
+                            <select class="form-control" name="select_prov" id="sel1">
+                                <%                                    try {
+                                        if (mane_prov.getProveedor().size() == 0) {
+                                            out.print("<option>Aún no hay proveedores</option>");
+                                        } else {
+                                            for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
+                                                out.print("<option>"+mane_prov.getProveedor().get(i).getNom_empresa()+"</option>");
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        out.print("<option>Error en esta area</option>");
+                                    }
 
+
+                                %>
+                            </select>
+                        </div>
                     </div>
                     <hr>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input"  required="true">
                         <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
                     </div>
-                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarCli">Enviar a proveedor</button>
-
+                    <button type="submit" class="btn btn-dark" name="accion" value="ComenzarPedido">Comenzar pedido</button>
                 </form>
             </div>
-
+            <!--FIN: FORM PEDIDOS-->
+            <!------------------------------------------------------------------------------------------->
 
             <hr class="aba mar" id="minuta">
             <h4>Agregar minuta </h4>
@@ -370,12 +389,25 @@
 
 
 <%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
-        sesion.setAttribute("user", null);
-        sesion.invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+            sesion.setAttribute("user", null);
+            sesion.invalidate();
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    } catch (Exception e) {
+        request.setAttribute("desde", "empleado_home.jsp");
+        request.setAttribute("pag", "login.jsp");
+        request.setAttribute("titulo", "Inicie sesion otra vez.");
+        request.setAttribute("detalle", "Algo ha salido mal en la pagina.");
+        request.setAttribute("sms", "falló empleado_home");
+        request.setAttribute("tipo", "error");
+
+        request.getRequestDispatcher("true.jsp").forward(request, response);
+
     }
 %>
 
+
+<script src="js/form.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

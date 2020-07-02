@@ -7,6 +7,8 @@ package Modelo;
 
 import Modelo.Manejadoras.Manejadora_hab;
 import Modelo.Manejadoras.Manejadora_minuta;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import java.sql.Date;
 
 /**
  *
@@ -53,4 +55,39 @@ public class Util {
         }
         return "";
     }
+
+    public Date fechaHoy() {
+        java.util.Date utilDate = new java.util.Date(); //fecha actual
+        java.sql.Date hoy = new java.sql.Date(utilDate.getTime());
+        return hoy;
+    }
+
+    public String cuadroDeAlerta(String titulo, String detalle, String sms, String tipo) {
+        //tipos.
+        //puede ser |error |success|
+        /* ej
+        request.setAttribute("desde", "huesped.jsp");
+        request.setAttribute("pag", "cliente_home.jsp");
+        request.setAttribute("titulo", "Eliminado");
+        request.setAttribute("detalle", "Se ha eliminado el" + " codigo");
+        request.setAttribute("sms", rs);
+        request.setAttribute("tipo", "success");
+       RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
+                    rd.include(request, response);
+         */
+
+        return "<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″/>"
+                + "<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>"
+                + "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>"
+                + "<script>"
+                + "$(document).ready(function(){"
+                + "swal('" + titulo + ".','" + detalle + ". " + sms + "','" + tipo + "');"
+                + "});"
+                + "</script>";
+    }
+
+    public String quitarEspaciosAlFInal(String a) {
+        return a.replaceAll("\\s*$", "");
+    }
+
 }

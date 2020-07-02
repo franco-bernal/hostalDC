@@ -73,7 +73,7 @@ public class DAOhabitacion {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from tipo_hab";
+            String query = "select * from tipo_hab order by ID_TIPO_HAB";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

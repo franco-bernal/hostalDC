@@ -74,7 +74,7 @@ public class DAOminuta {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from tipo_minuta";
+            String query = "select * from TIPO_MINUTA ORDER by ID_TIPO_MIN";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
