@@ -19,6 +19,10 @@ INSERT INTO TIPO_MINUTA VALUES (2,'general',3000);
 INSERT INTO TIPO_MINUTA VALUES (3,'servicios ejecutivos',2500);
 
 INSERT INTO MINUTA VALUES (1,'papapa','11-06-2020','muchas papas y de comida comeran comida...',1);
+INSERT INTO MINUTA VALUES (2,'pure poh','11-07-2020','muchas papas molidas y de comida comeran comida de papas...',2);
+INSERT INTO MINUTA VALUES (3,'aloz chino','11-09-2020','mulcielago al aloz y para tomal una celveza colona con musica de vilus, luna de miel ...',3);
+
+
 
 
 INSERT INTO PRODUCTOS VALUES (0,'mayo','kilo',1500,'1568186');

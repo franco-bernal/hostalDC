@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html >
     <head>
-         <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+        <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
         <title>Home Empleado</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="css/empleado.css" rel="stylesheet" type="text/css"/>
@@ -27,7 +27,6 @@
 
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
             <%
-               
                 HttpSession sesion = null;
                 String usuario = "";
                 String aint = "";
@@ -196,7 +195,6 @@
             <!--FIN: Recepción Huespedes listado -->
             <!------------------------------------------------------------------------------------------->            
             <!-- ....................... -->
-            <!-- ....................... -->
             <!--Recepción pedidos Listado-->
             <h4  class="mb-5 mar" id="pedidos">Recepción pedidos </h4>
 
@@ -285,7 +283,7 @@
                                             out.print("<option>Aún no hay proveedores</option>");
                                         } else {
                                             for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
-                                                out.print("<option>"+mane_prov.getProveedor().get(i).getNom_empresa()+"</option>");
+                                                out.print("<option>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</option>");
                                             }
                                         }
                                     } catch (Exception e) {
@@ -333,7 +331,18 @@
             </div>
 
 
+<!--minutas----------------------------------------------------------------------------------------------->
+<button type="button" class="" data-toggle="modal" data-target=".bd-example-modal-lg">Lista de minutas</button>
 
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content text-center">
+        <!-- la siguiente linea incluye la minuta.jsp -->
+        <jsp:include page="minuta.jsp" />
+    </div>
+  </div>
+</div>
+<!--FIn:-minutas------------------------------------------------------------------------------------------>
             <hr class="aba mar" id="lista">
 
 

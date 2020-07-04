@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 18.1.0.082.1035
---   en:        2020-07-02 03:17:48 CLT
+--   en:        2020-07-04 15:31:50 CLT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -79,11 +79,6 @@ CREATE TABLE minuta (
     detalle                   VARCHAR2(100) NOT NULL,
     tipo_minuta_id_tipo_min   INTEGER NOT NULL
 );
-
-CREATE UNIQUE INDEX minuta__idx ON
-    minuta (
-        tipo_minuta_id_tipo_min
-    ASC );
 
 ALTER TABLE minuta ADD CONSTRAINT minuta_pk PRIMARY KEY ( id_minuta );
 
@@ -227,7 +222,7 @@ ALTER TABLE proveedor
 -- Informe de Resumen de Oracle SQL Developer Data Modeler: 
 -- 
 -- CREATE TABLE                            15
--- CREATE INDEX                             4
+-- CREATE INDEX                             3
 -- ALTER TABLE                             28
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
