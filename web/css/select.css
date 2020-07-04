@@ -10,45 +10,6 @@ and open the template in the editor.
 
 
 
-*, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-  }
-a { text-decoration: none;
-color: #ff6873;}
-
-.transition,  ul li i:before, ul li i:after, .contAcordeon {
-  transition: all 0.25s ease-in-out;
-}
-
-.flipIn, h1, ul li {
-  animation: flipdown 0.5s ease both;
-}
-
-.no-select, h2 {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-  perspective: 900;
-  overflow-y: scroll;
-  background-color:white;
-  font-family: "Titillium Web", sans-serif;
-  color: rgba(48, 69, 92, 0.8);
-   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 #accesos {
   min-height: 0;
   display: inline-block;
@@ -57,10 +18,11 @@ html {
   margin: 90px 0;
   transform: translate(-50%, 0);
   box-shadow: 0 10px 0 0 #7ab602 inset;
-  background-color: #fefffa;
+  background-color: white;
   width: 100%;
-  padding: 1em;
   max-width:960px;
+  margin-bottom: 8px;
+  margin-top: 8px;
 }
 
 @media (max-width: 550px) {
@@ -80,120 +42,27 @@ h1, h2 {
 }
 
 h1 {
+  font:sans-serif;
   text-transform: uppercase;
-  font-size: 2.2em;
-  line-height: 1.2em;
+  font-size: 2.0em;
+  line-height: 0.8em;
   letter-spacing: .08em;
-  font-weight: 80;
+  font-weight: 40px;
+ margin-top: 40px;
 }
 
 h2 {
-  font-size: 1.6em;
-  line-height: 1.5em;
+  font-size: 1.4em;
+  line-height: 1.0em;
   font-weight: 300;
   letter-spacing: 1px;
   display: block;
-  background-color: #fefffa;
   margin: 0;
   cursor: pointer;
   padding: .5em;
+
 }
 
-.contAcordeon {
-    color: rgba(48, 69, 92, 0.8);
-    line-height: 1.5em;
-    letter-spacing: .05em;
-    position: relative;
-    overflow: hidden;
-    max-height: 200em;
-    opacity: 1;
-    transform: translate(0, 0);
-    margin-top: 1em;
-    z-index: 2;
-    padding: 0.3em;
-    width: 90%;
-    text-align: center;
-    
-}
-
-#accesos ul {
-  list-style: none;
-  perspective: 900;
-  padding: 0;
-  margin: 0;
-}
-#accesos ul li {
-  position: relative;
-  padding: 0;
-  margin: 0;
-  padding-bottom: 4px;
-  padding-top: 0;
-  border-top: 1px dotted #7ab602;
-}
-#accesos ul li:nth-of-type(1) {
-  animation-delay: 0.5s;
-}
-#accesos ul li:nth-of-type(2) {
-  animation-delay: 0.75s;
-}
-#accesos ul li:nth-of-type(3) {
-  animation-delay: 1s;
-}
-#accesos ul li:last-of-type {
-  animation-delay: 1.25s;
-  padding-bottom: 0;
-}
-#accesos ul li i.chevron {
-    position: absolute;
-    transform: translate(-18px, 0);
-    margin-top: 33px;
-    right: 0;
-}
-#accesos ul li i.chevron:before, #accesos ul li i.chevron:after {
-  content: "";
-  position: absolute;
-  background-color: #7ab602;
-  width: 3px;
-  height: 9px;
-}
-#accesos ul li i:before {
-  transform: translate(-2px, 0) rotate(45deg);
-}
-#accesos ul li i.chevron:after {
-  transform: translate(2px, 0) rotate(-45deg);
-}
-#accesos ul li input[type=checkbox] {
-  position: absolute;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  background-color: coral;
-}
-#accesos ul li input[type=checkbox] h2 i {
-  background-color: teal;
-  color: teal;
-}
-#accesos ul li input[type=checkbox]:checked ~ div {
-  margin-top: 0;
-  max-height: 0;
-  opacity: 0;
-  transform: translate(0, 50%);
-}
-#accesos ul li input[type=checkbox]:checked ~ i:before {
-  transform: translate(2px, 0) rotate(45deg);
-}
-#accesos ul li input[type=checkbox]:checked ~ i:after {
-  transform: translate(-2px, 0) rotate(-45deg);
-}
-
-#accesos input[type=checkbox] ~ h2 {
-  background-color: white;
-}
-#accesos input[type=checkbox]:checked ~ h2 {
-  background-color: white;
-}
 
 #accesos h2 > i {
     width: 50px;
@@ -211,6 +80,7 @@ h2 {
     margin-right: 1em;
     margin-top: 0px;
     float: right;
+    right: 30px;
 }
 @keyframes flipdown {
   0% {
@@ -305,3 +175,60 @@ h2 {
    margin-right: 90px;
 }
 
+
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+.accordion {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  text-align: center;
+}
+.accordion-item {
+  background-color: #fff;
+  color: #111;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25);
+}
+.accordion-item-header {
+  padding: 0.5rem 3rem 0.5rem 1rem;
+  min-height: 3.5rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.accordion-item-header::after {
+  content: "\002B";
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+}
+.accordion-item-header.active::after {
+  content: "\2212";
+}
+.accordion-item-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.accordion-item-body-content {
+  padding: 1rem;
+  line-height: 1.5rem;
+  border-top: 1px solid;
+  border-image: linear-gradient(to right, transparent, #34495e, transparent) 1;
+}
+
+@media(max-width:767px) {
+  html {
+    font-size: 14px;
+  }
+}

@@ -141,7 +141,6 @@ public class AgregarHuesped extends HttpServlet {
                 int cod = 4040;
                 String num_hab = "a";
 
-
                 //int cod_com = Integer.parseInt(hue.getAttribute("codigo_com").toString());
                 //manejadoras implicadas
                 Manejadora_orden mane_ord = new Manejadora_orden();
@@ -159,7 +158,7 @@ public class AgregarHuesped extends HttpServlet {
                     cod = Integer.parseInt(request.getParameter("txt_codigo"));
                     //obtenido el tipo de  habitacion con el numero extraido de una cadena de caracteres
                     num_hab = request.getParameter("select_habitacion");
-                    int numero_ha=Integer.parseInt(num_hab.substring(0,1));
+                    int numero_ha = Integer.parseInt(num_hab.substring(0, 1));
                     int tipo_ha = mane_ha.getHab().get(numero_ha).getTIPO_HAB_id_tipo_hab();
                     //
 
@@ -169,8 +168,6 @@ public class AgregarHuesped extends HttpServlet {
                     int tipo_mi = ord.getTipo_min();
                     //
 
-                    
-                    
                     //necesarios para el calculo de precio
                     int precio_mi = ma_mi.valorMinuta(tipo_mi);
                     int precio_ha = mane_ha.valorHab(tipo_ha);
@@ -183,37 +180,36 @@ public class AgregarHuesped extends HttpServlet {
                         }
                     }
 
-                    
                     precio_actual += huespedes * (precio_mi + precio_ha);
 
-                     Huesped hues = new Huesped(rut, nombre, apellido, cod, numero_ha);
-                mane_ord.actualizarPrecio(cod, precio_actual);
-                String rs = mane_hue.ingresarHuesped(hues);
-                
-                HttpSession hue = request.getSession();
-                hue.setAttribute("cod", cod);
-                if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                    Huesped hues = new Huesped(rut, nombre, apellido, cod, numero_ha);
+                    mane_ord.actualizarPrecio(cod, precio_actual);
+                    String rs = mane_hue.ingresarHuesped(hues);
 
-                    request.setAttribute("desde", "huesped.jsp");
-                    request.setAttribute("pag", "huesped.jsp");
-                    request.setAttribute("titulo", "Huesped agregado");
-                    request.setAttribute("detalle", "codigo de compra" + " cod ");
-                    request.setAttribute("sms", rs);
-                    request.setAttribute("tipo", "success");
-                    RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("desde", "huesped.jsp");
-                    request.setAttribute("pag", "huesped.jsp");
-                    request.setAttribute("titulo", "Huesped agregado");
-                    request.setAttribute("detalle", "codigo de compra" + " cod ");
-                    request.setAttribute("sms", rs);
-                    request.setAttribute("tipo", "success");
-                    RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                    rd.include(request, response);
-                }
+                    HttpSession hue = request.getSession();
+                    hue.setAttribute("cod", cod);
+                    if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+
+                        request.setAttribute("desde", "huesped.jsp");
+                        request.setAttribute("pag", "huesped.jsp");
+                        request.setAttribute("titulo", "Huesped agregado");
+                        request.setAttribute("detalle", "codigo de compra" + " cod ");
+                        request.setAttribute("sms", rs);
+                        request.setAttribute("tipo", "success");
+                        RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
+                        rd.include(request, response);
+                    } else {
+                        request.setAttribute("desde", "huesped.jsp");
+                        request.setAttribute("pag", "huesped.jsp");
+                        request.setAttribute("titulo", "Huesped agregado");
+                        request.setAttribute("detalle", "codigo de compra" + " cod ");
+                        request.setAttribute("sms", rs);
+                        request.setAttribute("tipo", "success");
+                        RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
+                        rd.include(request, response);
+                    }
                 } catch (Exception e) {
-                    out.print("|"+rut + "-" + nombre + "-" + apellido + "-" + cod + "- |||num|||:" + num_hab+" ||| error:"+e+"|");
+                    out.print("|" + rut + "-" + nombre + "-" + apellido + "-" + cod + "- |||num|||:" + num_hab + " ||| error:" + e + "|");
                 }
                 /*
                 Huesped hues = new Huesped(rut, nombre, apellido, cod, numero_ha);
