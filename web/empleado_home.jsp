@@ -1,3 +1,4 @@
+<%@page import="Modelo.Manejadoras.Manejadora_minuta"%>
 <%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
 <%@page import="Modelo.Manejadoras.Manejadora_proveedor"%>
 <%@page import="Modelo.Entidades.Orden_compra"%>
@@ -259,6 +260,12 @@
                 </div>
             </div>
             <!--FIN: Recepción pedidos Listado-->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <!------------------------------------------------------------------------------------------->            
 
 
@@ -273,6 +280,8 @@
             <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
 
                 <form action="ControlPedido" method="post">
+                   <input type='text' class='form-control desactivar' name='txt_rut_emp' value="<%=rut %>">
+
                     <div class="col-sm">
                         <p class="p-3 mb-2 bg-dark text-white text-center ">Pedido</p>
                         <div class="form-group">
@@ -304,122 +313,138 @@
                 </form>
             </div>
             <!--FIN: FORM PEDIDOS-->
+            <br>
+            <br>
+            <br>
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
             <!------------------------------------------------------------------------------------------->
 
+
             <hr class="aba mar" id="minuta">
-            <h4>Agregar minuta </h4>
+
+            <h4>Agregar minuta</h4>
             <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
-                <form action="ControlCliente" method="POST">
+                <form action="C_Minuta" method="POST">
                     <div class="col-sm">
                         <p class="p-3 mb-2 bg-dark text-white text-center ">Agregar minuta</p>
+
+                        <!--text area -->
                         <input type="text" class="form-control" name="txt_titulo" placeholder="titulo" required="true" maxlength="18">
-                        <input type="text" class="form-control" name="txt_f_fin" placeholder="desayuno" required="true" maxlength="20">
-                        <input type="email" class="form-control" name="txt_cantidad" placeholder="almuerzo" required="true" maxlength="30">
-                        <input type="email" class="form-control" name="txt_cantidad" placeholder="once" required="true" maxlength="30">
-                        <input type="email" class="form-control" name="txt_cantidad" placeholder="cena" required="true" maxlength="30">
-                        <input type="email" class="form-control" name="txt_cantidad" placeholder="valor" required="true" maxlength="30">
+                        <!--FIn text area -->
+
+                        <!--text area -->
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Descripción</span>
+                                <span class="input-group-text">-></span>
+                            </div>
+                            <textarea class="form-control" name="txt_detalle" aria-label="With textarea" maxlength="100"></textarea>
+                        </div>
+                        <!--FIn text area -->
+
+
+                        <!-- select -->
+                        <div class="form-group">
+                            <label for="sel1" class="mt-2">tipo de minuta</label>
+                            <select class="form-control" name="select_min" id="sel1">
+                                <%                                    Manejadora_minuta mane_min = new Manejadora_minuta();
+
+                                    try {
+                                        if (mane_min.getTipo().size() == 0) {
+                                            out.print("<option>Aún no hay minutas</option>");
+                                        } else {
+                                            for (int i = 0; i < mane_min.getTipo().size(); i++) {
+                                                out.print("<option>" + mane_min.getTipo().get(i).getNom_tipo() + "</option>");
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        out.print("<option>Error en esta area</option>");
+                                    }
+
+
+                                %>
+                            </select>
+                            <!--FIn select -->
+                        </div>
                     </div>
                     <hr>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input"  required="true">
                         <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
                     </div>
-                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarCli">Enviar Minuta</button>
-
+                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarMin">Enviar Minuta</button>
                 </form>
+
                 <hr class="aba mar">
             </div>
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+
+            <br>
+            <br>
+            <br>
 
 
-<!--minutas----------------------------------------------------------------------------------------------->
-<button type="button" class="" data-toggle="modal" data-target=".bd-example-modal-lg">Lista de minutas</button>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content text-center">
-        <!-- la siguiente linea incluye la minuta.jsp -->
-        <jsp:include page="minuta.jsp" />
-    </div>
-  </div>
-</div>
-<!--FIn:-minutas------------------------------------------------------------------------------------------>
-            <hr class="aba mar" id="lista">
-
+            <!--minutas----------------------------------------------------------------------------------------------->
 
             <h4  class="mb-5 mar">Lista de minutas </h4>
-            <div class="container-fluid col-lg-10 col-sm-12 col-xs-5 mb-5 mar"> 
-                <table class="table table-hover ">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">desayuno</th>
-                            <th scope="col">almuerzo</th>
-                            <th scope="col">once</th>
-                            <th scope="col">cena</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>General</td>
-                            <td>pan, te o cafe, huevos</td>
-                            <td>Tallarines y ensalada</td>
-                            <td>Te o cafe, pan</td>
-                            <td>Un sandwich de pan integral con filete de pollo</td>
 
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Especial</td>
-                            <td>Pan, Te o cafe, jugo, Tostadas</td>
-                            <td>Entrada, Plato de fondo, ensalada y postre</td>
-                            <td>Pan, Te o cafe</td>
-                            <td>Crema de verduras.</td>
 
-                        </tr>
+            <button type="button" class="" data-toggle="modal" data-target=".bd-example-modal-lg">Presione para ver la lista</button>
 
-                    </tbody>
-                </table>
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content text-center">
+                        <!-- la siguiente linea incluye la minuta.jsp -->
+                        <jsp:include page="minuta.jsp" />
+                    </div>
+                </div>
             </div>
+            <!--FIn:-minutas------------------------------------------------------------------------------------------>
 
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
-            <hr class="aba mar" id="lista">
 
             <!-- -->
         </div>
     </div>
 
 
-</div>
+    <%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
+                sesion.setAttribute("user", null);
+                sesion.invalidate();
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            HttpSession rs = request.getSession();
+            rs.setAttribute("desde", "empleado_home.jsp");
+            rs.setAttribute("pag", "login.jsp");
+            rs.setAttribute("titulo", "Inicie sesion otra vez.");
+            rs.setAttribute("detalle", "Algo ha salido mal en la pagina.");
+            rs.setAttribute("sms", "falló empleado_home + "+e);
+            rs.setAttribute("tip", "error");
+            response.sendRedirect("true.jsp");
 
-
-
-
-
-<%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
-            sesion.setAttribute("user", null);
-            sesion.invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-    } catch (Exception e) {
-        request.setAttribute("desde", "empleado_home.jsp");
-        request.setAttribute("pag", "login.jsp");
-        request.setAttribute("titulo", "Inicie sesion otra vez.");
-        request.setAttribute("detalle", "Algo ha salido mal en la pagina.");
-        request.setAttribute("sms", "falló empleado_home");
-        request.setAttribute("tipo", "error");
-
-        request.getRequestDispatcher("true.jsp").forward(request, response);
-
-    }
-%>
+    %>
 
 
-<script src="js/form.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="js/form.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
 </body>

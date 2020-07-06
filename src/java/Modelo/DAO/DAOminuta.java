@@ -55,7 +55,7 @@ public class DAOminuta {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from Minuta order by F_CREADO";
+            String query = "select * from Minuta ORDER BY ID_MINUTA desc";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

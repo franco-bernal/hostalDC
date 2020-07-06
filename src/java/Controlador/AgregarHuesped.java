@@ -104,13 +104,13 @@ public class AgregarHuesped extends HttpServlet {
                 if (rs == "Se ingreso exitosamente") {
                     hue.setAttribute("cod", codigo_compra);
 
-                    request.setAttribute("desde", "cliente_home.jsp");
-                    request.setAttribute("pag", "huesped.jsp");
-                    request.setAttribute("titulo", "Compra agregada");
-                    request.setAttribute("detalle", "agregue huespedes para validar la compra");
-                    request.setAttribute("sms", "compra registrada");
-                    request.setAttribute("tipo", "success");
-                    request.getRequestDispatcher("true.jsp").forward(request, response);
+                    hue.setAttribute("desde", "cliente_home.jsp");
+                    hue.setAttribute("pag", "huesped.jsp");
+                    hue.setAttribute("titulo", "Compra agregada");
+                    hue.setAttribute("detalle", "agregue huespedes para validar la compra");
+                    hue.setAttribute("sms", "compra registrada");
+                    hue.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
 
                 } else {
                     out.print(rs + " -----ha:" + ha + " ------co:" + co);
@@ -121,14 +121,15 @@ public class AgregarHuesped extends HttpServlet {
             if (e.toString().compareToIgnoreCase("Java.Lang.NullPointerException") == 0) {
                 error = "Punto vacío";
             }
-            request.setAttribute("desde", "cliente_home.jsp");
-            request.setAttribute("pag", "cliente_home.jsp");
-            request.setAttribute("titulo", "Algo ocurrió al ingresar los datos");
-            request.setAttribute("detalle", "intente de nuevo");
-            request.setAttribute("sms", "en 'agregar'");
-            request.setAttribute("tipo", "error");
-            RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-            rd.include(request, response);
+
+            HttpSession hue = request.getSession();
+            hue.setAttribute("desde", "cliente_home.jsp");
+            hue.setAttribute("pag", "cliente_home.jsp");
+            hue.setAttribute("titulo", "Algo ocurrió al ingresar los datos");
+            hue.setAttribute("detalle", "intente de nuevo");
+            hue.setAttribute("sms", "en 'agregar'");
+            hue.setAttribute("tip", "error");
+            response.sendRedirect("true.jsp");
 
         }
 ///////////////////////////////////////
@@ -190,53 +191,28 @@ public class AgregarHuesped extends HttpServlet {
                     hue.setAttribute("cod", cod);
                     if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
 
-                        request.setAttribute("desde", "huesped.jsp");
-                        request.setAttribute("pag", "huesped.jsp");
-                        request.setAttribute("titulo", "Huesped agregado");
-                        request.setAttribute("detalle", "codigo de compra" + " cod ");
-                        request.setAttribute("sms", rs);
-                        request.setAttribute("tipo", "success");
-                        RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                        rd.include(request, response);
+                        hue.setAttribute("desde", "huesped.jsp");
+                        hue.setAttribute("pag", "huesped.jsp");
+                        hue.setAttribute("titulo", "Huesped agregado");
+                        hue.setAttribute("detalle", "codigo de compra" + cod);
+                        hue.setAttribute("sms", "Se ingreso exitosamente ♠");
+                        hue.setAttribute("tip", "success");
+                        response.sendRedirect("true.jsp");
+
                     } else {
-                        request.setAttribute("desde", "huesped.jsp");
-                        request.setAttribute("pag", "huesped.jsp");
-                        request.setAttribute("titulo", "Huesped agregado");
-                        request.setAttribute("detalle", "codigo de compra" + " cod ");
-                        request.setAttribute("sms", rs);
-                        request.setAttribute("tipo", "success");
-                        RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                        rd.include(request, response);
+
+                        hue.setAttribute("desde", "huesped.jsp");
+                        hue.setAttribute("pag", "huesped.jsp");
+                        hue.setAttribute("titulo", "Huesped agregado");
+                        hue.setAttribute("detalle", "codigo de compra" + cod);
+                        hue.setAttribute("sms", rs);
+                        hue.setAttribute("tip", "success");
+                        response.sendRedirect("true.jsp");
+
                     }
                 } catch (Exception e) {
                     out.print("|" + rut + "-" + nombre + "-" + apellido + "-" + cod + "- |||num|||:" + num_hab + " ||| error:" + e + "|");
                 }
-                /*
-                Huesped hues = new Huesped(rut, nombre, apellido, cod, numero_ha);
-                mane_ord.actualizarPrecio(cod, precio_actual);
-                String rs = mane_hue.ingresarHuesped(hues);
-
-                hue.setAttribute("cod", cod);
-                if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
-
-                    request.setAttribute("desde", "huesped.jsp");
-                    request.setAttribute("pag", "huesped.jsp");
-                    request.setAttribute("titulo", "Huesped agregado");
-                    request.setAttribute("detalle", "codigo de compra" + " cod ");
-                    request.setAttribute("sms", rs);
-                    request.setAttribute("tipo", "success");
-                    RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("desde", "huesped.jsp");
-                    request.setAttribute("pag", "huesped.jsp");
-                    request.setAttribute("titulo", "Huesped agregado");
-                    request.setAttribute("detalle", "codigo de compra" + " cod ");
-                    request.setAttribute("sms", rs);
-                    request.setAttribute("tipo", "success");
-                    RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                    rd.include(request, response);
-                }*/
 
             }
         } catch (Exception e) {
@@ -244,14 +220,15 @@ public class AgregarHuesped extends HttpServlet {
             if (e.toString().compareToIgnoreCase("Java.Lang.NullPointerException") == 0) {
                 error = "Punto vacío";
             }
-            request.setAttribute("desde", "huesped.jsp");
-            request.setAttribute("pag", "huesped.jsp");
-            request.setAttribute("titulo", "Algo ha salido mal");
-            request.setAttribute("detalle", "por favor, intenta agregar huesped nuevamente.");
-            request.setAttribute("sms", "error en servlet agregarHuesped  + " + e);
-            request.setAttribute("tipo", "error");
-            RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-            rd.include(request, response);
+         
+            HttpSession hue = request.getSession();
+            hue.setAttribute("desde", "huesped.jsp");
+            hue.setAttribute("pag", "huesped.jsp");
+            hue.setAttribute("titulo", "Algo ha salido mal");
+            hue.setAttribute("detalle", "por favor, intenta agregar huesped nuevamente");
+            hue.setAttribute("sms", "error en servlet agregarHuesped  + " + e);
+            hue.setAttribute("tip", "error");
+            response.sendRedirect("true.jsp");
 
         }
         ///////////////////////////////////////////////////////

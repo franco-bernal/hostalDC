@@ -136,27 +136,40 @@ public class ControlUsuario extends HttpServlet {
                     Manejadora_empleado ma_em = new Manejadora_empleado();
                     String rut = ma_em.obtenerRutEmpleado(usu.getId_usuario());
                     sesion.setAttribute("rut", rut);
-                    request.getRequestDispatcher("empleado_home.jsp").forward(request, response);
+                    
+                    HttpSession rs = request.getSession();
+                    rs.setAttribute("desde", "login.jsp");
+                    rs.setAttribute("pag", "empleado_home.jsp");
+                    rs.setAttribute("titulo", "Ingresado como");
+                    rs.setAttribute("detalle", "empleado Dc");
+                    rs.setAttribute("sms", rut+" Cargando...");
+                    rs.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
 
                 }
                 //proveedor
                 if (r == 3) {
-
-                    request.getRequestDispatcher("proveedor_home.jsp").forward(request, response);
+                    HttpSession rs = request.getSession();
+                    rs.setAttribute("desde", "login.jsp");
+                    rs.setAttribute("pag", "proveedor_home.jsp");
+                    rs.setAttribute("titulo", "Ingresado como");
+                    rs.setAttribute("detalle", "proveedor");
+                    rs.setAttribute("sms", " Cargando...");
+                    rs.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
                 }
                 //cliente
                 if (r == 4) {
                     String rut = mane_cli.obtenerRutUsuario(usu.getId_usuario());
                     sesion.setAttribute("rut", rut);
-
-                    request.setAttribute("desde", "login.jsp");
-                    request.setAttribute("pag", "cliente_home.jsp");
-                    request.setAttribute("titulo", "Ingresado como ");
-                    request.setAttribute("detalle", "cliente ");
-                    request.setAttribute("sms", rut);
-                    request.setAttribute("tipo", "success");
-                    RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                    rd.include(request, response);
+                    HttpSession rs = request.getSession();
+                    rs.setAttribute("desde", "login.jsp");
+                    rs.setAttribute("pag", "cliente_home.jsp");
+                    rs.setAttribute("titulo", "Ingresado como");
+                    rs.setAttribute("detalle", "cliente");
+                    rs.setAttribute("sms", rut+" Cargando...");
+                    rs.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
                 }
             }
         } catch (Exception e) {
@@ -164,13 +177,13 @@ public class ControlUsuario extends HttpServlet {
             if (e.toString().compareToIgnoreCase("Java.Lang.NullPointerException") == 0) {
                 error = "Punto vacío";
             }
-
-            request.setAttribute("pag", "login.jsp");
-            request.setAttribute("titulo", "Algo ocurrió al iniciar");
-            request.setAttribute("detalle", "por favor, intentalo de nuevo.");
-            request.setAttribute("sms", e);
-            request.setAttribute("tipo", "error");
-            request.getRequestDispatcher("true.jsp").forward(request, response);
+            HttpSession rs = request.getSession();
+            rs.setAttribute("pag", "login.jsp");
+            rs.setAttribute("titulo", "Algo ocurrió al iniciar");
+            rs.setAttribute("detalle", "por favor, intentalo de nuevo.");
+            rs.setAttribute("sms", e);
+            rs.setAttribute("tip", "error");
+            response.sendRedirect("true.jsp");
 
         }
 

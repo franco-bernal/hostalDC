@@ -40,6 +40,12 @@ public class Manejadora_productos {
             }
     }
 
-    
+    public int cambiarNombreProductoPorId(String nom){
+        for(int i=0;i<arrayPro.size();i++){
+        if(arrayPro.get(i).getNombre().compareToIgnoreCase(nom)==0)
+            return arrayPro.get(i).getId_producto();
+         }
+       return 0; 
+    }
     
 }

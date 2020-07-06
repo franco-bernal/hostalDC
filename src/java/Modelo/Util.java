@@ -66,12 +66,15 @@ public class Util {
         //tipos.
         //puede ser |error |success|
         /* ej
-        request.setAttribute("desde", "huesped.jsp");
-        request.setAttribute("pag", "cliente_home.jsp");
-        request.setAttribute("titulo", "Eliminado");
-        request.setAttribute("detalle", "Se ha eliminado el" + " codigo");
-        request.setAttribute("sms", rs);
-        request.setAttribute("tipo", "success");
+                    HttpSession hue = request.getSession();
+                       hue.setAttribute("desde", "cliente_home.jsp");
+                    hue.setAttribute("pag", "huesped.jsp");
+                    hue.setAttribute("titulo", "Compra agregada");
+                    hue.setAttribute("detalle", "agregue huespedes para validar la compra");
+                    hue.setAttribute("sms", "compra registrada");
+                    hue.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
+        
        RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
                     rd.include(request, response);
          */

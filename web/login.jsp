@@ -13,19 +13,7 @@
         <title>Login HDC</title>
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
         <%
-            response.setHeader("Cache-Control", "no-cache");
-            response.setHeader("Cache-Control", "no-store");
-            response.setHeader("Pragma", "no-cache");
-            response.setDateHeader("Expires", 0);
-
-            HttpSession sesion;
-            try {
-                sesion = request.getSession();
-                session.invalidate();
-            } catch (Exception e) {
-                out.print("exit");
-            }
-
+            
 
         %>
     </head>

@@ -27,9 +27,11 @@
             Manejadora_proveedor mane_prov = new Manejadora_proveedor();
             Manejadora_productos mane_produ = new Manejadora_productos();
             UsuarioProveedor prov = new UsuarioProveedor();
+            
 
             String nom_prov = rs.getAttribute("prov").toString();
-
+            int id=Integer.parseInt(rs.getAttribute("id").toString());
+            rs.setAttribute("id_ord", id);
             for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
                 String nom_comparar = util.quitarEspaciosAlFInal(mane_prov.getProveedor().get(i).getNom_empresa());
                 if (nom_comparar.compareToIgnoreCase(nom_prov) == 0) {
@@ -46,12 +48,14 @@
         <h1><% out.print(prov.getNom_empresa()); %>|</h1>
         <h2>rubro:<%out.print(prov.getRubro());%></h2>
         <h3>rut:<%out.print(prov.getRut());%></h3>
+        <h1>Compra:<%out.print(id); %> </h1>
 
 
         <form action="ControlPedido" method="post">
             <p>Pedido</p>
+            <input type='text' class='form-control desactivar' name='txt_rut' value="<%=prov.getRut() %>">
             <label>elija un producto</label>
-            <select name="select_prod"">
+            <select name="select_prod">
                 <%
                     try {
                         if (mane_produ.getProducto().size() == 0) {
@@ -77,11 +81,19 @@
 
             <hr>
             <input type="checkbox"  required="true">
-            <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
-            <button type="submit" class="btn btn-dark" name="accion" value="ComenzarPedido">Comenzar pedido</button>
+            <label >Revisé los datos</label>
+            <button type="submit"  name="accion" value="Agregar_productos">Agregar al carro</button>
         </form>
+            
+            <!--boton Cancelar -->
+            <form action="ControlPedido" method="post">
+                <button type="submit"  name="accion" value="cancelar">salir y eliminar compra</button>
+            </form>
+            <form action="ControlPedido" method="post">
+                <button type="submit"  name="accion" value="Enviar">Confirmar y enviar</button>
+            </form>
+            
 
-
-
+            <a href='empleado_home.jsp' class="boton verde">Dejar pendiente</a>
     </body>
 </html>

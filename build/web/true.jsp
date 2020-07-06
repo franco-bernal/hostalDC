@@ -16,19 +16,20 @@
 
         <%
             Util util = new Util();
-            String pag = request.getAttribute("pag").toString();
-            String desde = request.getAttribute("desde").toString();;
-
+            HttpSession rs = request.getSession();
+            String pag = rs.getAttribute("pag").toString();
+            String desde = rs.getAttribute("desde").toString();
+            rs.setAttribute("redirect", pag);
             String titulo = "titulo vacío";
             String detalle = "";
             String sms = "vacío";
             String tipo = "";
 
             try {
-                titulo = request.getAttribute("titulo").toString();
-                detalle = request.getAttribute("detalle").toString();
-                tipo = request.getAttribute("tipo").toString();
-                sms = request.getAttribute("sms").toString();
+                titulo = rs.getAttribute("titulo").toString();
+                detalle = rs.getAttribute("detalle").toString();
+                tipo = rs.getAttribute("tip").toString();
+                sms = rs.getAttribute("sms").toString();
 
                 if (sms == null) {
                     sms = "vacío";
@@ -38,11 +39,11 @@
                     rd.include(request, response);
                 }
                 out.print(util.cuadroDeAlerta(titulo, detalle, sms, tipo));
-                RequestDispatcher rd = request.getRequestDispatcher(pag);
+                RequestDispatcher rd = request.getRequestDispatcher("redirect.jsp");
                 rd.include(request, response);
 
             } catch (Exception e) {
-                out.print(util.cuadroDeAlerta("true: Fallo reenvio", "404","desde:"+desde+ " a :" + pag + ". |sms:" + sms + "|", "error"));
+                out.print(util.cuadroDeAlerta("true: Fallo reenvio", "404","desde:"+desde+ " a :" + pag + ". |sms:" +tipo + "|"+e, "error"));
                 RequestDispatcher rd = request.getRequestDispatcher(desde);
                 rd.include(request, response);
             }

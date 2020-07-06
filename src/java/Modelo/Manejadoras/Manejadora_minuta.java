@@ -39,7 +39,12 @@ public class Manejadora_minuta {
     public void setArrayTipo(ArrayList<Tipo_minuta> arraytipo) {
         this.arraytipo = arraytipo;
     }
-
+    //_-----------------------------------------------------------------
+    
+    public String ingresarMinuta(Minuta min){
+        return dao_mi.ingresarMinuta(min);
+    }
+    
     
     public int valorMinuta(int id){
         
@@ -51,7 +56,19 @@ public class Manejadora_minuta {
         return 0;
     }
     
+    public int max_id_min(){
+        return arraymi.size()+1;
+    }
     
+    public int cambiarNombrePorIdMinuta(String nombre){
+        
+        for(int i=0;i<arraytipo.size();i++){
+            if(arraytipo.get(i).getNom_tipo().compareToIgnoreCase(nombre)==0){
+                return arraytipo.get(i).getId_tipo_minuta();
+            }
+        }
+        return 0;
+    }
     
     
     

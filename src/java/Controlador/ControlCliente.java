@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ControlCliente", urlPatterns = {"/ControlCliente"})
 public class ControlCliente extends HttpServlet {
@@ -83,26 +84,30 @@ public class ControlCliente extends HttpServlet {
             Usuario u = new Usuario(id, nom_usu, clave, correo, tipo, 0);
             UsuarioCli_detalle d = new UsuarioCli_detalle(rut, nom, telefono, dir, id);
             //out.print();
-            String rs=mane_cli.ingresarClienteCompleto(u, d);
+            String rs = mane_cli.ingresarClienteCompleto(u, d);
 
             if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
-                request.setAttribute("desde", "select.jsp");
-                request.setAttribute("pag", "login.jsp");
-                request.setAttribute("titulo", "Registrado!");
-                request.setAttribute("detalle", "Ya puedes iniciar con tu usuario: " + nom_usu);
-                request.setAttribute("sms", " ");
-                request.setAttribute("tipo", "success");
-                RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                rd.include(request, response);
-            }else{
-                 request.setAttribute("desde", "select.jsp");
-                request.setAttribute("pag", "select.jsp");
-                request.setAttribute("titulo", "Error de registro");
-                request.setAttribute("detalle", " ");
-                request.setAttribute("sms", rs);
-                request.setAttribute("tipo", "alert");
-                RequestDispatcher rd = request.getRequestDispatcher("true.jsp");
-                rd.include(request, response);
+
+                HttpSession hue = request.getSession();
+                hue.setAttribute("desde", "select.jsp");
+                hue.setAttribute("pag", "login.jsp");
+                hue.setAttribute("titulo", "Registrado!");
+                hue.setAttribute("detalle", "Ya puedes iniciar con tu usuario: " + nom_usu);
+                hue.setAttribute("sms", " ");
+                hue.setAttribute("tip", "success");
+                response.sendRedirect("true.jsp");
+
+            } else {
+              
+                HttpSession hue = request.getSession();
+                hue.setAttribute("desde", "select.jsp");
+                hue.setAttribute("pag", "select.jsp");
+                hue.setAttribute("titulo", "Error de registro");
+                hue.setAttribute("detalle", " ");
+                hue.setAttribute("sms", rs);
+                hue.setAttribute("tip", "alert");
+                response.sendRedirect("true.jsp");
+                
             }
 
         }
