@@ -48,4 +48,17 @@ public class Manejadora_productos {
        return 0; 
     }
     
+     public Producto obtenerProductoPorId(int id){
+        for(int i = 0 ;i<arrayPro.size();i++){
+            if(arrayPro.get(i).getId_producto()==id){
+                return arrayPro.get(i);
+            }
+        }
+        return null;
+    }
+
+     public int maxIdProducto(){
+         return arrayPro.size()+1;
+     }
+    
 }

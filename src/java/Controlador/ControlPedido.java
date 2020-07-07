@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Entidades.Orden_pedido;
+import Modelo.Entidades.Producto;
 import Modelo.Entidades.UsuarioProveedor;
 import Modelo.Entidades.detalle_pedido;
 import Modelo.Manejadoras.Manejadora_pedidos;
@@ -187,28 +188,26 @@ public class ControlPedido extends HttpServlet {
             HttpSession rs = request.getSession();
             int id = Integer.parseInt(rs.getAttribute("id_ord").toString());
             String re = mane_ped.limpiarPedidoCompleto(id);
-            if(re.compareToIgnoreCase("true")==0){
-                
-                   HttpSession hue = request.getSession();
-            hue.setAttribute("desde", "agregarProductos.jsp");
-            hue.setAttribute("pag", "empleado_home.jsp");
-            hue.setAttribute("titulo", "Compra eliminada");
-            hue.setAttribute("detalle", " ");
-            hue.setAttribute("sms", " ");
-            hue.setAttribute("tip", "success");
-            response.sendRedirect("true.jsp");
-            }else{
-                     HttpSession hue = request.getSession();
-            hue.setAttribute("desde", "agregarProductos.jsp");
-            hue.setAttribute("pag", "agregarProductos.jsp");
-            hue.setAttribute("titulo", "No se pudo eliminar");
-            hue.setAttribute("detalle", "intente de nuevo");
-            hue.setAttribute("sms", re);
-            hue.setAttribute("tip", "error");
-            response.sendRedirect("true.jsp");
+            if (re.compareToIgnoreCase("true") == 0) {
+
+                HttpSession hue = request.getSession();
+                hue.setAttribute("desde", "agregarProductos.jsp");
+                hue.setAttribute("pag", "empleado_home.jsp");
+                hue.setAttribute("titulo", "Compra eliminada");
+                hue.setAttribute("detalle", " ");
+                hue.setAttribute("sms", " ");
+                hue.setAttribute("tip", "success");
+                response.sendRedirect("true.jsp");
+            } else {
+                HttpSession hue = request.getSession();
+                hue.setAttribute("desde", "agregarProductos.jsp");
+                hue.setAttribute("pag", "agregarProductos.jsp");
+                hue.setAttribute("titulo", "No se pudo eliminar");
+                hue.setAttribute("detalle", "intente de nuevo");
+                hue.setAttribute("sms", re);
+                hue.setAttribute("tip", "error");
+                response.sendRedirect("true.jsp");
             }
-            
-         
 
         }
         if (accion.equals("Enviar")) {
@@ -216,30 +215,73 @@ public class ControlPedido extends HttpServlet {
 
             HttpSession rs = request.getSession();
             int id = Integer.parseInt(rs.getAttribute("id_ord").toString());
-            
-             String re = mane_ped.actualizarEstado(2, id);
-            if(re.compareToIgnoreCase("true")==0){
-                
-                   HttpSession hue = request.getSession();
-            hue.setAttribute("desde", "agregarProductos.jsp");
-            hue.setAttribute("pag", "empleado_home.jsp");
-            hue.setAttribute("titulo", "Pedido enviado");
-            hue.setAttribute("detalle", " ");
-            hue.setAttribute("sms", " ");
-            hue.setAttribute("tip", "success");
-            response.sendRedirect("true.jsp");
-            }else{
-                     HttpSession hue = request.getSession();
-            hue.setAttribute("desde", "agregarProductos.jsp");
-            hue.setAttribute("pag", "agregarProductos.jsp");
-            hue.setAttribute("titulo", "No se pudo enviar");
-            hue.setAttribute("detalle", "intente de nuevo");
-            hue.setAttribute("sms", re);
-            hue.setAttribute("tip", "error");
-            response.sendRedirect("true.jsp");
+
+            String re = mane_ped.actualizarEstado(2, id);
+            if (re.compareToIgnoreCase("true") == 0) {
+
+                HttpSession hue = request.getSession();
+                hue.setAttribute("desde", "agregarProductos.jsp");
+                hue.setAttribute("pag", "empleado_home.jsp");
+                hue.setAttribute("titulo", "Pedido enviado");
+                hue.setAttribute("detalle", " ");
+                hue.setAttribute("sms", " ");
+                hue.setAttribute("tip", "success");
+                response.sendRedirect("true.jsp");
+            } else {
+                HttpSession hue = request.getSession();
+                hue.setAttribute("desde", "agregarProductos.jsp");
+                hue.setAttribute("pag", "agregarProductos.jsp");
+                hue.setAttribute("titulo", "No se pudo enviar");
+                hue.setAttribute("detalle", "intente de nuevo");
+                hue.setAttribute("sms", re);
+                hue.setAttribute("tip", "error");
+                response.sendRedirect("true.jsp");
             }
-            
+
         }
+
+        if (accion.equals("insert_prod")) {
+            Manejadora_productos mane_prod = new Manejadora_productos();
+            int id = mane_prod.maxIdProducto();
+            String nombre = request.getParameter("txt_nombre").toString();
+            String detalle = request.getParameter("txt_detalle").toString();
+            int valor = Integer.parseInt(request.getParameter("txt_valor").toString());
+            String rut = request.getParameter("txt_rut");
+            Producto prod = new Producto(id, nombre, detalle, valor, rut);
+            try {
+                String rs = mane_prod.ingresarProducto(prod);
+                if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                    HttpSession hue = request.getSession();
+                    hue.setAttribute("desde", "proveedor_home.jsp");
+                    hue.setAttribute("pag", "proveedor_home.jsp");
+                    hue.setAttribute("titulo", "Producto agregado");
+                    hue.setAttribute("detalle", " ");
+                    hue.setAttribute("sms", rs);
+                    hue.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
+                }else{
+                     HttpSession hue = request.getSession();
+                    hue.setAttribute("desde", "proveedor_home.jsp");
+                    hue.setAttribute("pag", "proveedor_home.jsp");
+                    hue.setAttribute("titulo", "No se guardó");
+                    hue.setAttribute("detalle", "intentelo de nuevo");
+                    hue.setAttribute("sms", rs);
+                    hue.setAttribute("tip", "error");
+                    response.sendRedirect("true.jsp");
+                }
+            } catch (Exception e) {
+                  HttpSession hue = request.getSession();
+                    hue.setAttribute("desde", "proveedor_home.jsp");
+                    hue.setAttribute("pag", "proveedor_home.jsp");
+                    hue.setAttribute("titulo", "No se guardó");
+                    hue.setAttribute("detalle", "intentelo de nuevo");
+                    hue.setAttribute("sms", e);
+                    hue.setAttribute("tip", "error");
+                    response.sendRedirect("true.jsp");
+            }
+
+        }
+
     }
 
     /**

@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.Entidades.Usuario;
 import Modelo.Manejadoras.Manejadora_cliente;
 import Modelo.Manejadoras.Manejadora_empleado;
+import Modelo.Manejadoras.Manejadora_proveedor;
 import Modelo.Manejadoras.Manejadora_usuario;
 import Modelo.Util;
 import java.io.IOException;
@@ -149,6 +150,10 @@ public class ControlUsuario extends HttpServlet {
                 }
                 //proveedor
                 if (r == 3) {
+                    Manejadora_proveedor mane_prov = new Manejadora_proveedor();
+                    String rut = mane_prov.obtenerRutProveedor(usu.getId_usuario());
+                    sesion.setAttribute("rut", rut);
+                    
                     HttpSession rs = request.getSession();
                     rs.setAttribute("desde", "login.jsp");
                     rs.setAttribute("pag", "proveedor_home.jsp");

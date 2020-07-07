@@ -13,15 +13,15 @@
             HttpSession rs = request.getSession();
             String pag = rs.getAttribute("redirect").toString();
         %>
-        <META HTTP-EQUIV="Refresh" CONTENT="3;URL=<%=pag%>">
+        <META HTTP-EQUIV="Refresh" CONTENT="1;URL=<%=pag%>">
        <% rs.removeAttribute("redirect"); %>
-        <title>Redirect</title>
+        <title>Redireccionando...</title>
 
 
     </head>
     <body >
           <h1 class="letras">Cargando...</h1>
-        <img src="https://steamuserimages-a.akamaihd.net/ugc/394426147786758208/A797F77D6693AE7ACBF0FE2D1244795217A18A58/" width="100px"  height="120px">
+        <img src="https://static.wixstatic.com/media/81cab9_ce4a29f9ba69499fbdea5bf8ec9e75f7~mv2.gif" width="20%"  height="20%">
       
         
     </body>

@@ -68,13 +68,7 @@
         <link href="css/Cliente.css" rel="stylesheet" type="text/css"/>
         <link href="css/Util.css" rel="stylesheet" type="text/css"/>
 
-        <%
-            response.setHeader("Cache-Control", "no-cache");
-            response.setHeader("Cache-Control", "no-store");
-            response.setHeader("Pragma", "no-cache");
-            response.setDateHeader("Expires", 0);
-
-        %>
+     
 
     </head>
 
@@ -119,21 +113,10 @@
         <!--...............-->   
         <div class="fon " data-spy="scroll" data-target="#navbar-example2" data-offset="0" >   
             <!-- cuerpo con identificadores reconocibles para el manejo del menu(nav,header) -->
+           
             <br>
             <br>
             <hr class="aba mar">
-            <!--...............-->
-            <!--.......Form eliminar compra........-->
-            <div class="col-lg-2 d-flex justify-content-center">
-                <form action="AgregarHuesped" method="Post">
-                    <h4 class="mb-5 mar" id="eliminar">Eliminar compra</h4>
-                    <input type="text" class="form-control" name="txt_cod" placeholder="codigo" required="ingrese dato" maxlength="18">
-                    <button type="submit" class="btn btn-dark btn-block" name="accion" value="borrar">Borrar compra</button>
-                </form>
-            </div>
-            <!--.....FIn: Form eliminar compra..........-->
-            <!--..............-->
-            <br><br><br><br>
             <!--..............-->
             <br><br>
             <!--.........Lista de compras.....-->
@@ -149,8 +132,7 @@
                                     <th >hasta</th>
                                     <th >fecha comprado</th>
                                     <th >precio total</th>
-                                    <th >tipo minuta</th>
-                                    <th >rut comprador</th>
+                                    <th >Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,14 +151,13 @@
                                                     if (ord.getOrden().get(i).getCliente_rut_emp().compareToIgnoreCase(rut_o) == 0) {
                                                         nom_mi = util.tipo_min_nom(ord.getOrden().get(i).getTipo_min());
                                                        // nom_hab = util.tipo_hab_nom(ord.getOrden().get(i).getTipo_hab());
-                                                        out.print("<tr class='table-dark'>");
+                                                        out.print("<tr class='table-dark text-center'>");
                                                         out.print("<td>" + ord.getOrden().get(i).getCodigo_compra() + "</td>"
                                                                 + "<td>" + ord.getOrden().get(i).getF_inicio() + "</td>"
                                                                 + "<td>" + ord.getOrden().get(i).getF_fin() + "</td>"
                                                                 + "<td>" + ord.getOrden().get(i).getF_compra() + "</td>"
-                                                                + "<td>" + ord.getOrden().get(i).getPrecio_total() + "</td>"
-                                                                + "<td>" + nom_mi + "</td>"
-                                                                + "<td>" + ord.getOrden().get(i).getCliente_rut_emp() + "</td>"
+                                                                + "<td> $" + ord.getOrden().get(i).getPrecio_total() + "</td>"
+                                                                + "<td><a href='aux_eliminar.jsp?id="+ord.getOrden().get(i).getCodigo_compra()+"&accion=el_ord' class='btn btn-warning btn-sm'>Eliminar</a></td>"
                                                                 + "</tr>");
                                                     }
                                             }

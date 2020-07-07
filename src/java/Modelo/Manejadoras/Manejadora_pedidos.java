@@ -27,7 +27,25 @@ public class Manejadora_pedidos {
     public void setArrayPedido(ArrayList<Orden_pedido> arrayPed) {
         this.arrayPed = arrayPed;
     }
+//DETALLES DEL PEDIDO
 
+    DAOorden_pedido dao_det = new DAOorden_pedido();
+
+    private ArrayList<detalle_pedido> arrayDet = dao_det.ObtenerDetalles();
+
+    public ArrayList<detalle_pedido> getDetallePedidos() {
+        return arrayDet;
+    }
+
+    public void setArrayDetallePedidos(ArrayList<detalle_pedido> arrayDet) {
+        this.arrayDet = arrayDet;
+    }
+
+    public ArrayList<detalle_pedido> obtenerDetalles(){
+      return dao_det.ObtenerDetalles();
+    }
+    
+    
     /*
     ingresar
      */
@@ -52,27 +70,53 @@ public class Manejadora_pedidos {
         }
 
     }
-    
-    public String eliminarPedido(int id){
+
+    public String eliminarPedido(int id) {
         return dao_ped.eliminarPedido(id);
     }
-    
-    
-    public String limpiarCarroProductos(int id){
-    return dao_ped.limpiarProductos(id);
+
+    public String limpiarCarroProductos(int id) {
+        return dao_ped.limpiarProductos(id);
     }
-    
-    public String actualizarEstado(int estado, int id){
+
+    public String actualizarEstado(int estado, int id) {
         return dao_ped.actualizarEstado(estado, id);
     }
-    
-    
-    public String limpiarPedidoCompleto(int id){
-        String rs=limpiarCarroProductos(id);
-        if(rs.compareToIgnoreCase("true")==0){
-            rs=eliminarPedido(id);
+
+    public String limpiarPedidoCompleto(int id) {
+        String rs = limpiarCarroProductos(id);
+        if (rs.compareToIgnoreCase("true") == 0) {
+            rs = eliminarPedido(id);
         }
         return rs;
+    }
+
+    public String EstadoDelPedido(int estado) {
+        String est = "No encontrado";
+        if (estado == 0) {
+            est = "rechazado";//por proveedor
+        }
+        if (estado == 1) {
+            est = "pendiente";//por cliente
+        }
+        if (estado == 2) {
+            est = "enviado";//a proveedor
+        }
+        if (estado == 3) {
+            est = "aceptado";//por proveedor
+        }
+        if (estado == 4) {
+            est = "procesado";//por proveedor y enviado a empleados
+        }
+        if (estado == 5) {
+            est="ok";//el pedido llegó bien
+        }
+        if(estado==6){
+            est="falta";//productos. por empleados
+        }
+
+        
+        return est;
     }
 
 }

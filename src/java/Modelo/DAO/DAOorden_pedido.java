@@ -51,7 +51,7 @@ public class DAOorden_pedido {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from ORDEN_PEDIDO order by id_pedido";
+            String query = "select * from ORDEN_PEDIDO order by ESTADO desc,ID_PEDIDO desc";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -90,12 +90,12 @@ public class DAOorden_pedido {
         return rs;
     }
 
-    public ArrayList<detalle_pedido> ObtenerDetallesPorId(int id) {
+    public ArrayList<detalle_pedido> ObtenerDetalles() {
         ArrayList<detalle_pedido> arrayDeta = new ArrayList<detalle_pedido>();
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from DETALLE_PEDIDO WHERE ORDEN_PEDIDO_ID_PEDIDO=" + id + ";";
+            String query = "select * from DETALLE_PEDIDO";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

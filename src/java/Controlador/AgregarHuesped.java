@@ -240,48 +240,27 @@ public class AgregarHuesped extends HttpServlet {
                 int codigo = Integer.parseInt(hue.getAttribute("cod").toString());
                 String rs = mane_hue.cancelar(codigo);
                 if (rs == "realizado") {
-                    mane_hue.cancelar(codigo);
-                    request.setAttribute("pag", "cliente_home.jsp");
-
-                    request.setAttribute("desde", "huesped.jsp");
-                    request.setAttribute("pag", "cliente_home.jsp");
-                    request.setAttribute("titulo", "Eliminado");
-                    request.setAttribute("detalle", "Se ha eliminado el" + " codigo");
-                    request.setAttribute("sms", rs);
-                    request.setAttribute("tipo", "success");
-                    request.getRequestDispatcher("true.jsp").forward(request, response);
+                    
+                       hue.setAttribute("desde", "huesped.jsp");
+                    hue.setAttribute("pag", "cliente_home.jsp");
+                    hue.setAttribute("titulo", "Eliminado");
+                    hue.setAttribute("detalle", "Se ha eliminado el " +  codigo);
+                    hue.setAttribute("sms", rs);
+                    hue.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
+                    
                 } else {
-                    request.getRequestDispatcher("huesped.jsp").forward(request, response);
+                    hue.setAttribute("desde", "huesped.jsp");
+                    hue.setAttribute("pag", "huesped.jsp");
+                    hue.setAttribute("titulo", "No se puede eliminar");
+                    hue.setAttribute("detalle", "Vuelva a intentarlo");
+                    hue.setAttribute("sms", rs);
+                    hue.setAttribute("tip", "error");
+                    response.sendRedirect("true.jsp");
                 }
             }
             ///////////////////////////////////////////////////////
-            if (accion.equals("borrar")) {
-                HttpSession hue = request.getSession();
-                int codigo = Integer.parseInt(request.getParameter("txt_cod"));
-
-                String rs = mane_hue.cancelar(codigo);
-                if (rs == "realizado") {
-                    request.setAttribute("desde", "cliente_home.jsp");
-                    request.setAttribute("pag", "cliente_home.jsp");
-                    request.setAttribute("titulo", "Eliminado");
-                    request.setAttribute("detalle", "Se ha eliminado el" + " codigo");
-                    request.setAttribute("sms", rs);
-                    request.setAttribute("tipo", "success");
-                    request.getRequestDispatcher("true.jsp").forward(request, response);
-                } else {
-                    String error = "No se pudo realizar";
-                    out.print("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                    out.print("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    out.print("<script>");
-                    out.print("$(document).ready(function(){");
-                    out.print("swal('No se pudo eliminar','por favor, intentalo de nuevo . " + error + "','error');");
-                    out.print("});");
-                    out.print("</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("cliente_home.jsp");
-                    rd.include(request, response);
-
-                }
-            }
+         
 
         } catch (Exception e) {
             String error = "";

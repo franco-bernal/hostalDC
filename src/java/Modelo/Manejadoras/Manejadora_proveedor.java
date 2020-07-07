@@ -56,5 +56,16 @@ public class Manejadora_proveedor {
         }
 
     }
+    
+    
+     public String obtenerRutProveedor(int id) {
+        for (int i = 0; i < arrayPro.size(); i++) {
+            if (id == arrayPro.get(i).getUSUARIO_id_usuario()) {
+                return arrayPro.get(i).getRut();
+            }
+        }
+        return null;
+    }
+      
 
 }

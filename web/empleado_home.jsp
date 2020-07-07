@@ -228,25 +228,57 @@
                                         rutProveedor = mane_prov.getProveedor().get(i).getRut();
                                         rutPedido = mane_ped.getPedido().get(e).getProveedor_rut();
                                         try {
-
+                                            int estado = mane_ped.getPedido().get(e).getEstado();
                                             if (rutProveedor.compareToIgnoreCase(rutPedido) == 0) {
-                                                out.print("<tbody>"
-                                                        + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
-                                                        + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
-                                                        + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
-                                                        + "<td>"
-                                                        + "<button type='button' class='btn btn-success'>Recibido</button>"
-                                                        + "<button type='button' class='btn btn-danger'>falta</button>"
-                                                        + "</td>"
-                                                        + "</tbody>");
 
+                                                if (estado == 0) {
+                                                    out.print("<tbody>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                            + "<td>"
+                                                            + "rechazado"
+                                                            + "</td>"
+                                                            + "</tbody>");
+                                                }
+
+                                                if(estado == 2){
+                                                    out.print("<tbody>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                            + "<td>"
+                                                            + "enviado"
+                                                            + "</td>"
+                                                            + "</tbody>");
+                                                }
+                                                if(estado == 3){
+                                                     out.print("<tbody>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                            + "<td>"
+                                                            + "aceptado"
+                                                            + "</td>"
+                                                            + "</tbody>");
+                                                }
+                                                if(estado == 4){
+                                                    out.print("<tbody>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                            + "<td>"
+                                                            + "<button type='button' class='btn btn-success'>Recibido</button>"
+                                                            + "<button type='button' class='btn btn-danger'>falta</button>"
+                                                            + "</td>"
+                                                            + "</tbody>");
+                                                }
+                                                
                                             }
 
                                         } catch (Exception u) {
-
                                         }
                                     }
-
                                 }
 
 
@@ -280,7 +312,7 @@
             <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
 
                 <form action="ControlPedido" method="post">
-                   <input type='text' class='form-control desactivar' name='txt_rut_emp' value="<%=rut %>">
+                    <input type='text' class='form-control desactivar' name='txt_rut_emp' value="<%=rut%>">
 
                     <div class="col-sm">
                         <p class="p-3 mb-2 bg-dark text-white text-center ">Pedido</p>
@@ -433,7 +465,7 @@
             rs.setAttribute("pag", "login.jsp");
             rs.setAttribute("titulo", "Inicie sesion otra vez.");
             rs.setAttribute("detalle", "Algo ha salido mal en la pagina.");
-            rs.setAttribute("sms", "falló empleado_home + "+e);
+            rs.setAttribute("sms", "falló empleado_home + " + e);
             rs.setAttribute("tip", "error");
             response.sendRedirect("true.jsp");
 

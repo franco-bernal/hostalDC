@@ -1,3 +1,7 @@
+<%@page import="Modelo.Entidades.Producto"%>
+<%@page import="Modelo.Manejadoras.Manejadora_productos"%>
+<%@page import="Modelo.Entidades.Orden_pedido"%>
+<%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE html>
@@ -8,17 +12,15 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <link href="css/pruebas.css" rel="stylesheet" type="text/css"/>
-        <%
-            response.setHeader("Cache-Control", "no-cache");
-            response.setHeader("Cache-Control", "no-store");
-            response.setHeader("Pragma", "no-cache");
-            response.setDateHeader("Expires", 0);
-        %>
+        <link href="css/Util.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body data-spy="scroll" id="inicio" class="text-capitalize" data-target="#navbar-example2">
         <%            HttpSession sesion = request.getSession();
             String usuario = sesion.getAttribute("user").toString();
             String aint = sesion.getAttribute("tipo").toString();
+            String rut = sesion.getAttribute("rut").toString();
+
             int tip = Integer.parseInt(aint);
             String tipo;
 
@@ -63,87 +65,155 @@
                 </div>
             </div>
 
+
+            <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+            <%
+                Manejadora_pedidos mane_ped = new Manejadora_pedidos();
+                Manejadora_productos mane_prod = new Manejadora_productos();
+                Orden_pedido ord = new Orden_pedido();
+                Producto prod = new Producto();
+
+            %>
+
             <hr class="aba mar" id="pedidos">
 
-            <h4  class="mb-5 mar">Mis pedidos </h4>
+            <h4 class="mb-5 mar">Mis pedidos </h4>
             <div class="container-fluid col-lg-8 col-sm-12 col-xs-5 mb-5 mar"> 
                 <table class="table table-hover table-sm ">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">producto</th>
-                            <th scope="col">cantidad</th>
-                            <th scope="col">unidad</th>
-                            <th scope="col">enviado/recibido</th>
+                            <th scope="col">idPedido</th>
+                            <th scope="col">fecha de emicion</th>
                             <th scope="col">aceptar/rechazar</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>manzanas</td>
-                            <td>5</td>
-                            <td>kg</td>
-                            <td>01/02/20</td>
-                            <td class="row">
-                                <button type="button" class="btn btn-success">Aceptar</button>
-                                <button type="button" class="btn btn-danger">Rechazar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>camas</td>
-                            <td>2</td>
-                            <td>Unidades</td>
-                            <td>01/02/20</td>
-                            <td class="row"> 
-                                <button type="button" class="btn btn-success">Aceptar</button>
-                                <button type="button" class="btn btn-danger">Rechazar</button>
-                            </td>
+                        <%                            for (int i = 0; i < mane_ped.getPedido().size(); i++) {
 
-                        </tr>
-                        <tr class="table-success">
-                            <th scope="row">3</th>
-                            <td>papas</td>
-                            <td>2</td>
-                            <td>kg</td>
-                            <td>31/02/20</td>
-                            <td>Rechazado</td>
+                                ord = mane_ped.getPedido().get(i);
+                                if (ord.getProveedor_rut().compareToIgnoreCase(rut) == 0) {
+                                    prod = mane_prod.obtenerProductoPorId(ord.getId_pedido());
+                                    if (ord.getEstado() == 2) {
+                                        out.print(""
+                                                + "<tr>"
+                                                + "<td>N°" + ord.getId_pedido() + "</td>"
+                                                + "<td>" + ord.getF_emicion() + "</td>"
+                                                + "<td class='row'>"
+                                                + "<a href='detalle_pedido.jsp?id=" + ord.getId_pedido() +"'>Revisar</a>"
+                                                + "<a href='aux_eliminar.jsp?id=" + ord.getId_pedido() + "&accion=rechazar'>Rechazar</a> "
+                                                + "</td>"
+                                                + "</tr>");
 
+                                    }
+                                    if (ord.getEstado() == 3) {//procesado
+                                        out.print(""
+                                                + "<tr class='table-success'>"
+                                                + "<td>N°" + ord.getId_pedido() + "</td>"
+                                                + "<td>" + ord.getF_emicion() + "</td>"
+                                                + "<td class='row'>"
+                                                + "Enviado"
+                                                + "</td>"
+                                                + "</tr>");
+                                    }
+                                    if (ord.getEstado() == 0) {//rechazado
+                                        out.print(""
+                                                + "<tr class='table-success'>"
+                                                + "<td>N°" + ord.getId_pedido() + "</td>"
+                                                + "<td>" + ord.getF_emicion() + "</td>"
+                                                + "<td class='row'>"
+                                                + "Rechazado"
+                                                + " </td>"
+                                                + " </tr>");
+                                    }
+                                }
+                            }
+                            //     + "<td>"+mane_ped.EstadoDelPedido(ord.getEstado())+"</td>"
+%>
 
-                        </tr>
-                        <tr class="table-success">
-                            <th scope="row">4</th>
-                            <td>peras</td>
-                            <td>5</td>
-                            <td>kg</td>
-                            <td>31/02/20</td>
-                            <td>Enviado</td>
-
-                        </tr>
                     </tbody>
                 </table>
             </div>
 
 
 
-            <!-- -->
+            <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
         </div>
 
 
         <hr class="aba mar">
+
+        <h1>Agregar productos</h1>
+
+        <form action="ControlPedido" method="post">
+            <p>Pedido</p>
+            <input type='text' class='form-control desactivar' name='txt_rut' value="<%=rut%>">
+
+            <label>nombre producto</label>
+            <input type="text" name="txt_nombre" maxlength="10" >
+
+            <label>detalle producto</label>
+            <input type="text" name="txt_detalle" maxlength="20" >
+
+            <label>valor</label>
+            <input type="number" name="txt_valor" min="1" max="1000000" >
+
+            <hr>
+            <input type="checkbox"  required="true">
+            <label >Revisé los datos</label>
+            <button type="submit"  name="accion" value="insert_prod">Agregar al carro</button>
+        </form>
+
+
+
+
+
         <hr class="aba mar" >
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Detalle</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    if (mane_prod.getProducto().size() > 0) {
+                        for (int i = 0; i < mane_prod.getProducto().size(); i++) {
+                            Producto pro = mane_prod.getProducto().get(i);
+                            if (pro.getProveedor_rut().compareToIgnoreCase(rut) == 0) {
+                                out.print(""
+                                        + "<tr>"
+                                        + "<td>" + pro.getNombre() + "</td>"
+                                        + "<td>" + pro.getDetalle() + "</td>"
+                                        + "<td>" + pro.getValor() + "</td>"
+                                        + "</tr>");
+                            }
+                        }
+                    } else {
+                        out.print(""
+                                + "<tr>"
+                                + "<td>No tiene productos registrados</td>"
+                                + "</tr>");
+                    }
+
+                    //    
+                %>
+
+            </tbody>
+        </table>
+
         <hr class="aba mar" >
 
 
 
 
 
-        <%
-            if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
+        <%            if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
                 sesion.setAttribute("user", null);
                 sesion.invalidate();
                 request.getRequestDispatcher("index.jsp").forward(request, response);
