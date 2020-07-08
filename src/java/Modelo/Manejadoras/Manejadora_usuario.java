@@ -57,6 +57,22 @@ public class Manejadora_usuario {
         return null;
     }
     
+     public Usuario obtenerUsuarioPorId(int id) {
+        Usuario u = new Usuario();
+        for (int i = 0; i < arrayUsuario.size(); i++) {
+            if (id==arrayUsuario.get(i).getId_usuario()) {
+                u.setId_usuario(arrayUsuario.get(i).getId_usuario());
+                u.setNom_usuario(arrayUsuario.get(i).getNom_usuario());
+                u.setClave(arrayUsuario.get(i).getClave());
+                u.setCorreo(arrayUsuario.get(i).getCorreo());
+                u.setTipo_usuario_permiso(arrayUsuario.get(i).getTipo_usuario_permiso());
+                u.setConexion(arrayUsuario.get(i).getConexion());
+                return u;
+            }
+        }
+        return null;
+    }
+    
      public boolean verificar(String nom) {
         Usuario u = new Usuario();
         for (int i = 0; i < arrayUsuario.size(); i++) {

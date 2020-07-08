@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 18.1.0.082.1035
---   en:        2020-07-04 15:31:50 CLT
+--   en:        2020-07-07 19:22:53 CLT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -45,10 +45,9 @@ CREATE UNIQUE INDEX empleado__idx ON
 ALTER TABLE empleado ADD CONSTRAINT empleado_pk PRIMARY KEY ( rut_empleado );
 
 CREATE TABLE factura (
-    cod_factura     INTEGER NOT NULL,
-    descripcion     VARCHAR2(50) NOT NULL,
-    fecha_pago      DATE,
-    fecha_factura   DATE NOT NULL
+    cod_factura   INTEGER NOT NULL,
+    valor_total   INTEGER NOT NULL,
+    f_emicion     DATE NOT NULL
 );
 
 ALTER TABLE factura ADD CONSTRAINT factura_pk PRIMARY KEY ( cod_factura );
@@ -90,7 +89,8 @@ CREATE TABLE orden_compra (
     precio_total              INTEGER NOT NULL,
     tipo_hab_id_tipo_hab      INTEGER NOT NULL,
     tipo_minuta_id_tipo_min   INTEGER NOT NULL,
-    cliente_rut_emp           VARCHAR2(20) NOT NULL
+    cliente_rut_emp           VARCHAR2(20) NOT NULL,
+    factura_cod_factura       INTEGER
 );
 
 ALTER TABLE orden_compra ADD CONSTRAINT orden_compra_pk PRIMARY KEY ( codigo_compra );
@@ -194,6 +194,10 @@ ALTER TABLE orden_compra
         REFERENCES cliente ( rut_emp );
 
 ALTER TABLE orden_compra
+    ADD CONSTRAINT orden_compra_factura_fk FOREIGN KEY ( factura_cod_factura )
+        REFERENCES factura ( cod_factura );
+
+ALTER TABLE orden_compra
     ADD CONSTRAINT orden_compra_tipo_hab_fk FOREIGN KEY ( tipo_hab_id_tipo_hab )
         REFERENCES tipo_hab ( id_tipo_hab );
 
@@ -223,7 +227,7 @@ ALTER TABLE proveedor
 -- 
 -- CREATE TABLE                            15
 -- CREATE INDEX                             3
--- ALTER TABLE                             28
+-- ALTER TABLE                             29
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0

@@ -70,6 +70,13 @@ public class Manejadora_minuta {
         return 0;
     }
     
+    public String obtenerTipoMinuta(int id){
+        for(int i=0;i<arraytipo.size();i++){
+            if(id==arraytipo.get(i).getId_tipo_minuta())
+                return arraytipo.get(i).getNom_tipo();
+        }
+        return "";
+    }
     
     
     

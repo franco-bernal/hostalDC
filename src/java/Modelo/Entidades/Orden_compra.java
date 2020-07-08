@@ -21,11 +21,12 @@ public class Orden_compra {
     private int tipo_hab;
     private int tipo_min;
     private String cliente_rut_emp;
+    private int FACTURA_cod_factura;
 
     public Orden_compra() {
     }
 
-    public Orden_compra(int codigo_compra, Date f_inicio, Date f_fin, Date f_compra, int precio_total, int tipo_hab, int tipo_min, String cliente_rut_emp) {
+    public Orden_compra(int codigo_compra, Date f_inicio, Date f_fin, Date f_compra, int precio_total, int tipo_hab, int tipo_min, String cliente_rut_emp, int FACTURA_cod_factura) {
         this.codigo_compra = codigo_compra;
         this.f_inicio = f_inicio;
         this.f_fin = f_fin;
@@ -34,6 +35,7 @@ public class Orden_compra {
         this.tipo_hab = tipo_hab;
         this.tipo_min = tipo_min;
         this.cliente_rut_emp = cliente_rut_emp;
+        this.FACTURA_cod_factura = FACTURA_cod_factura;
     }
 
     public int getCodigo_compra() {
@@ -99,7 +101,14 @@ public class Orden_compra {
     public void setCliente_rut_emp(String cliente_rut_emp) {
         this.cliente_rut_emp = cliente_rut_emp;
     }
-    
-    
+
+    public int getFACTURA_cod_factura() {
+        return FACTURA_cod_factura;
+    }
+
+    public void setFACTURA_cod_factura(int FACTURA_cod_factura) {
+        this.FACTURA_cod_factura = FACTURA_cod_factura;
+    }
+
     
 }

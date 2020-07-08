@@ -24,6 +24,7 @@
         out.print("error");
     } else {
         try {
+            
             usuario = sesion.getAttribute("user").toString();
             clave = sesion.getAttribute("clave").toString();
             aint = sesion.getAttribute("tipo").toString();

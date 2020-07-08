@@ -65,7 +65,7 @@ public class Manejadora_cliente {
     }
 
     public UsuarioCli_detalle obtenerClienteCompleto(String rut) {
-        for (int i = 0; i>arrayclien.size(); i++) {
+        for (int i = 0; i<arrayclien.size(); i++) {
             if (arrayclien.get(i).getRut_emp().compareToIgnoreCase(rut) == 0) {
                  UsuarioCli_detalle u =new UsuarioCli_detalle(arrayclien.get(i).getRut_emp(), arrayclien.get(i).getNom_emp(), arrayclien.get(i).getTele_emp(), arrayclien.get(i).getDir_emp(), arrayclien.get(i).getUsuario_id_usuario());
                  return u;
@@ -75,6 +75,9 @@ public class Manejadora_cliente {
         }
         return null;
     }
+    
+    
+    
     
     public String obtenerClienteCompletoStr(String rut) {
         String r = null;

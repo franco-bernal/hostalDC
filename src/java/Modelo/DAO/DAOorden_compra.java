@@ -12,8 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -28,7 +27,7 @@ public class DAOorden_compra {
         try {
             //inserto datos de la orden
             Connection con = c.getConnection();
-            String query1 = "INSERT INTO ORDEN_compra VALUES (?,?,?,?,?,?,?,?)";
+            String query1 = "INSERT INTO ORDEN_compra VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query1);
             ps = con.prepareStatement(query1);
             ps.setInt(1, ord.getCodigo_compra());
@@ -39,6 +38,7 @@ public class DAOorden_compra {
             ps.setInt(6, ord.getTipo_hab());
             ps.setInt(7, ord.getTipo_min());
             ps.setString(8, ord.getCliente_rut_emp());
+            ps.setInt(9, 0);
 
             resultado = ps.executeUpdate() == 1;
             ps.close();
@@ -63,7 +63,7 @@ public class DAOorden_compra {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Orden_compra ord = new Orden_compra(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getString(8));
+                Orden_compra ord = new Orden_compra(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getString(8),rs.getInt(9));
                 arrayOrd.add(ord);
             }
             ps.close();
@@ -134,17 +134,16 @@ public class DAOorden_compra {
 
         return r;
     }
-    
-    
-        public String actualizarPrecio(int codigo, int precio) {
-            boolean resultado = false;
-            String r = "false";
+
+    public String actualizarPrecio(int codigo, int precio) {
+        boolean resultado = false;
+        String r = "false";
 
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
 
-            String query = " update ORDEN_COMPRA set precio_total="+precio+" where CODIGO_COMPRA="+codigo;
+            String query = " update ORDEN_COMPRA set precio_total=" + precio + " where CODIGO_COMPRA=" + codigo;
             PreparedStatement ps = con.prepareStatement(query);
             resultado = ps.executeUpdate() == 1;
             r = "true";
@@ -152,6 +151,27 @@ public class DAOorden_compra {
 
         } catch (SQLException ex) {
             r = "Exception en DAOorden_compra/actualizarPrecio err:" + ex.toString() + " fin/.";
+        }
+
+        return r;
+    }
+    
+     public String asignarFactura(int codigo_factura, int codigo_compra ) {
+        boolean resultado = false;
+        String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+
+            String query = "update ORDEN_COMPRA set FACTURA_COD_FACTURA="+codigo_factura+" where CODIGO_COMPRA="+codigo_compra;
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOorden_compra/asignarFactura err:" + ex.toString() + " fin/.";
         }
 
         return r;

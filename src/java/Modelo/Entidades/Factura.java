@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Modelo.Entidades;
+
 import java.sql.Date;
 
 /**
@@ -11,22 +12,18 @@ import java.sql.Date;
  * @author Franco
  */
 public class Factura {
-    
+
     private int cod_factura;
-    private String descripcion;
-    private Date fecha_pago;
-    private Date fecha_factura;
+    private int valor_total;
+    private Date f_emicion;
 
     public Factura() {
     }
 
-    
-    
-    public Factura(int cod_factura, String descripcion, Date fecha_pago, Date fecha_factura) {
+    public Factura(int cod_factura, int valor_total, Date f_emicion) {
         this.cod_factura = cod_factura;
-        this.descripcion = descripcion;
-        this.fecha_pago = fecha_pago;
-        this.fecha_factura = fecha_factura;
+        this.valor_total = valor_total;
+        this.f_emicion = f_emicion;
     }
 
     public int getCod_factura() {
@@ -37,33 +34,24 @@ public class Factura {
         this.cod_factura = cod_factura;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getValor_total() {
+        return valor_total;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setValor_total(int valor_total) {
+        this.valor_total = valor_total;
     }
 
-    public Date getFecha_pago() {
-        return fecha_pago;
+    public Date getF_emicion() {
+        return f_emicion;
     }
 
-    public void setFecha_pago(Date fecha_pago) {
-        this.fecha_pago = fecha_pago;
+    public void setF_emicion(Date f_emicion) {
+        this.f_emicion = f_emicion;
     }
 
-    public Date getFecha_factura() {
-        return fecha_factura;
-    }
+    
+    
+    
 
-    public void setFecha_factura(Date fecha_factura) {
-        this.fecha_factura = fecha_factura;
-    }
-    
-    
-    
-    
-    
-    
 }

@@ -7,7 +7,9 @@ package Modelo.Manejadoras;
 
 import Modelo.DAO.DAOorden_compra;
 import Modelo.Entidades.Orden_compra;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -82,6 +84,38 @@ public class Manejadora_orden {
             }
         }
         return contador;
+    }
+
+    public String asignarFactura(int codigo_factura, int codigo_compra) {
+        return daoOrd.asignarFactura(codigo_factura, codigo_compra);
+    }
+
+    public ArrayList<Orden_compra> listaDeComprasPorFactura(int cod_fact) {
+        ArrayList<Orden_compra> arrayC = new ArrayList<>();
+
+        for (int i = 0; i < arrayOrden.size(); i++) {
+            if (arrayOrden.get(i).getFACTURA_cod_factura() == cod_fact) {
+                arrayC.add(arrayOrden.get(i));
+            }
+        }
+
+        return arrayC;
+    }
+
+    public int cantidadDias(int cod_compra) {
+        int dias = 0;
+        for (int i = 0; i < arrayOrden.size(); i++) {
+            if (arrayOrden.get(i).getCodigo_compra() == cod_compra) {
+
+                Date fechaUltimaSincro=arrayOrden.get(i).getF_inicio();
+                Date fechaActual=arrayOrden.get(i).getF_fin();
+
+                dias = (int) ((fechaActual.getTime() - fechaUltimaSincro.getTime()) / 86400000);
+
+            }
+        }
+
+        return dias;
     }
 
 }

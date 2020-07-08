@@ -69,4 +69,14 @@ public class Manejadora_huesped {
         return String.valueOf(rs) + " " + String.valueOf(res);
     }
 
+    public int cantidadHuespedesOrdenCompra(int cod_compra) {
+        int contador=0;
+        for (int i = 0; i < arrayHuesped.size();i++) {
+            if(arrayHuesped.get(i).getORDEN_compra_codigo_compra()==cod_compra){
+                contador+=1;
+            }
+        }
+        return contador;
+    }
+
 }

@@ -51,5 +51,11 @@ public class Manejadora_hab {
         return 0;
     }
     
-    
+    public String obtenerTipoHab(int id){
+        for(int i=0;i<arraytipo.size();i++){
+            if(id==arraytipo.get(i).getId_tipo_hab())
+                return arraytipo.get(i).getNom_tipo();
+        }
+        return "";
+    }
 }

@@ -98,7 +98,7 @@ public class AgregarHuesped extends HttpServlet {
 
                 int codigo_compra = dao_ord.buscaridMax() + 1;
                 String ruta = request.getParameter("txt_rut");
-                Orden_compra ord = new Orden_compra(codigo_compra, f_inicio, f_fin, f_compra, 0, se_ha, se_co, ruta);
+                Orden_compra ord = new Orden_compra(codigo_compra, f_inicio, f_fin, f_compra, 0, se_ha, se_co, ruta,0);
                 String rs = dao_ord.ingresarOrden(ord);
 
                 if (rs == "Se ingreso exitosamente") {
