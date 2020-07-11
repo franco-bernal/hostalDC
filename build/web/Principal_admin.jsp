@@ -52,7 +52,7 @@
 
 
     <div>
-        <a href="admi/administrador.jsp" class="button1"  > Administración de Facturación</a>
+        <a href="admi/administrador.jsp" class="button1"  > Administración de compras</a>
     </div>
 </div>
 
