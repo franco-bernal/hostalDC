@@ -73,7 +73,6 @@
     </head>
 
     <body  data-spy="scroll" class="text-capitalize "  data-target="#navbar-example2">
-
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">       
             <a class="navbar-brand " href="#"><%out.print(usuario);%></a>
             <ul class="nav nav-pills">
@@ -96,6 +95,10 @@
                 </form>
             </ul>
         </nav>
+
+
+
+
         <div class="giga" data-spy="scroll">
             <br>
             <br>
@@ -113,6 +116,19 @@
         <!--...............-->   
         <div class="fon " data-spy="scroll" data-target="#navbar-example2" data-offset="0" >   
             <!-- cuerpo con identificadores reconocibles para el manejo del menu(nav,header) -->
+
+
+            <!--Modal de ayuda -->            
+            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <embed src="pdf/CASO.pdf#page=3" type="application/pdf" width="100%" height="600px" />
+                    </div>
+                </div>
+            </div>
+            <!--Fin Modal   <object  data="pdf/CASO.pdf#page=2"></object>                         <iframe  src="pdf/CASO.pdf#page=2"></iframe>-->
 
             <br>
             <br>
@@ -164,7 +180,7 @@
                                         } catch (Exception e) {
                                             out.print(e);
                                         }//
-                                    %>
+%>
                                 </tr>
                             </tbody>
                         </table>
