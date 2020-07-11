@@ -24,7 +24,6 @@
         out.print("error");
     } else {
         try {
-            
             usuario = sesion.getAttribute("user").toString();
             clave = sesion.getAttribute("clave").toString();
             aint = sesion.getAttribute("tipo").toString();
@@ -69,7 +68,7 @@
         <link href="css/Cliente.css" rel="stylesheet" type="text/css"/>
         <link href="css/Util.css" rel="stylesheet" type="text/css"/>
 
-     
+
 
     </head>
 
@@ -93,7 +92,7 @@
                 </li>
 
                 <form action="ControlUsuario" method="POST">
-                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary"  class="nav-link" type="submit" name="accion" value="Salir">
+                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary nav-link"  type="submit" name="accion" value="Salir">
                 </form>
             </ul>
         </nav>
@@ -114,7 +113,7 @@
         <!--...............-->   
         <div class="fon " data-spy="scroll" data-target="#navbar-example2" data-offset="0" >   
             <!-- cuerpo con identificadores reconocibles para el manejo del menu(nav,header) -->
-           
+
             <br>
             <br>
             <hr class="aba mar">
@@ -128,11 +127,11 @@
                         <table class="table center-block" >
                             <thead>
                                 <tr>
-                                    <th >codigo</th>
-                                    <th >desde</th>
-                                    <th >hasta</th>
-                                    <th >fecha comprado</th>
-                                    <th >precio total</th>
+                                    <th >Codigo</th>
+                                    <th >Desde</th>
+                                    <th >Hasta</th>
+                                    <th >Fecha Comprado</th>
+                                    <th >Precio Total</th>
                                     <th >Eliminar</th>
                                 </tr>
                             </thead>
@@ -149,23 +148,23 @@
                                                 String rut_o = mane_cli.obtenerRutUsuario(id);
                                                 Util util = new Util();
                                                 String nom_mi = "";
-                                                    if (ord.getOrden().get(i).getCliente_rut_emp().compareToIgnoreCase(rut_o) == 0) {
-                                                        nom_mi = util.tipo_min_nom(ord.getOrden().get(i).getTipo_min());
-                                                       // nom_hab = util.tipo_hab_nom(ord.getOrden().get(i).getTipo_hab());
-                                                        out.print("<tr class='table-dark text-center'>");
-                                                        out.print("<td>" + ord.getOrden().get(i).getCodigo_compra() + "</td>"
-                                                                + "<td>" + ord.getOrden().get(i).getF_inicio() + "</td>"
-                                                                + "<td>" + ord.getOrden().get(i).getF_fin() + "</td>"
-                                                                + "<td>" + ord.getOrden().get(i).getF_compra() + "</td>"
-                                                                + "<td> $" + ord.getOrden().get(i).getPrecio_total() + "</td>"
-                                                                + "<td><a href='aux_eliminar.jsp?id="+ord.getOrden().get(i).getCodigo_compra()+"&accion=el_ord' class='btn btn-warning btn-sm'>Eliminar</a></td>"
-                                                                + "</tr>");
-                                                    }
+                                                if (ord.getOrden().get(i).getCliente_rut_emp().compareToIgnoreCase(rut_o) == 0) {
+                                                    nom_mi = util.tipo_min_nom(ord.getOrden().get(i).getTipo_min());
+                                                    // nom_hab = util.tipo_hab_nom(ord.getOrden().get(i).getTipo_hab());
+                                                    out.print("<tr class='table-dark text-center'>");
+                                                    out.print("<td>" + ord.getOrden().get(i).getCodigo_compra() + "</td>"
+                                                            + "<td>" + ord.getOrden().get(i).getF_inicio() + "</td>"
+                                                            + "<td>" + ord.getOrden().get(i).getF_fin() + "</td>"
+                                                            + "<td>" + ord.getOrden().get(i).getF_compra() + "</td>"
+                                                            + "<td> $" + ord.getOrden().get(i).getPrecio_total() + "</td>"
+                                                            + "<td><a href='aux_eliminar.jsp?id=" + ord.getOrden().get(i).getCodigo_compra() + "&accion=el_ord' class='btn btn-warning btn-sm'>Eliminar</a></td>"
+                                                            + "</tr>");
+                                                }
                                             }
                                         } catch (Exception e) {
                                             out.print(e);
                                         }//
-%>
+                                    %>
                                 </tr>
                             </tbody>
                         </table>
@@ -209,7 +208,7 @@
                         <!--Checkbox-->
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input"  required="true">
-                            <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
+                            <label class="form-check-label" for="exampleCheck1">Revise los datos</label>
                         </div>
                         <!--FIN: Checkbox-->
                         <button type="submit" class="btn btn-dark btn-block" name="accion" value="Agregar" style='width:220px; height:35px'>Agregar Huesped</button>
@@ -219,15 +218,47 @@
 
 
             <hr>
-            <br><br><br><br><br>
+            <br><br>
+
+
+            <h4>Pago Facturas</h4>
+
+            <form action="ControlCliente" method="post">           
+
+
+                <div class="fac">  
+                    <br><br>
+                    <label>Seleccionar Pago Facturas </label>
+                    <br>
+                    <select id="" name="select_opc">
+                        <option>Seleccionar</option>
+                        <option>uno</option>
+                        <option>todos</option>
+                    </select>
+                    <br>
+                    <label for="">Ingrese codigo Factura a Pagar:</label>
+                    <br>
+                    <input type="number"  name="cod_ord"> 
+                    <br> 
+                    <br> 
+                    <input type='text' class='form-control desactivar' name='txt_rut' value="<%=rut%>">
+                    <div class="b">
+                        <button type="submit"  class="btn btn-dark btn-block" name="accion" value="generarFactura" style='width:100px; height:35px'>Pagar</button>
+                    </div>
+                </div>
+
+            </form>
+            <br><br><br>
 
 
 
-        </div>
-        <!-- cuerpo con identificadores reconocibles para el manejo del menu(nav,header) -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+            <!-- cuerpo con identificadores reconocibles para el manejo del menu(nav,header) -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     </body>
 </html>

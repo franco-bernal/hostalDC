@@ -55,13 +55,26 @@ public class Manejadora_orden {
     }
 
     public Orden_compra devolverCompraCompleta(int codigo) {
+        ArrayList<Orden_compra> arrayO = daoOrd.ObtenerCompras();
 
-        for (int i = 0; i < arrayOrden.size(); i++) {
-            if (arrayOrden.get(i).getCodigo_compra() == codigo) {
-                return arrayOrden.get(i);
+        for (int i = 0; i < arrayO.size(); i++) {
+            if (arrayO.get(i).getCodigo_compra() == codigo) {
+                return arrayO.get(i);
             }
         }
         return null;
+    }
+
+    public ArrayList<Orden_compra> listaComprasPorCodigo(int cod) {
+        ArrayList<Orden_compra> arrayC = daoOrd.ObtenerCompras();
+        ArrayList<Orden_compra> arrayO = new ArrayList<>();
+        for (int i = 0; i < arrayC.size(); i++) {
+            if (arrayC.get(i).getCodigo_compra() == cod) {
+                arrayO.add(arrayC.get(i));
+            }
+        }
+
+        return arrayO;
     }
 
     public ArrayList<Orden_compra> listaComprasPorRUT(String rut) {
@@ -90,8 +103,12 @@ public class Manejadora_orden {
         return daoOrd.asignarFactura(codigo_factura, codigo_compra);
     }
 
+    public String asignarFacturaMultiple(int codigo_factura, String rut) {
+        return daoOrd.asignarFacturaMultiple(codigo_factura, rut);
+    }
+
     public ArrayList<Orden_compra> listaDeComprasPorFactura(int cod_fact) {
-        ArrayList<Orden_compra> arrayC = new ArrayList<>();
+        ArrayList<Orden_compra> arrayC = daoOrd.ObtenerCompras();
 
         for (int i = 0; i < arrayOrden.size(); i++) {
             if (arrayOrden.get(i).getFACTURA_cod_factura() == cod_fact) {
@@ -107,8 +124,8 @@ public class Manejadora_orden {
         for (int i = 0; i < arrayOrden.size(); i++) {
             if (arrayOrden.get(i).getCodigo_compra() == cod_compra) {
 
-                Date fechaUltimaSincro=arrayOrden.get(i).getF_inicio();
-                Date fechaActual=arrayOrden.get(i).getF_fin();
+                Date fechaUltimaSincro = arrayOrden.get(i).getF_inicio();
+                Date fechaActual = arrayOrden.get(i).getF_fin();
 
                 dias = (int) ((fechaActual.getTime() - fechaUltimaSincro.getTime()) / 86400000);
 
@@ -116,6 +133,15 @@ public class Manejadora_orden {
         }
 
         return dias;
+    }
+
+    public int valorTodas(int cod_factura) {
+        ArrayList<Orden_compra> arrayC = listaDeComprasPorFactura(cod_factura);
+        int acumulador = 0;
+        for (int i = 0; i < arrayC.size(); i++) {
+            acumulador += arrayC.get(i).getPrecio_total();
+        }
+        return acumulador;
     }
 
 }

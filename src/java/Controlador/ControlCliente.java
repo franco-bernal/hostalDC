@@ -12,7 +12,7 @@ import Modelo.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import javax.servlet.RequestDispatcher;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,157 +74,164 @@ public class ControlCliente extends HttpServlet {
 
         String accion = request.getParameter("accion");
         try {
-            
-             if (accion.equals("RegistrarCli")) {
-            int id = mane_usu.idMax() + 1;
-            String nom_usu = request.getParameter("txt_nom_emp");
-            String clave = request.getParameter("txt_clave");
-            String correo = request.getParameter("txt_correo_emp");
-            int tipo = 4;
 
-            String rut = request.getParameter("txt_rut_emp");
-            String nom = request.getParameter("txt_nom_emp");
-            String telefono = request.getParameter("txt_tele_emp");
-            String dir = request.getParameter("txt_dir_emp");
+            if (accion.equals("RegistrarCli")) {
+                int id = mane_usu.idMax() + 1;
+                String nom_usu = request.getParameter("txt_nom_emp");
+                String clave = request.getParameter("txt_clave");
+                String correo = request.getParameter("txt_correo_emp");
+                int tipo = 4;
 
-            Usuario u = new Usuario(id, nom_usu, clave, correo, tipo, 0);
-            UsuarioCli_detalle d = new UsuarioCli_detalle(rut, nom, telefono, dir, id);
-            //out.print();
-            String rs = mane_cli.ingresarClienteCompleto(u, d);
+                String rut = request.getParameter("txt_rut_emp");
+                String nom = request.getParameter("txt_nom_emp");
+                String telefono = request.getParameter("txt_tele_emp");
+                String dir = request.getParameter("txt_dir_emp");
 
-            if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                Usuario u = new Usuario(id, nom_usu, clave, correo, tipo, 0);
+                UsuarioCli_detalle d = new UsuarioCli_detalle(rut, nom, telefono, dir, id);
+                //out.print();
+                String rs = mane_cli.ingresarClienteCompleto(u, d);
 
-                HttpSession hue = request.getSession();
-                hue.setAttribute("desde", "select.jsp");
-                hue.setAttribute("pag", "login.jsp");
-                hue.setAttribute("titulo", "Registrado!");
-                hue.setAttribute("detalle", "Ya puedes iniciar con tu usuario: " + nom_usu);
-                hue.setAttribute("sms", " ");
-                hue.setAttribute("tip", "success");
-                response.sendRedirect("true.jsp");
+                if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
 
-            } else {
+                    HttpSession hue = request.getSession();
+                    hue.setAttribute("desde", "select.jsp");
+                    hue.setAttribute("pag", "login.jsp");
+                    hue.setAttribute("titulo", "Registrado!");
+                    hue.setAttribute("detalle", "Ya puedes iniciar con tu usuario: " + nom_usu);
+                    hue.setAttribute("sms", " ");
+                    hue.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
 
-                HttpSession hue = request.getSession();
-                hue.setAttribute("desde", "select.jsp");
-                hue.setAttribute("pag", "select.jsp");
-                hue.setAttribute("titulo", "Error de registro");
-                hue.setAttribute("detalle", " ");
-                hue.setAttribute("sms", rs);
-                hue.setAttribute("tip", "alert");
-                response.sendRedirect("true.jsp");
+                } else {
+
+                    HttpSession hue = request.getSession();
+                    hue.setAttribute("desde", "select.jsp");
+                    hue.setAttribute("pag", "select.jsp");
+                    hue.setAttribute("titulo", "Error de registro");
+                    hue.setAttribute("detalle", " ");
+                    hue.setAttribute("sms", rs);
+                    hue.setAttribute("tip", "alert");
+                    response.sendRedirect("true.jsp");
+
+                }
 
             }
 
-        }
+            if (accion.equals("generarFactura")) {
+                Util util = new Util();
+                Manejadora_factura mane_fac = new Manejadora_factura();
+                Manejadora_orden mane_ord = new Manejadora_orden();
+                String rut = request.getParameter("txt_rut").toString();
+                String opc = request.getParameter("select_opc").toString();
+                int cod_factura = mane_fac.maxIdFactura();
+                Date f_emicion = util.fechaHoy();
+                int valor_total = 0;
+                int valor_bruto = 0;
 
-        if (accion.equals("generar factura")) {
-            Util util = new Util();
-            Manejadora_factura mane_fac = new Manejadora_factura();
-            Manejadora_orden mane_ord = new Manejadora_orden();
+                if (opc.compareToIgnoreCase("uno") == 0) {
+                    int cod_ord = Integer.parseInt(request.getParameter("cod_ord"));
 
-            String opc = request.getParameter("select_opc");
+                    Orden_compra ord = mane_ord.devolverCompraCompleta(cod_ord);
+                    int iva = 0;
+                    iva = (int) Math.round((ord.getPrecio_total() * 0.19));
+                    valor_total = ord.getTipo_hab() + iva;
 
-            int cod_factura = mane_fac.maxIdFactura();
-            Date f_emicion = util.fechaHoy();
-            int valor_total = 0;
+                    Factura fac = new Factura(cod_factura, valor_total, f_emicion);
+                    String rs = mane_fac.ingresarFactura(fac);
 
-            if (opc.compareToIgnoreCase("solo uno") == 0) {
-                int cod_ord = Integer.parseInt(request.getParameter("cod_ord"));
-                Orden_compra ord = mane_ord.devolverCompraCompleta(cod_ord);
-                valor_total = (int) Math.round((ord.getPrecio_total() * 1.19));
+                    if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
 
-                Factura fac = new Factura(cod_factura, valor_total, f_emicion);
-                String rs = mane_fac.ingresarFactura(fac);
-                if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                        rs = mane_ord.asignarFactura(cod_factura, cod_ord);
 
-                    rs = mane_ord.asignarFactura(cod_factura, cod_ord);
-
-                    if (rs.compareToIgnoreCase("true") == 0) {
-                        HttpSession hue = request.getSession();
-                         hue.setAttribute("cod_factura", cod_factura);
-                        hue.setAttribute("desde", "cliente_home.jsp");
-                        hue.setAttribute("pag", "factura.jsp");
-                        hue.setAttribute("titulo", "Factura generada");
-                        hue.setAttribute("detalle", "cualquier factura anterior inpaga fué borrada");
-                        hue.setAttribute("sms", " ");
-                        hue.setAttribute("tip", "success");
-                        response.sendRedirect("true.jsp");
+                        if (rs.compareToIgnoreCase("true") == 0) {
+                            HttpSession hue = request.getSession();
+                            hue.setAttribute("opc", "uno");
+                            hue.setAttribute("cod_orden", cod_ord);
+                            hue.setAttribute("cod_factura", cod_factura);
+                            hue.setAttribute("desde", "cliente_home.jsp");
+                            hue.setAttribute("pag", "factura.jsp");
+                            hue.setAttribute("titulo", "Factura generada");
+                            hue.setAttribute("detalle", "cualquier factura anterior inpaga fué borrada");
+                            hue.setAttribute("sms", " ");
+                            hue.setAttribute("tip", "success");
+                            response.sendRedirect("true.jsp");
+                        } else {
+                            mane_ord.asignarFactura(0, cod_ord);
+                            HttpSession hue = request.getSession();
+                            hue.setAttribute("desde", "cliente_home.jsp");
+                            hue.setAttribute("pag", "cliente_home.jsp");
+                            hue.setAttribute("titulo", "No se pudo asignar");
+                            hue.setAttribute("detalle", "Intentelo de nuevo");
+                            hue.setAttribute("sms", " ");
+                            hue.setAttribute("tip", "error");
+                            response.sendRedirect("true.jsp");
+                        }
                     } else {
-                        mane_ord.asignarFactura(0, cod_ord);
                         HttpSession hue = request.getSession();
                         hue.setAttribute("desde", "cliente_home.jsp");
                         hue.setAttribute("pag", "cliente_home.jsp");
-                        hue.setAttribute("titulo", "No se pudo asignar");
-                        hue.setAttribute("detalle", "Intentelo de nuevo");
-                        hue.setAttribute("sms", " ");
+                        hue.setAttribute("titulo", "No se pudo generar");
+                        hue.setAttribute("detalle", "Intentelo de nuevo más tarde");
+                        hue.setAttribute("sms", "");
                         hue.setAttribute("tip", "error");
                         response.sendRedirect("true.jsp");
                     }
-                } else {
-                    HttpSession hue = request.getSession();
-                    hue.setAttribute("desde", "cliente_home.jsp");
-                    hue.setAttribute("pag", "cliente_home.jsp");
-                    hue.setAttribute("titulo", "No se pudo generar");
-                    hue.setAttribute("detalle", "Intentelo de nuevo más tarde");
-                    hue.setAttribute("sms", "");
-                    hue.setAttribute("tip", "error");
-                    response.sendRedirect("true.jsp");
                 }
 
-            }
+                if (opc.compareToIgnoreCase("todos") == 0) {
+                    String rr = "";
 
-            if (opc.compareToIgnoreCase("todos") == 0) {
+                    ArrayList<Orden_compra> arrayC = mane_ord.listaComprasPorRUT(rut);
+                    for (int i = 0; i < arrayC.size(); i++) {
+                        int cod_ord = arrayC.get(i).getCodigo_compra();
+                        Orden_compra ord = mane_ord.devolverCompraCompleta(cod_ord);
+                        valor_total += ord.getPrecio_total();
+                    }
+                    int iva = (int) Math.round((valor_total * 0.19));
+                    valor_total = valor_total + iva;
+                    Factura fac = new Factura(cod_factura, valor_total, f_emicion);
+                    String rs = mane_fac.ingresarFactura(fac);
 
-                for (int i = 0; i < mane_ord.getOrden().size(); i++) {
-                    int cod_ord = mane_ord.getOrden().get(i).getCodigo_compra();
-
-                    Orden_compra ord = mane_ord.devolverCompraCompleta(cod_ord);
-
-                    valor_total += ord.getPrecio_total();
-
-                    String rs = mane_ord.asignarFactura(cod_factura, cod_ord);
-
-                }
-                valor_total = (int) Math.round((valor_total * 1.19));
-                Factura fac = new Factura(cod_factura, valor_total, f_emicion);
-                String rs = mane_fac.ingresarFactura(fac);
-                if(rs.compareToIgnoreCase("Se ingreso exitosamente")==0){
-                     HttpSession hue = request.getSession();
-                     hue.setAttribute("cod_factura", cod_factura);
+                    if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
+                        rr = mane_ord.asignarFacturaMultiple(cod_factura, rut);
+                        if (rr.compareToIgnoreCase("true") == 0) {
+                            HttpSession hue = request.getSession();
+                            hue.setAttribute("opc", "todos");
+                            hue.setAttribute("cod_factura", cod_factura);
+                            hue.setAttribute("desde", "cliente_home.jsp");
+                            hue.setAttribute("pag", "factura.jsp");
+                            hue.setAttribute("titulo", "Factura generada");
+                            hue.setAttribute("detalle", "se agregaron todas las facturas");
+                            hue.setAttribute("sms", " ");
+                            hue.setAttribute("tip", "success");
+                            response.sendRedirect("true.jsp");
+                        }
+                    } else {
+                        HttpSession hue = request.getSession();
                         hue.setAttribute("desde", "cliente_home.jsp");
-                        hue.setAttribute("pag", "factura.jsp");
-                        hue.setAttribute("titulo", "Factura generada");
-                        hue.setAttribute("detalle", "cualquier factura anterior inpaga fué borrada");
-                        hue.setAttribute("sms", " ");
-                        hue.setAttribute("tip", "success");
+                        hue.setAttribute("pag", "cliente_home.jsp");
+                        hue.setAttribute("titulo", "No se pudo generar");
+                        hue.setAttribute("detalle", "Intentelo de nuevo más tarde");
+                        hue.setAttribute("sms", "");
+                        hue.setAttribute("tip", "error");
                         response.sendRedirect("true.jsp");
-                }else{
-                     HttpSession hue = request.getSession();
-                    hue.setAttribute("desde", "cliente_home.jsp");
-                    hue.setAttribute("pag", "cliente_home.jsp");
-                    hue.setAttribute("titulo", "No se pudo generar");
-                    hue.setAttribute("detalle", "Intentelo de nuevo más tarde");
-                    hue.setAttribute("sms", "");
-                    hue.setAttribute("tip", "error");
-                    response.sendRedirect("true.jsp");
-                }
-                
-            }
+                    }
 
-        }//generar factura
+                }
+
+            }//generar factura
         } catch (Exception e) {
-              HttpSession hue = request.getSession();
-                    hue.setAttribute("desde", "cliente_home.jsp");
-                    hue.setAttribute("pag", "login.jsp");
-                    hue.setAttribute("titulo", "Hubo algun error en la pagina");
-                    hue.setAttribute("detalle", "Intentelo de nuevo más tarde");
-                    hue.setAttribute("sms", "");
-                    hue.setAttribute("tip", "error");
-                    response.sendRedirect("true.jsp");
+            HttpSession hue = request.getSession();
+            hue.setAttribute("desde", "cliente_home.jsp");
+            hue.setAttribute("pag", "login.jsp");
+            hue.setAttribute("titulo", "Hubo algun error en la pagina");
+            hue.setAttribute("detalle", "Intentelo de nuevo más tarde");
+            hue.setAttribute("sms", "");
+            hue.setAttribute("tip", "error");
+            response.sendRedirect("true.jsp");
         }
         //REGISTRO CLIENTE
-       
 
     }
 

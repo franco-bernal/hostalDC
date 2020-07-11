@@ -176,6 +176,16 @@ public class ControlUsuario extends HttpServlet {
                     rs.setAttribute("tip", "success");
                     response.sendRedirect("true.jsp");
                 }
+                if(r==1){
+                    HttpSession rs = request.getSession();
+                    rs.setAttribute("desde", "login.jsp");
+                    rs.setAttribute("pag", "Principal_admin.jsp");
+                    rs.setAttribute("titulo", "Ingresado como");
+                    rs.setAttribute("detalle", "Administrador");
+                    rs.setAttribute("sms", "Cargando...");
+                    rs.setAttribute("tip", "success");
+                    response.sendRedirect("true.jsp");
+                }
             }
         } catch (Exception e) {
             String error = "";

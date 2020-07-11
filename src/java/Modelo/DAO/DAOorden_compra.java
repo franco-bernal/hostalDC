@@ -176,5 +176,26 @@ public class DAOorden_compra {
 
         return r;
     }
+     
+      public String asignarFacturaMultiple(int codigo_factura, String rut ) {
+        boolean resultado = false;
+        String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+
+            String query = "update ORDEN_COMPRA set FACTURA_COD_FACTURA="+codigo_factura+" where CLIENTE_RUT_EMP='"+rut+"'";
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOorden_compra/asignarFacturaMultiple err:" + ex.toString() + " fin/.";
+        }
+
+        return r;
+    }
 
 }

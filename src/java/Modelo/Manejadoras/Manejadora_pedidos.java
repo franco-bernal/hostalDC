@@ -118,5 +118,17 @@ public class Manejadora_pedidos {
         
         return est;
     }
+    
+    
+    public detalle_pedido traerDetallesDelPedido(int cod){
+        
+        for(int i=0;i<arrayDet.size();i++){
+            if(arrayDet.get(i).getORDEN_PEDIDO_id_pedido()==cod){
+               return arrayDet.get(i);
+            }
+        }
+        return null;
+    }
+    
 
 }

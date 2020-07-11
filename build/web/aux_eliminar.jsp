@@ -33,8 +33,8 @@
                             HttpSession hue = request.getSession();
                             hue.setAttribute("desde", "detalle_pedido.jsp");
                             hue.setAttribute("pag", "proveedor_home.jsp");
-                            hue.setAttribute("titulo", "Pedido rechazado");
-                            hue.setAttribute("detalle", "Se ha rechazado el pedido");
+                            hue.setAttribute("titulo", "Pedido aceptado");
+                            hue.setAttribute("detalle", "Se ha aceptado el pedido");
                             hue.setAttribute("sms", " ");
                             hue.setAttribute("tip", "success");
                             response.sendRedirect("true.jsp");

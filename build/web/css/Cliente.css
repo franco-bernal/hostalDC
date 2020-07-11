@@ -98,3 +98,31 @@ fomu1{
 .bo{
     float: right;
 }
+
+h4{
+    text-align: center;
+}
+
+.fac{
+    text-align: center;
+    color:green;
+}
+
+.b{
+   display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}

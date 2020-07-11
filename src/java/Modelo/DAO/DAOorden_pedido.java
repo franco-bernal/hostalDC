@@ -51,7 +51,7 @@ public class DAOorden_pedido {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from ORDEN_PEDIDO order by ESTADO desc,ID_PEDIDO desc";
+            String query = "select * from ORDEN_PEDIDO order by ESTADO desc";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

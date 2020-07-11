@@ -65,9 +65,10 @@ public class Manejadora_cliente {
     }
 
     public UsuarioCli_detalle obtenerClienteCompleto(String rut) {
-        for (int i = 0; i<arrayclien.size(); i++) {
-            if (arrayclien.get(i).getRut_emp().compareToIgnoreCase(rut) == 0) {
-                 UsuarioCli_detalle u =new UsuarioCli_detalle(arrayclien.get(i).getRut_emp(), arrayclien.get(i).getNom_emp(), arrayclien.get(i).getTele_emp(), arrayclien.get(i).getDir_emp(), arrayclien.get(i).getUsuario_id_usuario());
+        ArrayList<UsuarioCli_detalle> arrayclient = dao_det.ObtenerClientes();
+        for (int i = 0; i<arrayclient.size(); i++) {
+            if (rut.compareToIgnoreCase(arrayclient.get(i).getRut_emp()) == 0) {
+                 UsuarioCli_detalle u =new UsuarioCli_detalle(arrayclient.get(i).getRut_emp(), arrayclient.get(i).getNom_emp(), arrayclient.get(i).getTele_emp(), arrayclient.get(i).getDir_emp(), arrayclient.get(i).getUsuario_id_usuario());
                  return u;
             }else{
                 return null;
@@ -84,9 +85,9 @@ public class Manejadora_cliente {
         for (int i = 0; i<arrayclien.size(); i++) {
             if (arrayclien.get(i).getRut_emp().compareToIgnoreCase(rut) == 0) {
                  UsuarioCli_detalle u =new UsuarioCli_detalle(arrayclien.get(i).getRut_emp(), arrayclien.get(i).getNom_emp(), arrayclien.get(i).getTele_emp(), arrayclien.get(i).getDir_emp(), arrayclien.get(i).getUsuario_id_usuario());
-                 r= arrayclien.get(i).getNom_emp().toString();
+                 return arrayclien.get(i).getNom_emp().toString();
             }else{
-                r= "r="+arrayclien.get(i).getRut_emp()+" rut e:"+rut;
+                r= "error="+arrayclien.get(i).getRut_emp()+" rut e:"+rut;
             }
         }
         return r;

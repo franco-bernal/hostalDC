@@ -58,21 +58,7 @@
                     }
                     %>
                     
-                    
-                    <!--  ejemplo de lo que repite el for de arriba
-                    <div class="menu">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h4 class="menu-title">titulo</h4>
-                                <div class="menu-detail">detalle</div>
-                            </div>
-                            <div class="col-sm-4 menu-price-detail">
-                                <h4 class="menu-price">$</h4>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                    
+               
 
                 </div><!-- .col-sm-6 -->
 

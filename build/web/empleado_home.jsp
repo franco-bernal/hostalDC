@@ -19,6 +19,12 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="css/empleado.css" rel="stylesheet" type="text/css"/>
         <link href="css/Util.css" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
     </head>
 
     <body  data-spy="scroll" class="text-capitalize letras text-center "  data-target="#navbar-example2">
@@ -26,7 +32,9 @@
             try {
         %>
 
+
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
+
             <%
                 HttpSession sesion = null;
                 String usuario = "";
@@ -58,31 +66,30 @@
 
 
 
-
-
             <a class="navbar-brand " href="#"><%out.print(usuario);%></a>
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#recepcion">Recepcion huespedes</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#recepcion">Recepcion Huespedes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#pedidos">Recepcion pedidos</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#pedidos">Recepcion Pedidos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#pedir">Generar pedido</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#pedir">Generar Pedido</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#minuta">Agregar minuta</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#minuta">Agregar Minuta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#lista">Lista de minutas</a>
+                    <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#lista">Lista de Minutas</a>
                 </li>
                 <form action="ControlUsuario">
-                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary" type="submit"  name="accion" value="Salir">
+                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary nav-link" type="submit"  name="accion" value="Salir">
                 </form>
             </ul>
 
         </nav>
+
 
         <div class="giga" data-spy="scroll">
             <br>
@@ -108,27 +115,32 @@
             <!------------------------------------------------------------------------------------------->
             <!-- ....................... -->
             <!--Recepción Huespedes listado -->
+            <br>
             <h4  class="mb-5 mar" id="recepcion">Recepción Huespedes </h4>
 
 
             <div  id="customers" class="container " >
                 <div>
                     <div>
+
                         <%
+
                             try {
                                 if (mane_cli.getCliente().size() > 0) {//tamaño de la lista de clientes completa
                                     for (int i = 0; i < mane_cli.getCliente().size(); i++) {//cliente por cliente
                                         if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0) {//se revisa si es mayor a 0 la cantidad
                                             //acordeon boton
-                                            out.print("<div class='accordion' id='accordionExample'>"
-                                                    + "<div class='card'>"
+
+                                            out.print("<div  class='accordion'  id='accordionExample'    >"
+                                                    + "<div class='card' >"
                                                     + "<div class='card-header' id='heading" + i + "'>"
-                                                    + "<h2 class='mb-0'>"
-                                                    + "<button class=' btn  btn-block text-center' type='button' data-toggle='collapse' data-target='#collapse" + i + "' aria-expanded='true' aria-controls='collapse" + i + "' >"
+                                                    + "<h2  class='mb-0'>"
+                                                    + "<button  class=' btn  btn-block text-center' type='button' data-toggle='collapse' data-target='#collapse" + i + "' aria-expanded='true' aria-controls='collapse" + i + "' >"
                                                     + mane_cli.getCliente().get(i).getNom_emp() + " | " + mane_cli.getCliente().get(i).getRut_emp()
                                                     + " </button>"
                                                     + "</h2>"
                                                     + "</div>");
+
                                             /////////////////termino boton/////////////////////////////
                                             out.print("<div id='collapse" + i + "'  aria-labelledby='heading" + i + "' data-parent='#accordionExample' >"
                                                     + "<div>");
@@ -178,11 +190,12 @@
                                         }
                                     }
                                 } else {
-                                    out.print("<p>no hay clientes<p>");
+                                    out.print("<p>No hay Clientes<p>");
                                 }
                             } catch (Exception e) {
                                 request.getRequestDispatcher("login.jsp").forward(request, response);
                             }
+
                         %>
 
                         <br>
@@ -197,286 +210,294 @@
             <!------------------------------------------------------------------------------------------->            
             <!-- ....................... -->
             <!--Recepción pedidos Listado-->
-            <h4  class="mb-5 mar" id="pedidos">Recepción pedidos </h4>
+            <hr class="aba mar" id="pedir">
+            <br>
+            <h4  class="mb-5 mar" id="pedidos">Recepción Pedidos </h4>
 
 
-            <div  id="customers" class="container" >
+            <div id="customers" class="container"  >
 
                 <br>
                 <div >
+
                     <div >
-                        <table class="table center-block">
-                            <thead>
-                                <tr>
-                                    <th>Proveedor</th>
-                                    <th>rubro</th>
-                                    <th>emitido</th>
-                                    <th>Estado</th>
+                        <div class="ex3" >
+                            <table class="table center-block"  >
 
-                                </tr>
-                            </thead>
+                                <thead class="table center-block" >
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Proveedor</th>
+                                        <th>Rubro</th>
+                                        <th>Emitido</th>
+                                        <th>Estado</th>
 
-                            <%
-                                Manejadora_proveedor mane_prov = new Manejadora_proveedor();
-                                Manejadora_pedidos mane_ped = new Manejadora_pedidos();
-                                String rutProveedor;
-                                String rutPedido;
-                                for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
+                                    </tr>
+                                </thead>
 
-                                    for (int e = 0; e < mane_ped.getPedido().size(); e++) {
+                                <%                              
+                                    Manejadora_proveedor mane_prov = new Manejadora_proveedor();
+                                    Manejadora_pedidos mane_ped = new Manejadora_pedidos();
+                                    String rutProveedor;
+                                    String rutPedido;
+                                    for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
 
-                                        rutProveedor = mane_prov.getProveedor().get(i).getRut();
-                                        rutPedido = mane_ped.getPedido().get(e).getProveedor_rut();
-                                        try {
-                                            int estado = mane_ped.getPedido().get(e).getEstado();
-                                            if (rutProveedor.compareToIgnoreCase(rutPedido) == 0) {
+                                        for (int e = 0; e < mane_ped.getPedido().size(); e++) {
 
-                                                if (estado == 0) {
-                                                    out.print("<tbody>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
-                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
-                                                            + "<td>"
-                                                            + "rechazado"
-                                                            + "</td>"
-                                                            + "</tbody>");
+                                            rutProveedor = mane_prov.getProveedor().get(i).getRut();
+                                            rutPedido = mane_ped.getPedido().get(e).getProveedor_rut();
+                                            try {
+
+                                                if (rutProveedor.compareToIgnoreCase(rutPedido) == 0) {
+                                                    if (mane_ped.getPedido().get(e).getEstado() == 4) {
+                                                        out.print("<tbody>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getId_pedido() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                                + "<td>"
+                                                                + "<button type='button' class='btn btn-success'>Recibido</button>"
+                                                                + "<button type='button' class='btn btn-danger'>Falta</button>"
+                                                                + "</td>"
+                                                                + "</tbody>");
+                                                    }
+                                                    if (mane_ped.getPedido().get(e).getEstado() == 3) {
+                                                        out.print("<tbody>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getId_pedido() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                                + "<td>aceptado</td>"
+                                                                + "</tbody>");
+                                                    }
+                                                    if (mane_ped.getPedido().get(e).getEstado() == 2) {
+                                                        out.print("<tbody>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getId_pedido() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                                + "<td>enviado</td>"
+                                                                + "</tbody>");
+                                                    }
+                                                    if (mane_ped.getPedido().get(e).getEstado() == 0) {
+                                                        out.print("<tbody>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getId_pedido() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
+                                                                + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
+                                                                + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
+                                                                + "<td>Rechazado</td>"
+                                                                + "</tbody>");
+                                                    }
+
                                                 }
 
-                                                if(estado == 2){
-                                                    out.print("<tbody>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
-                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
-                                                            + "<td>"
-                                                            + "enviado"
-                                                            + "</td>"
-                                                            + "</tbody>");
-                                                }
-                                                if(estado == 3){
-                                                     out.print("<tbody>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
-                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
-                                                            + "<td>"
-                                                            + "aceptado"
-                                                            + "</td>"
-                                                            + "</tbody>");
-                                                }
-                                                if(estado == 4){
-                                                    out.print("<tbody>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</td>"
-                                                            + "<td>" + mane_prov.getProveedor().get(i).getRubro() + "</td>"
-                                                            + "<td>" + mane_ped.getPedido().get(e).getF_emicion() + "</td>"
-                                                            + "<td>"
-                                                            + "<button type='button' class='btn btn-success'>Recibido</button>"
-                                                            + "<button type='button' class='btn btn-danger'>falta</button>"
-                                                            + "</td>"
-                                                            + "</tbody>");
-                                                }
-                                                
+                                            } catch (Exception u) {
+
                                             }
-
-                                        } catch (Exception u) {
                                         }
+
                                     }
-                                }
 
 
-                            %>
+                                %>
 
-                        </table>
+                            </table>
+                        </div>
                         <br>
                         <br
 
                     </div>
                 </div>
             </div>
-            <!--FIN: Recepción pedidos Listado-->
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <!------------------------------------------------------------------------------------------->            
+        </div>
+
+        <!--FIN: Recepción pedidos Listado-->
+        <br>
+        <br>
+
+
+        <!------------------------------------------------------------------------------------------->            
 
 
 
-            <!-- FORM PEDIDOS-->
-            <!-- herramientas para los pedidos -->
+        <!-- FORM PEDIDOS-->
+        <!-- herramientas para los pedidos -->
 
-            <!-- FIN herramientas para los pedidos -->
-            <hr class="aba mar" id="pedir">
+        <!-- FIN herramientas para los pedidos -->
 
-            <h4  class=" mb-5 mar">Generar pedido </h4>
-            <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
+        <hr class="aba mar" id="pedir">
+        <br>
+        <h4  class=" mb-5 mar">Generar Pedido </h4>
+        <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
 
-                <form action="ControlPedido" method="post">
-                    <input type='text' class='form-control desactivar' name='txt_rut_emp' value="<%=rut%>">
+            <form action="ControlPedido" method="post">
+                <input type='text' class='form-control desactivar' name='txt_rut_emp' value="<%=rut%>">
 
-                    <div class="col-sm">
-                        <p class="p-3 mb-2 bg-dark text-white text-center ">Pedido</p>
-                        <div class="form-group">
-                            <label for="sel1" class="mt-2">Seleccionar proveedor</label>
-                            <select class="form-control" name="select_prov" id="sel1">
-                                <%                                    try {
-                                        if (mane_prov.getProveedor().size() == 0) {
-                                            out.print("<option>Aún no hay proveedores</option>");
-                                        } else {
-                                            for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
-                                                out.print("<option>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</option>");
-                                            }
+                <div class="col-sm">
+                    <p class="p-3 mb-2 bg-dark text-white text-center ">Pedido</p>
+                    <div class="form-group">
+                        <label for="sel1" class="mt-2">Seleccionar Proveedor</label>
+                        <select class="form-control" name="select_prov" id="sel1">
+                            <%                                    try {
+                                    if (mane_prov.getProveedor().size() == 0) {
+                                        out.print("<option>Aún no hay proveedores</option>");
+                                    } else {
+                                        for (int i = 0; i < mane_prov.getProveedor().size(); i++) {
+                                            out.print("<option>" + mane_prov.getProveedor().get(i).getNom_empresa() + "</option>");
                                         }
-                                    } catch (Exception e) {
-                                        out.print("<option>Error en esta area</option>");
                                     }
+                                } catch (Exception e) {
+                                    out.print("<option>Error en esta area</option>");
+                                }
 
 
-                                %>
-                            </select>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input"  required="true">
-                        <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
-                    </div>
-                    <button type="submit" class="btn btn-dark" name="accion" value="ComenzarPedido">Comenzar pedido</button>
-                </form>
-            </div>
-            <!--FIN: FORM PEDIDOS-->
-            <br>
-            <br>
-            <br>
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-
-
-            <hr class="aba mar" id="minuta">
-
-            <h4>Agregar minuta</h4>
-            <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
-                <form action="C_Minuta" method="POST">
-                    <div class="col-sm">
-                        <p class="p-3 mb-2 bg-dark text-white text-center ">Agregar minuta</p>
-
-                        <!--text area -->
-                        <input type="text" class="form-control" name="txt_titulo" placeholder="titulo" required="true" maxlength="18">
-                        <!--FIn text area -->
-
-                        <!--text area -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Descripción</span>
-                                <span class="input-group-text">-></span>
-                            </div>
-                            <textarea class="form-control" name="txt_detalle" aria-label="With textarea" maxlength="100"></textarea>
-                        </div>
-                        <!--FIn text area -->
-
-
-                        <!-- select -->
-                        <div class="form-group">
-                            <label for="sel1" class="mt-2">tipo de minuta</label>
-                            <select class="form-control" name="select_min" id="sel1">
-                                <%                                    Manejadora_minuta mane_min = new Manejadora_minuta();
-
-                                    try {
-                                        if (mane_min.getTipo().size() == 0) {
-                                            out.print("<option>Aún no hay minutas</option>");
-                                        } else {
-                                            for (int i = 0; i < mane_min.getTipo().size(); i++) {
-                                                out.print("<option>" + mane_min.getTipo().get(i).getNom_tipo() + "</option>");
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        out.print("<option>Error en esta area</option>");
-                                    }
-
-
-                                %>
-                            </select>
-                            <!--FIn select -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input"  required="true">
-                        <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
-                    </div>
-                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarMin">Enviar Minuta</button>
-                </form>
-
-                <hr class="aba mar">
-            </div>
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-            <!------------------------------------------------------------------------------------------->
-
-            <br>
-            <br>
-            <br>
-
-
-            <!--minutas----------------------------------------------------------------------------------------------->
-
-            <h4  class="mb-5 mar">Lista de minutas </h4>
-
-
-            <button type="button" class="" data-toggle="modal" data-target=".bd-example-modal-lg">Presione para ver la lista</button>
-
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content text-center">
-                        <!-- la siguiente linea incluye la minuta.jsp -->
-                        <jsp:include page="minuta.jsp" />
+                            %>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <!--FIn:-minutas------------------------------------------------------------------------------------------>
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-
-
-            <!-- -->
+                <hr>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input"  required="true">
+                    <label class="form-check-label" for="exampleCheck1">Revise los Datos</label>
+                </div>
+                <button type="submit" class="btn btn-dark" name="accion" value="ComenzarPedido">Comenzar Pedido</button>
+            </form>
         </div>
+        <!--FIN: FORM PEDIDOS-->
+        <br>
+        <br>
+        <br>
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+
+
+        <hr class="aba mar" id="minuta">
+        <br>
+        <br>
+        <h4>Agregar Minuta</h4>
+        <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
+            <form action="C_Minuta" method="POST">
+                <div class="col-sm">
+                    <p class="p-3 mb-2 bg-dark text-white text-center ">Agregar Minuta</p>
+
+                    <!--text area -->
+                    <input type="text" class="form-control" name="txt_titulo" placeholder="Titulo" required="true" maxlength="18">
+                    <!--FIn text area -->
+
+                    <!--text area -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Descripción</span>
+                            <span class="input-group-text">-></span>
+                        </div>
+                        <textarea class="form-control" name="txt_detalle" aria-label="With textarea" maxlength="100"></textarea>
+                    </div>
+                    <!--FIn text area -->
+
+
+                    <!-- select -->
+                    <div class="form-group">
+                        <label for="sel1" class="mt-2">Tipo de Minuta</label>
+                        <select class="form-control" name="select_min" id="sel1">
+                            <%                                    Manejadora_minuta mane_min = new Manejadora_minuta();
+
+                                try {
+                                    if (mane_min.getTipo().size() == 0) {
+                                        out.print("<option>Aún no hay minutas</option>");
+                                    } else {
+                                        for (int i = 0; i < mane_min.getTipo().size(); i++) {
+                                            out.print("<option>" + mane_min.getTipo().get(i).getNom_tipo() + "</option>");
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    out.print("<option>Error en esta area</option>");
+                                }
+
+
+                            %>
+                        </select>
+                        <!--FIn select -->
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input"  required="true">
+                    <label class="form-check-label" for="exampleCheck1">Revise los Datos</label>
+                </div>
+                <button type="submit" class="btn btn-dark" name="accion" value="RegistrarMin">Enviar Minuta</button>
+            </form>
+
+            <hr class="aba mar">
+        </div>
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------->
+
+        <br>
+        <br>
+        <br>
+
+
+        <!--minutas----------------------------------------------------------------------------------------------->
+
+        <h4  class="mb-5 mar">Lista de minutas </h4>
+
+
+        <button type="button" class="" data-toggle="modal" data-target=".bd-example-modal-lg">Presione para ver la Lista</button>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content text-center">
+
+                    <!-- la siguiente linea incluye la minuta.jsp -->
+                    <jsp:include page="minuta.jsp" />
+                </div>
+            </div>
+        </div>
+        <!--FIn:-minutas------------------------------------------------------------------------------------------>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <!-- -->
     </div>
+</div>
 
 
-    <%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
-                sesion.setAttribute("user", null);
-                sesion.invalidate();
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            HttpSession rs = request.getSession();
-            rs.setAttribute("desde", "empleado_home.jsp");
-            rs.setAttribute("pag", "login.jsp");
-            rs.setAttribute("titulo", "Inicie sesion otra vez.");
-            rs.setAttribute("detalle", "Algo ha salido mal en la pagina.");
-            rs.setAttribute("sms", "falló empleado_home + " + e);
-            rs.setAttribute("tip", "error");
-            response.sendRedirect("true.jsp");
-
+<%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
+            sesion.setAttribute("user", null);
+            sesion.invalidate();
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-    %>
+    } catch (Exception e) {
+        HttpSession rs = request.getSession();
+        rs.setAttribute("desde", "empleado_home.jsp");
+        rs.setAttribute("pag", "login.jsp");
+        rs.setAttribute("titulo", "Inicie sesion otra vez.");
+        rs.setAttribute("detalle", "Algo ha salido mal en la pagina.");
+        rs.setAttribute("sms", "falló empleado_home + " + e);
+        rs.setAttribute("tip", "error");
+        response.sendRedirect("true.jsp");
+
+    }
+%>
 
 
-    <script src="js/form.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="js/form.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
 </body>

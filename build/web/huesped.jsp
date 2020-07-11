@@ -34,9 +34,31 @@
     </head>
     <body >
         <%
+            String usuario = "";
+    String clave = "";
+    String aint = "";
+    String rut = "";
+    int id_usuario = 3;
+    String tipo = "";
+             HttpSession sesion = request.getSession();
+    if (sesion == null) {
+        out.print("error");
+    } else {}
+        try {
+            usuario = sesion.getAttribute("user").toString();
+            clave = sesion.getAttribute("clave").toString();
+            aint = sesion.getAttribute("tipo").toString();
+            id_usuario = Integer.parseInt(sesion.getAttribute("id").toString());
+            rut = sesion.getAttribute("rut").toString();
+
+        } catch (Exception e) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+
+            
             int codigo = 0;
             try {
-            HttpSession hue = request.getSession();
+                HttpSession hue = request.getSession();
                 codigo = Integer.parseInt(hue.getAttribute("cod").toString());
                 hue.setAttribute("cod", codigo);
 
@@ -44,16 +66,15 @@
                 Manejadora_hab mane_ha = new Manejadora_hab();
                 Orden_compra ord = mane_ord.devolverCompraCompleta(codigo);
                 int precio = ord.getPrecio_total();
-           
 
 
         %>
-        
+
         <div class="container col-lg-5 col-sm-12 col-xs-5"> 
             <form action="AgregarHuesped" method="Post">
                 <div class="col-sm">
-                    <p class="p-3 mb-2 bg-dark text-white ">Agregar huespedes | <%=codigo %></p>
-                    <input type='text' class='form-control desactivar' name="txt_codigo" value="<%=codigo %>">
+                    <p class="p-3 mb-2 bg-dark text-white ">Agregar huespedes | <%=codigo%></p>
+                    <input type='text' class='form-control desactivar' name="txt_codigo" value="<%=codigo%>">
                     <input type="text" class="form-control" name="txt_rut" placeholder="rut" required="ingrese rut" maxlength="18">
                     <input type="text" class="form-control" name="txt_nombre" placeholder="nombre" required="true" maxlength="20">
                     <input type="text" class="form-control" name="txt_apellido" placeholder="apellido" required="true" maxlength="20">
@@ -61,8 +82,8 @@
                     <div class="form-group">
                         <label for="sel1" class="mt-2">habitaciones</label>
                         <select class="form-control" name="select_habitacion" id="sel1">
-                            <%     
-                                String tipo = "";
+                            <%
+                                tipo = "";
                                 int habi = 0;
                                 for (int i = 0; i < mane_ha.getHab().size(); i++) {
 
@@ -94,11 +115,11 @@
             <a href="cliente_home.jsp"  class="btn btn-dark btn-block">Volver</a>
 
         </div>
-                        
-                        
-                        
-                        
-<!--...............................................................................................................................-->
+
+
+
+
+        <!--...............................................................................................................................-->
         <hr>
         <div class="container table-sm  col-lg-10 col-sm-12 col-xs-5 mb-5 mar"> 
             <table class="table table-hover ">
@@ -111,7 +132,7 @@
                 </thead>
                 <tbody>
 
-                    <% 
+                    <%
                         Manejadora_huesped mane = new Manejadora_huesped();
 
                         for (int i = 0; i < mane.getHuesped().size(); i++) {
@@ -136,28 +157,25 @@
                         Manejadora_hab ma_ha = new Manejadora_hab();
 
                         int precio_mi = ma_mi.valorMinuta(tipo_mi);
-                        int precio_ha = ma_ha.valorHab(tipo_ha);
-                        
-                        
-                        out.print("<h1>precio total: " + precio + " </h1><p>  | Valor minuta:" + precio_mi + " | Valor habitacion:" + precio_ha + "</p>");
+                        int com = ma_ha.valorHab(2);
+                        int solo = ma_ha.valorHab(1);
 
-                         
+                        out.print("<h1>precio total: " + precio + " </h1><p>  | Valor minuta:" + precio_mi + " | Valor habitacion compartida:" + com + " | Valor habitacion individual:" + solo + "</p>");
+
 
                     %>
 
 
 
-                    <%
-                       
-                        } catch (Exception e) {
+                    <%                        } catch (Exception e) {
                             request.setAttribute("pag", "huesped.jsp");
                             request.setAttribute("titulo", "Error");
                             request.setAttribute("detalle", "en jsp huesped");
-                            request.setAttribute("sms", "error en la hoja html cod:"+codigo);
+                            request.setAttribute("sms", "error en la hoja html cod:" + codigo);
                             request.setAttribute("tipo", "error");
                             request.getRequestDispatcher("true.jsp").forward(request, response);
                         }
-                         
+
                     %>
                 </tbody>
             </table>
