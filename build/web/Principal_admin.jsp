@@ -51,18 +51,12 @@
     </div>
 
 
-    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"  type="button" class="button1">Administración de Ordenes de Venta</a>
+    <div>
+        <a href="admi/administrador.jsp" class="button1"  > Administración de Facturación</a>
+    </div>
 </div>
 
 
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="background-color: #000000">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content container">
-            <jsp:include page="admi/administrador.jsp" />
-        </div>
-    </div>
-</div>   
 
 <br>
 <br>

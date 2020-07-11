@@ -19,10 +19,12 @@
 
 
     </head>
-    <body >
+      <body background="https://i.pinimg.com/originals/9d/43/da/9d43da092565f9f5003c3aaa64292902.gif" >
+       
           <h1 class="letras">Cargando...</h1>
-        <img src="https://static.wixstatic.com/media/81cab9_ce4a29f9ba69499fbdea5bf8ec9e75f7~mv2.gif" width="20%"  height="20%">
+         
+       
       
-        
+      
     </body>
 </html>
