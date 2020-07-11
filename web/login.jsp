@@ -3,6 +3,7 @@
     Created on : 17-06-2020, 3:02:38
     Author     : Enfoks
 --%>
+<%@page import="org.apache.commons.codec.digest.DigestUtils"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Modelo.Manejadoras.Manejadora_usuario" %>
 
@@ -42,11 +43,14 @@
                             <%                            
                                 String nom="";
                                 String clave="";
+                                String textoSinEncriptar="";
                                 Manejadora_usuario mane=null;
                                 try {
                                     mane = new Manejadora_usuario();
                                     nom = request.getParameter("txt_nom");
-                                    clave = request.getParameter("txt_clave");
+                                    textoSinEncriptar = request.getParameter("txt_clave");
+                                    clave = DigestUtils.md5Hex(textoSinEncriptar);
+
                                 } catch (Exception e) {
                                     nom = "";
                                     clave = "";

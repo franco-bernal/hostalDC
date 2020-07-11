@@ -13,12 +13,12 @@ import Modelo.Manejadoras.Manejadora_usuario;
 import Modelo.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -108,7 +108,9 @@ public class ControlUsuario extends HttpServlet {
 
             String accion = request.getParameter("accion");
             String nom = request.getParameter("txt_nom");
-            String clave = request.getParameter("txt_clave");
+            String textoSinEncriptar= request.getParameter("txt_clave");
+            String clave = DigestUtils.md5Hex(textoSinEncriptar);
+
             Usuario usu = new Usuario();
 
             usu = mane_usu.obtenerUsuario(nom, clave);
@@ -137,13 +139,13 @@ public class ControlUsuario extends HttpServlet {
                     Manejadora_empleado ma_em = new Manejadora_empleado();
                     String rut = ma_em.obtenerRutEmpleado(usu.getId_usuario());
                     sesion.setAttribute("rut", rut);
-                    
+
                     HttpSession rs = request.getSession();
                     rs.setAttribute("desde", "login.jsp");
                     rs.setAttribute("pag", "empleado_home.jsp");
                     rs.setAttribute("titulo", "Ingresado como");
                     rs.setAttribute("detalle", "empleado Dc");
-                    rs.setAttribute("sms", rut+" Cargando...");
+                    rs.setAttribute("sms", rut + " Cargando...");
                     rs.setAttribute("tip", "success");
                     response.sendRedirect("true.jsp");
 
@@ -153,7 +155,7 @@ public class ControlUsuario extends HttpServlet {
                     Manejadora_proveedor mane_prov = new Manejadora_proveedor();
                     String rut = mane_prov.obtenerRutProveedor(usu.getId_usuario());
                     sesion.setAttribute("rut", rut);
-                    
+
                     HttpSession rs = request.getSession();
                     rs.setAttribute("desde", "login.jsp");
                     rs.setAttribute("pag", "proveedor_home.jsp");
@@ -172,11 +174,11 @@ public class ControlUsuario extends HttpServlet {
                     rs.setAttribute("pag", "cliente_home.jsp");
                     rs.setAttribute("titulo", "Ingresado como");
                     rs.setAttribute("detalle", "cliente");
-                    rs.setAttribute("sms", rut+" Cargando...");
+                    rs.setAttribute("sms", rut + " Cargando...");
                     rs.setAttribute("tip", "success");
                     response.sendRedirect("true.jsp");
                 }
-                if(r==1){
+                if (r == 1) {
                     HttpSession rs = request.getSession();
                     rs.setAttribute("desde", "login.jsp");
                     rs.setAttribute("pag", "Principal_admin.jsp");

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -107,7 +108,8 @@ public class ControlEmp extends HttpServlet {
         if (accion.equals("RegistrarEmple")) {
             int id = mane_usu.idMax() + 1;
             String nom_usu = request.getParameter("txt_nom_emp");
-            String clave = request.getParameter("txt_clave");
+            String textoSinEncriptar = request.getParameter("txt_clave");
+             String clave = DigestUtils.md5Hex(textoSinEncriptar);
             String correo = request.getParameter("txt_correo_emp");
             int tipo = 2;
 

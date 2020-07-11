@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -78,7 +79,8 @@ public class ControlProveedor extends HttpServlet {
         if (accion.equals("RegistrarProv")) {
             int id = mane_usu.idMax() + 1;
             String nom_usu = request.getParameter("txt_nom_emp");
-            String clave = request.getParameter("txt_clave");
+            String textoSinEncriptar = request.getParameter("txt_clave");
+            String clave = DigestUtils.md5Hex(textoSinEncriptar);
             String correo = request.getParameter("txt_correo_emp");
             int tipo = 3;
 
@@ -91,7 +93,7 @@ public class ControlProveedor extends HttpServlet {
             String rs=mane_pro.ingresarProveedorCompleto(u, d);
             
                if (rs.compareToIgnoreCase("Se ingreso exitosamente") == 0) {
-                request.setAttribute("desde", "select.jsp");
+                   request.setAttribute("desde", "select.jsp");
                 request.setAttribute("pag", "login.jsp");
                 request.setAttribute("titulo", "Registrado!");
                 request.setAttribute("detalle", "Ya puedes iniciar con tu usuario: " + nom_usu);
