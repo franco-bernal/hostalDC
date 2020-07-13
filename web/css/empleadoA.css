@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .giga{
-    height: 230px;
+    height: 250px;
     width: 100%;
     background-image: url("https://wallpaperstock.net/wallpapers/thumbs1/40997wide.jpg");
     opacity: 0.8;
@@ -25,7 +25,7 @@ and open the template in the editor.
      font-size:25px;
      color: black;
      text-align: center;
-
+     font-family:sans-serif;
      
      
 }
@@ -66,7 +66,7 @@ fomu1{
 }
 
 #customers {
- 
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -74,7 +74,6 @@ fomu1{
 #customers td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
-  
 }
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
@@ -84,7 +83,7 @@ fomu1{
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: center;
+  text-align: left;
   background-color: #4CAF50;
   color: white;
 }
@@ -103,6 +102,14 @@ div.ex3 {
   height: 280px;
   overflow: auto;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -224,31 +231,4 @@ div.ex3 {
   max-width:960px;
  margin-top: 5px;
  
-}
-
-
-.centrar{
-  
-  margin-left: 27%;
-}
-
-.button1 {
-  background-color: #4CAF50; 
-  border: none;
-  color: white;
-  padding: 8px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s; 
-  transition-duration: 0.4s;
-  border-radius: 50%;
-}
-
-.button1 {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-   border-radius: 50%;
 }

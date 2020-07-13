@@ -1,4 +1,3 @@
-<%@page import="Modelo.Manejadoras.Manejadora_huesped"%>
 <%@page import="Modelo.Manejadoras.Manejadora_minuta"%>
 <%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
 <%@page import="Modelo.Manejadoras.Manejadora_proveedor"%>
@@ -38,8 +37,6 @@
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
 
             <%
-                Manejadora_huesped mane_hu=new Manejadora_huesped();
-                                        int can_hue=0;
                 Manejadora_orden mane_ord = null;
                 Manejadora_cliente mane_cli = null;
                 HttpSession sesion = null;
@@ -128,45 +125,27 @@
         <div class="fon" data-spy="scroll" data-target="#navbar-example2" data-offset="0" >  
 
 
-            <br>
-            <!--Modal de ayuda -->            
-            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
-
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <embed src="pdf/CASO.pdf#page=3" type="application/pdf" width="100%" height="600px" />
-                    </div>
-                </div>
-            </div>
-            <!--Fin Modal   <object  data="pdf/CASO.pdf#page=2"></object>                         <iframe  src="pdf/CASO.pdf#page=2"></iframe>-->
-
-            <!-- ....................... -->
-            <!-- ....................... -->
-
-
+            
             <!------------------------------------------------------------------------------------------->
             <!-- ....................... -->
             <!--Recepción Huespedes listado -->
             <br>
-            <h4  class="mb-5 mar" id="recepcion">Recepción Huespedes </h4>
+            <h4  id="recepcion">Recepción Huespedes </h4>
 
-            <div  id="customers" class="container-fluid" >
+
+            <div  id="customers" class="container " >
                 <div>
                     <div>
 
                         <%
 
                             try {
-                                
                                 if (mane_cli.getCliente().size() > 0) {//tamaño de la lista de clientes completa
                                     for (int i = 0; i < mane_cli.getCliente().size(); i++) {//cliente por cliente
-                                        
-                                        if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0 && mane_ord.valorTodasPorRut(mane_cli.getCliente().get(i).getRut_emp())>0 ) {//se revisa si es mayor a 0 la cantidad
+                                        if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0) {//se revisa si es mayor a 0 la cantidad
                                             //acordeon boton
-                                    
 
-                                            out.print("<div  class='accordion'  id='accordionExample'>"
+                                            out.print("<div  class='accordion'  id='accordionExample'    >"
                                                     + "<div class='card' >"
                                                     + "<div class='card-header' id='heading" + i + "'>"
                                                     + "<h2  class='mb-0'>"
@@ -195,7 +174,8 @@
                                                     + "</thead>"
                                                     + "<tbody>");
                                             //fin columnas
-                                               for (int e = 0; e < arrayC.size(); e++) {//recorre la lista filtrada por rut
+
+                                            for (int e = 0; e < arrayC.size(); e++) {//recorre la lista filtrada por rut
 
                                                 int id = mane_cli.obtenerIdUsuario(mane_cli.getCliente().get(i).getRut_emp());
                                                 String rut_o = mane_cli.obtenerRutUsuario(id);
@@ -211,7 +191,7 @@
                                                         + "<td>" + arrayC.get(e).getF_inicio() + "</td>"
                                                         + "<td>" + arrayC.get(e).getF_fin() + "</td>"
                                                         + "<td>" + arrayC.get(e).getF_compra() + "</td>"
-                                                        + "<td><a href='recep_ha.jsp?id=" + arrayC.get(e).getCodigo_compra() + "&rut=" + mane_cli.getCliente().get(i).getRut_emp() + "' class='btn btn-warning btn-sm'>recepcionar</a></td>"
+                                                        + "<td><a href='recep_ha.jsp?id=" + arrayC.get(e).getCodigo_compra() + "&rut=" + mane_cli.getCliente().get(i).getRut_emp() + "' class='btn btn-warning btn-sm'>rece</a></td>"
                                                         + "</tr>");
                                             }
 
@@ -219,17 +199,15 @@
                                                     + "</table>"
                                                     + "</div>"
                                                     + "</div>"
-                                                    + "</div>"
-                                                    + "</div>"
-                                                    + "");
-  
-                                           
+                                                    + "</div>");
+
                                         }
                                     }
                                 } else {
                                     out.print("<p>No hay Clientes<p>");
                                 }
                             } catch (Exception e) {
+                                request.getRequestDispatcher("login.jsp").forward(request, response);
                             }
 
                         %>
@@ -246,21 +224,24 @@
             <!------------------------------------------------------------------------------------------->            
             <!-- ....................... -->
             <!--Recepción pedidos Listado-->
-            <hr class="aba mar" id="pedir">
+            <hr>
             <br>
-            <h4  class="mb-5 mar" id="pedidos">Recepción Pedidos </h4>
+            <h4>Recepción Pedidos </h4>
+            <br>
+            
+            <div id="customers" class="centrar" >
+                
+            <div style="text-align:center;" >
 
+       
+               
 
-            <div id="customers" class="container"  >
-
-                <br>
-                <div >
-
-                    <div >
+                    <div class=" col-lg-5 col-sm-12 col-xs-5 " >
                         <div class="ex3" >
-                            <table class="table center-block"  >
+                            
+                            <table WIDTH="600"  >
 
-                                <thead class="table center-block" >
+                                <thead  >
                                     <tr>
                                         <th>id</th>
                                         <th>Proveedor</th>
@@ -360,10 +341,10 @@
 
         <!-- FIN herramientas para los pedidos -->
 
-        <hr class="aba mar" id="pedir">
+        <hr>
         <br>
-        <h4  class=" mb-5 mar">Generar Pedido </h4>
-        <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
+        <h4  class=" mb-5">Generar Pedido </h4>
+        <div class="container col-lg-5 col-sm-12 col-xs-5"> 
 
             <form action="ControlPedido" method="post">
                 <input type='text' class='form-control desactivar' name='txt_rut_emp' value="<%=rut%>">
@@ -483,7 +464,7 @@
         <h4  class="mb-5 mar">Lista de minutas </h4>
 
 
-        <button type="button" class="" data-toggle="modal" data-target=".minuta">Presione para ver la Lista</button>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target=".minuta">Presione para ver la Lista</button>
 
         <div class="modal fade minuta" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -506,8 +487,32 @@
 
 
         <!-- -->
-    </div>
+   
+
+
+<div>
+
+<br>
+            <!--Modal de ayuda -->            
+            <button type="button" class="button1 button1" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <embed src="pdf/CASO.pdf#page=3" type="application/pdf" width="100%" height="600px" />
+                    </div>
+                </div>
+            </div>
+            <!--Fin Modal   <object  data="pdf/CASO.pdf#page=2"></object>                         <iframe  src="pdf/CASO.pdf#page=2"></iframe>-->
+
+            <!-- ....................... -->
+            <!-- ....................... -->
 </div>
+
+
+        <br>
+         <br>
+ </div>
 
 
 <%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
@@ -533,7 +538,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
 </body>
 </html>
