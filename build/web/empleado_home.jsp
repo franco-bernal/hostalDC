@@ -1,3 +1,4 @@
+<%@page import="Modelo.Manejadoras.Manejadora_huesped"%>
 <%@page import="Modelo.Manejadoras.Manejadora_minuta"%>
 <%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
 <%@page import="Modelo.Manejadoras.Manejadora_proveedor"%>
@@ -37,6 +38,8 @@
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
 
             <%
+                Manejadora_huesped mane_hu=new Manejadora_huesped();
+                                        int can_hue=0;
                 Manejadora_orden mane_ord = null;
                 Manejadora_cliente mane_cli = null;
                 HttpSession sesion = null;
@@ -148,20 +151,22 @@
             <br>
             <h4  class="mb-5 mar" id="recepcion">Recepción Huespedes </h4>
 
-
-            <div  id="customers" class="container " >
+            <div  id="customers" class="container-fluid" >
                 <div>
                     <div>
 
                         <%
 
                             try {
+                                
                                 if (mane_cli.getCliente().size() > 0) {//tamaño de la lista de clientes completa
                                     for (int i = 0; i < mane_cli.getCliente().size(); i++) {//cliente por cliente
-                                        if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0) {//se revisa si es mayor a 0 la cantidad
+                                        
+                                        if (mane_ord.cantidadDeOrdenes(mane_cli.getCliente().get(i).getRut_emp()) > 0 && mane_ord.valorTodasPorRut(mane_cli.getCliente().get(i).getRut_emp())>0 ) {//se revisa si es mayor a 0 la cantidad
                                             //acordeon boton
+                                    
 
-                                            out.print("<div  class='accordion'  id='accordionExample'    >"
+                                            out.print("<div  class='accordion'  id='accordionExample'>"
                                                     + "<div class='card' >"
                                                     + "<div class='card-header' id='heading" + i + "'>"
                                                     + "<h2  class='mb-0'>"
@@ -190,8 +195,7 @@
                                                     + "</thead>"
                                                     + "<tbody>");
                                             //fin columnas
-
-                                            for (int e = 0; e < arrayC.size(); e++) {//recorre la lista filtrada por rut
+                                               for (int e = 0; e < arrayC.size(); e++) {//recorre la lista filtrada por rut
 
                                                 int id = mane_cli.obtenerIdUsuario(mane_cli.getCliente().get(i).getRut_emp());
                                                 String rut_o = mane_cli.obtenerRutUsuario(id);
@@ -215,15 +219,17 @@
                                                     + "</table>"
                                                     + "</div>"
                                                     + "</div>"
-                                                    + "</div>");
-
+                                                    + "</div>"
+                                                    + "</div>"
+                                                    + "");
+  
+                                           
                                         }
                                     }
                                 } else {
                                     out.print("<p>No hay Clientes<p>");
                                 }
                             } catch (Exception e) {
-                                request.getRequestDispatcher("login.jsp").forward(request, response);
                             }
 
                         %>

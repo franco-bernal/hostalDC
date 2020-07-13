@@ -197,5 +197,28 @@ public class DAOorden_compra {
 
         return r;
     }
+      
+      
+     public ArrayList<Orden_compra> ObtenerComprasPorFactura(int cod_factura) {
+        ArrayList<Orden_compra> arrayOrd = new ArrayList<Orden_compra>();
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "select * from orden_compra where FACTURA_COD_FACTURA="+cod_factura+" order by CODIGO_COMPRA";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Orden_compra ord = new Orden_compra(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getString(8),rs.getInt(9));
+                arrayOrd.add(ord);
+            }
+            ps.close();
+            return arrayOrd;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }  
+      
+      
+     
 
 }

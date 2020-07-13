@@ -74,8 +74,8 @@
 
     </head>
     <body  data-spy="scroll" class="text-capitalize "  data-target="#navbar-example2">
-        
-        
+
+
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">       
             <a class="navbar-brand " href="#"><%out.print(usuario);%></a>
             <ul class="nav nav-pills">
@@ -93,18 +93,18 @@
                     <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#comprar">Comprar</a>
                 </li>
                 <%
-                if(tipo=="Admin"){
-                    out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp'>Volver a admin</a>");
-                }else{
-                    out.print(""
-                            + " <form action='ControlUsuario' method='POST'>"
-                            + " <input action='ControlUsuario' class='btn btn-sm btn-outline-secondary nav-link'  type='submit' name='accion' value='Salir'>"
-                            + "</form>");
-                }
+                    if (tipo == "Admin") {
+                        out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp'>Volver a admin</a>");
+                    } else {
+                        out.print(""
+                                + " <form action='ControlUsuario' method='POST'>"
+                                + " <input action='ControlUsuario' class='btn btn-sm btn-outline-secondary nav-link'  type='submit' name='accion' value='Salir'>"
+                                + "</form>");
+                    }
                 %>
-               
-                   
-                
+
+
+
             </ul>
         </nav>
 
@@ -258,17 +258,19 @@
                     <br><br>
                     <label>Seleccionar Pago Facturas </label>
                     <br>
-                    <select id="" name="select_opc">
-                        <option>Seleccionar</option>
+                    <select   name="select_opc" onChange="pagoOnChange(this)"  >
                         <option>uno</option>
                         <option>todos</option>
                     </select>
-                    <br>
-                    <label for="">Ingrese codigo Factura a Pagar:</label>
-                    <br>
-                    <input type="number"  name="cod_ord"> 
-                    <br> 
-                    <br> 
+                    <div  id="nTargeta" style="display:'';">
+                        <br>
+                        <label for="">Ingrese codigo Factura a Pagar:</label>
+                        <br>
+                        <input type="number"  name="cod_ord"> 
+                        <br> 
+                        <br> 
+                    </div>
+
                     <input type='text' class='form-control desactivar' name='txt_rut' value="<%=rut%>">
                     <div class="b">
                         <button type="submit"  class="btn btn-dark btn-block" name="accion" value="generarFactura" style='width:100px; height:35px'>Pagar</button>
@@ -280,6 +282,23 @@
 
 
 
+            <script>
+                function pagoOnChange(sel) {
+                    if (sel.value == "uno") {
+                        divT = document.getElementById("nTargeta");
+                        divT.style.display = "";
+                    } else {
+                        if (sel.value == "todos") {
+                            divT = document.getElementById("nTargeta");
+                            divT.style.display = "none";
+                        }
+
+
+
+
+                    }
+                }
+            </script>
 
 
 

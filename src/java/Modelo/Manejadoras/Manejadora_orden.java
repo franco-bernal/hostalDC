@@ -108,15 +108,8 @@ public class Manejadora_orden {
     }
 
     public ArrayList<Orden_compra> listaDeComprasPorFactura(int cod_fact) {
-        ArrayList<Orden_compra> arrayC = daoOrd.ObtenerCompras();
-
-        for (int i = 0; i < arrayOrden.size(); i++) {
-            if (arrayOrden.get(i).getFACTURA_cod_factura() == cod_fact) {
-                arrayC.add(arrayOrden.get(i));
-            }
-        }
-
-        return arrayC;
+       
+        return  daoOrd.ObtenerComprasPorFactura(cod_fact);
     }
 
     public int cantidadDias(int cod_compra) {
@@ -137,6 +130,15 @@ public class Manejadora_orden {
 
     public int valorTodas(int cod_factura) {
         ArrayList<Orden_compra> arrayC = listaDeComprasPorFactura(cod_factura);
+        int acumulador = 0;
+        for (int i = 0; i < arrayC.size(); i++) {
+            acumulador += arrayC.get(i).getPrecio_total();
+        }
+        return acumulador;
+    }
+    
+    public int valorTodasPorRut(String rut) {
+        ArrayList<Orden_compra> arrayC = listaComprasPorRUT(rut);
         int acumulador = 0;
         for (int i = 0; i < arrayC.size(); i++) {
             acumulador += arrayC.get(i).getPrecio_total();

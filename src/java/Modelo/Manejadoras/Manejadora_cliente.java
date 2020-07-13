@@ -65,16 +65,8 @@ public class Manejadora_cliente {
     }
 
     public UsuarioCli_detalle obtenerClienteCompleto(String rut) {
-        ArrayList<UsuarioCli_detalle> arrayclient = dao_det.ObtenerClientes();
-        for (int i = 0; i<arrayclient.size(); i++) {
-            if (rut.compareToIgnoreCase(arrayclient.get(i).getRut_emp()) == 0) {
-                 UsuarioCli_detalle u =new UsuarioCli_detalle(arrayclient.get(i).getRut_emp(), arrayclient.get(i).getNom_emp(), arrayclient.get(i).getTele_emp(), arrayclient.get(i).getDir_emp(), arrayclient.get(i).getUsuario_id_usuario());
-                 return u;
-            }else{
-                return null;
-            }
-        }
-        return null;
+       return  dao_det.ObtenerClientePorRut(rut);
+        
     }
     
     

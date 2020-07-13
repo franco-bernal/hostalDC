@@ -29,26 +29,17 @@
         %>
         <!--Fin: obtenido cod de compra y rut del comprador-->
         <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
-        <h2>Habitaciones disponibles</h2>
-        <%
-            for (int i = 0; i < mane_hab.getHab().size(); i++) {
-                    out.print(" -{"+mane_hab.getHab().get(i).getNum_hab() + "}- ");
-            }
 
-        %>
-
-
-        <h2>Recepcion huespedes</h2>
+        <h2>Lista de huespedes y sus habitaciones</h2>
         <%            for (int i = 0; i < mane_hue.getHuesped().size(); i++) {
                 if (mane_hue.getHuesped().get(i).getORDEN_compra_codigo_compra() == id_compra) {
-                    out.print(i);
-                    out.print(mane_hue.getHuesped().get(i).getNombre() + " -{}- ");
+                    out.print("Nombre:"+mane_hue.getHuesped().get(i).getNombre() +" "+""+mane_hue.getHuesped().get(i).getApellido()+"  N°"+mane_hue.getHuesped().get(i).getHABITACION_num_hab());
                 }
             }
 
         %>
 
-
+        <a href="empleado_home.jsp">volver</a>
 
 
 
