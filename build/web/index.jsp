@@ -1,3 +1,12 @@
+<%-- 
+    Document   : index
+    Created on : 13-07-2020, 15:46:10
+    Author     : Alicia_fachonizta
+--%>
+<%@page import="Modelo.Util"%>
+<%@page import="Modelo.Entidades.Visitas"%>
+<%@page import="Modelo.Manejadoras.Manejadora_visitas"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 </head>
@@ -72,7 +81,14 @@
           </div>
 
 
-
+    <%
+        Util util=new Util();
+    Manejadora_visitas mane_vi=new Manejadora_visitas();
+    Visitas vi = new Visitas(1, util.fechaHoy());
+    mane_vi.ingresarVisita(vi);
+    
+    %>
+    
 
 </body>
 </html>

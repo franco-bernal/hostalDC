@@ -119,7 +119,7 @@
     <p class="descmodulo">Descripción de los informes de visitas</p>
   
  
-    <a href="#" class="btn btn-success">Ingresar <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+    <a href="admi/VisitasTabla.jsp" class="btn btn-success">Ingresar <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 </div>
   <br>
 </div>

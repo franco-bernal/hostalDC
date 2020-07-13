@@ -223,29 +223,34 @@
 
 
 
-        </div>    
-
+        </div>  
+                                        
+                                        <div  class="acc3">                  
+                                        
+                                        <div class="accesos2" >
         <!--botones de sesion -->
-        <form action="ControlUsuario" method="POST" class="box">
+        <form action="ControlUsuario" method="POST" class="centrar" class="box">
             <input type="text" class="desactivar"  name="admin" value="<%="2"%>" />
             <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
             <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
-            <button name="accion" value="Ingresar" type="submit">Entrar como empleado</button>
+            <button class="btn btn-outline-success" name="accion" value="Ingresar" type="submit">Ingresar como empleado</button>
         </form>   
-        <form action="ControlUsuario" method="POST" class="box">
+            <br>
+        <form action="ControlUsuario" method="POST"  class="centrar" class="box">
             <input type="text" class="desactivar"  name="admin" value="<%="3"%>" />
             <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
             <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
-            <button name="accion" value="Ingresar" type="submit">Entrar como proveedor</button>
-        </form>       
-        <form action="ControlUsuario" method="POST" class="box">
+            <button class="btn btn-outline-success" name="accion" value="Ingresar" type="submit">Ingresar como proveedor</button>
+        </form>
+            <br>
+        <form action="ControlUsuario" method="POST"  class="centrar"  class="box">
             <input type="text" class="desactivar"  name="admin" value="<%="4"%>" />
             <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
             <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
-            <button name="accion" value="Ingresar" type="submit">Entrar como cliente</button>
+            <button class="btn btn-outline-success"  name="accion" value="Ingresar" type="submit">Ingresar como cliente</button>
         </form>   
-
-
+  </div>
+ </div>
 
         <div >
             <a href="Principal_admin.jsp" class="boton verde">Volver</a>
@@ -254,8 +259,7 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
+       
         <div class="dere">
             <div style="color: white" id="copyright" style="text-align: center;" >Copyright&copy; 2020 - Todos los derechos reservados</div>
         </div>

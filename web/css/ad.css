@@ -254,3 +254,52 @@ display: flex;
 }
 
 
+.centrar{
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    
+}
+
+
+
+.accesos2 {
+  min-height: 0;
+  display: inline-block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 0 0 #7ab602 inset;
+  background-color: #fefffa;
+  width: 100%;
+  padding: 1em;
+  max-width:500px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.acc3 {
+  box-shadow: 0 8px 0 0 #7ab602 inset;
+  background-color: #fefffa;
+  width: 90%;
+  padding: 0,5em;
+  max-width:500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2px;
+
+
+}
+
+@media (max-width: 550px) {
+  .accesos2 {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+
+}
