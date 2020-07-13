@@ -137,7 +137,7 @@
                                                                     + "<td>N°" + ord.getId_pedido() + "</td>"
                                                                     + "<td>" + ord.getF_emicion() + "</td>"
                                                                     + "<td class='centrar'>"
-                                                                    + "Enviado"
+                                                                    + "aceptado"
                                                                     + "</td>"
                                                                     + "</tr>");
                                                         }
@@ -148,6 +148,16 @@
                                                                     + "<td>" + ord.getF_emicion() + "</td>"
                                                                     + "<td class='centrar'>"
                                                                     + "Rechazado"
+                                                                    + " </td>"
+                                                                    + " </tr>");
+                                                        }
+                                                        if (ord.getEstado() == 4) {//enviado
+                                                            out.print(""
+                                                                    + "<tr class='table-success'>"
+                                                                    + "<td>N°" + ord.getId_pedido() + "</td>"
+                                                                    + "<td>" + ord.getF_emicion() + "</td>"
+                                                                    + "<td class='centrar'>"
+                                                                    + "enviado"
                                                                     + " </td>"
                                                                     + " </tr>");
                                                         }

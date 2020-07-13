@@ -211,7 +211,7 @@
                                                         + "<td>" + arrayC.get(e).getF_inicio() + "</td>"
                                                         + "<td>" + arrayC.get(e).getF_fin() + "</td>"
                                                         + "<td>" + arrayC.get(e).getF_compra() + "</td>"
-                                                        + "<td><a href='recep_ha.jsp?id=" + arrayC.get(e).getCodigo_compra() + "&rut=" + mane_cli.getCliente().get(i).getRut_emp() + "' class='btn btn-warning btn-sm'>rece</a></td>"
+                                                        + "<td><a href='recep_ha.jsp?id=" + arrayC.get(e).getCodigo_compra() + "&rut=" + mane_cli.getCliente().get(i).getRut_emp() + "' class='btn btn-warning btn-sm'>recepcionar</a></td>"
                                                         + "</tr>");
                                             }
 
