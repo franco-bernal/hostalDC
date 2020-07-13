@@ -14,15 +14,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrador</title>
-        <%
-            response.setHeader("Cache-Control", "no-cache");
-            response.setHeader("Cache-Control", "no-store");
-            response.setHeader("Pragma", "no-cache");
-            response.setDateHeader("Expires", 0);
-        %>
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="css/ad.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <link href="css/Util.css" rel="stylesheet" type="text/css"/>
 
 
     </head>
@@ -208,7 +204,7 @@
                                                 } catch (Exception e) {
                                                     out.print(e);
                                                 }//
-%>
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -229,23 +225,30 @@
 
         </div>    
 
-
-        <div class="agre">
-            <div class='row'>
-                <img src='https://image.flaticon.com/icons/png/512/14/14598.png'  width='80' height='80'/> 
-                <div >
-
-                    <a href='select.jsp' class="boton verde">Agregar usuario</a>
-                </div>
-                <strong>HostalDC</strong></div>
-        </div>               
-
-
+        <!--botones de sesion -->
+        <form action="ControlUsuario" method="POST" class="box">
+            <input type="text" class="desactivar"  name="admin" value="<%="2"%>" />
+            <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
+            <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
+            <button name="accion" value="Ingresar" type="submit">Entrar como empleado</button>
+        </form>   
+        <form action="ControlUsuario" method="POST" class="box">
+            <input type="text" class="desactivar"  name="admin" value="<%="3"%>" />
+            <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
+            <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
+            <button name="accion" value="Ingresar" type="submit">Entrar como proveedor</button>
+        </form>       
+        <form action="ControlUsuario" method="POST" class="box">
+            <input type="text" class="desactivar"  name="admin" value="<%="4"%>" />
+            <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
+            <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
+            <button name="accion" value="Ingresar" type="submit">Entrar como cliente</button>
+        </form>   
 
 
 
         <div >
-            <a href="login.jsp" class="boton verde">Volver</a>
+            <a href="Principal_admin.jsp" class="boton verde">Volver</a>
 
         </div >
         <br>
@@ -256,6 +259,8 @@
         <div class="dere">
             <div style="color: white" id="copyright" style="text-align: center;" >Copyright&copy; 2020 - Todos los derechos reservados</div>
         </div>
+
+        <!--????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????-->
 
 
 

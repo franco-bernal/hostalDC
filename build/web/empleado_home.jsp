@@ -24,10 +24,11 @@
 
 
 
-
     </head>
 
-    <body  data-spy="scroll" class="text-capitalize letras text-center "  data-target="#navbar-example2">
+    <body data-spy="scroll" class="text-capitalize letras text-center "  data-target="#navbar-example2">
+
+
         <%
             try {
         %>
@@ -36,12 +37,12 @@
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">
 
             <%
+                Manejadora_orden mane_ord = null;
+                Manejadora_cliente mane_cli = null;
                 HttpSession sesion = null;
                 String usuario = "";
                 String aint = "";
                 String rut = "";
-                Manejadora_orden mane_ord = null;
-                Manejadora_cliente mane_cli = null;
                 String tipo = "";
 
                 try {
@@ -52,15 +53,23 @@
                     aint = sesion.getAttribute("tipo").toString();
                     rut = sesion.getAttribute("rut").toString();
                 } catch (Exception e) {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
-                int tip = Integer.parseInt(aint);
 
-                if (tip == 2) {
-                    tipo = "Empleado";
+                int tip = Integer.parseInt(aint);
+               
+                
+                  if (usuario.compareToIgnoreCase("hostaldc") == 0) {
+                    tipo = "Admin";
                 } else {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    if (tip == 2) {
+                    tipo = "Empleado";
                 }
+                }
+                
+               
+
+              
 
             %>
 
@@ -83,11 +92,17 @@
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#lista">Lista de Minutas</a>
                 </li>
-                <form action="ControlUsuario">
-                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary nav-link" type="submit"  name="accion" value="Salir">
-                </form>
+                 <%
+                    if (tipo == "Admin") {
+                        out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp'>Volver a admin</a>");
+                    } else {
+                        out.print(""
+                                + "<form action='ControlUsuario'>"
+                                + "<input action='ControlUsuario' class='btn btn-sm btn-outline-secondary nav-link' type='submit'  name='accion' value='Salir'>"
+                                + "</form>");
+                    }
+                %>
             </ul>
-
         </nav>
 
 
@@ -462,9 +477,9 @@
         <h4  class="mb-5 mar">Lista de minutas </h4>
 
 
-        <button type="button" class="" data-toggle="modal" data-target=".bd-example-modal-lg">Presione para ver la Lista</button>
+        <button type="button" class="" data-toggle="modal" data-target=".minuta">Presione para ver la Lista</button>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade minuta" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content text-center">
 

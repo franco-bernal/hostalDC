@@ -13,9 +13,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login HDC</title>
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
+        
         <%
-            
-
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires", 0);
         %>
     </head>
 
@@ -40,11 +43,11 @@
                 <div class="footer-box">
                     <div class="alert btn-outline-dark text-center letras" role="alert">
                         <p>
-                            <%                            
-                                String nom="";
-                                String clave="";
-                                String textoSinEncriptar="";
-                                Manejadora_usuario mane=null;
+                            <%
+                                String nom = "";
+                                String clave = "";
+                                String textoSinEncriptar = "";
+                                Manejadora_usuario mane = null;
                                 try {
                                     mane = new Manejadora_usuario();
                                     nom = request.getParameter("txt_nom");
@@ -70,7 +73,7 @@
                             %>
                         </p>
                     </div>
-                        
+
 
                 </div>
 

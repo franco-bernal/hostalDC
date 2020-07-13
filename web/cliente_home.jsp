@@ -10,7 +10,9 @@
 <%@page session="true" %>
 <%@page import="Modelo.DAO.DAOusuario" %>
 
-<%                DAOusuario u = new DAOusuario();
+<%
+
+    DAOusuario u = new DAOusuario();
     Manejadora_cliente mane_cli = new Manejadora_cliente();
     String usuario = "";
     String clave = "";
@@ -18,8 +20,10 @@
     String rut = "";
     int id_usuario = 3;
     int con = 3;
+    int tip = 0;
     String tipo = "";
     HttpSession sesion = request.getSession();
+
     if (sesion == null) {
         out.print("error");
     } else {
@@ -27,9 +31,9 @@
             usuario = sesion.getAttribute("user").toString();
             clave = sesion.getAttribute("clave").toString();
             aint = sesion.getAttribute("tipo").toString();
+            tip = Integer.parseInt(aint);
             id_usuario = Integer.parseInt(sesion.getAttribute("id").toString());
             rut = sesion.getAttribute("rut").toString();
-
         } catch (Exception e) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
@@ -41,16 +45,14 @@
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
-        int tip = Integer.parseInt(aint);
-
-        if (tip == 4) {
-            tipo = "Cliente";
+        if (usuario.compareToIgnoreCase("hostaldc") == 0) {
+            tipo = "Admin";
         } else {
-            tipo = "salir";
+            if (tip == 4) {
+                tipo = "Cliente";
+            }
         }
-        if (tipo == "salir") {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+
     }
 %>
 
@@ -71,8 +73,9 @@
 
 
     </head>
-
     <body  data-spy="scroll" class="text-capitalize "  data-target="#navbar-example2">
+        
+        
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">       
             <a class="navbar-brand " href="#"><%out.print(usuario);%></a>
             <ul class="nav nav-pills">
@@ -89,10 +92,19 @@
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-secondary nav-link" type="button"  href="#comprar">Comprar</a>
                 </li>
-
-                <form action="ControlUsuario" method="POST">
-                    <input action="ControlUsuario" class="btn btn-sm btn-outline-secondary nav-link"  type="submit" name="accion" value="Salir">
-                </form>
+                <%
+                if(tipo=="Admin"){
+                    out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp'>Volver a admin</a>");
+                }else{
+                    out.print(""
+                            + " <form action='ControlUsuario' method='POST'>"
+                            + " <input action='ControlUsuario' class='btn btn-sm btn-outline-secondary nav-link'  type='submit' name='accion' value='Salir'>"
+                            + "</form>");
+                }
+                %>
+               
+                   
+                
             </ul>
         </nav>
 
@@ -108,7 +120,7 @@
             </div>
             <h4 class="text-center"><%out.print(rut);%></h4>
             <div  class="tipo">
-                <p>  <%out.print(tipo);%>  </p>
+                <p>  <%=tipo%>  </p>
             </div>
         </div>
 

@@ -37,10 +37,7 @@ public class ControlUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Cache-Control", "no-store");
-        response.setHeader("Pragma", "no-cache");
-        response.setDateHeader("Expires", 0);
+
         PrintWriter out = response.getWriter();
 
         try {
@@ -50,7 +47,10 @@ public class ControlUsuario extends HttpServlet {
             String accion = request.getParameter("accion");
 
             if (accion.equals("Salir")) {
-
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Cache-Control", "no-store");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
                 mane_usu.Conec(Integer.parseInt(sesion.getAttribute("id").toString()), 0);
                 sesion.invalidate();
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -106,9 +106,15 @@ public class ControlUsuario extends HttpServlet {
             Manejadora_cliente mane_cli = new Manejadora_cliente();
             HttpSession sesion = request.getSession();
 
+            int admin = -1;
+            try {
+                admin = Integer.valueOf(request.getParameter("admin"));
+            } catch (Exception e) {
+                admin = -1;
+            }
             String accion = request.getParameter("accion");
             String nom = request.getParameter("txt_nom");
-            String textoSinEncriptar= request.getParameter("txt_clave");
+            String textoSinEncriptar = request.getParameter("txt_clave");
             String clave = DigestUtils.md5Hex(textoSinEncriptar);
 
             Usuario usu = new Usuario();
@@ -117,11 +123,15 @@ public class ControlUsuario extends HttpServlet {
             if (usu == null) {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
+                if (admin == -1) {
+                    sesion.setAttribute("tipo", usu.getTipo_usuario_permiso());
+                } else {
+                    sesion.setAttribute("tipo", admin);
+                }
 
                 sesion.setAttribute("id", usu.getId_usuario());
                 sesion.setAttribute("user", usu.getNom_usuario());
                 sesion.setAttribute("clave", usu.getClave());
-                sesion.setAttribute("tipo", usu.getTipo_usuario_permiso());
 
             }
 
@@ -130,7 +140,12 @@ public class ControlUsuario extends HttpServlet {
             if (accion.equals("Ingresar")) {
 
                 try {
-                    r = usu.getTipo_usuario_permiso();
+                    if (admin == -1) {
+                        r = usu.getTipo_usuario_permiso();
+                    } else {
+                        r = admin;
+                    }
+
                 } catch (Exception e) {
                     r = 0;
                 }
@@ -188,6 +203,7 @@ public class ControlUsuario extends HttpServlet {
                     rs.setAttribute("tip", "success");
                     response.sendRedirect("true.jsp");
                 }
+
             }
         } catch (Exception e) {
             String error = "";
