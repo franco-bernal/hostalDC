@@ -3,18 +3,34 @@
     Created on : 01-07-2020, 18:47:56
     Author     : Enfoks
 --%>
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Entidades.Usuario" %>
 <%@page import="Modelo.Manejadoras.Manejadora_usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%
+    //Seguridad de pagina
+    String llave="ok";
+    try {
+        String permiso = request.getParameter("id");
+        if (permiso == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+            if(permiso.compareToIgnoreCase(llave)==0){
+                out.print("");
+            }else{
+               response.sendRedirect("login.jsp"); 
+            }
+        }
+    } catch (Exception e) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrador</title>
-        
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="css/ad.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -204,7 +220,7 @@
                                                 } catch (Exception e) {
                                                     out.print(e);
                                                 }//
-                                            %>
+%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -224,33 +240,33 @@
 
 
         </div>  
-                                        
-                                        <div  class="acc3">                  
-                                        
-                                        <div class="accesos2" >
-        <!--botones de sesion -->
-        <form action="ControlUsuario" method="POST" class="centrar" class="box">
-            <input type="text" class="desactivar"  name="admin" value="<%="2"%>" />
-            <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
-            <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
-            <button class="btn btn-outline-success" name="accion" value="Ingresar" type="submit">Ingresar como empleado</button>
-        </form>   
-            <br>
-        <form action="ControlUsuario" method="POST"  class="centrar" class="box">
-            <input type="text" class="desactivar"  name="admin" value="<%="3"%>" />
-            <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
-            <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
-            <button class="btn btn-outline-success" name="accion" value="Ingresar" type="submit">Ingresar como proveedor</button>
-        </form>
-            <br>
-        <form action="ControlUsuario" method="POST"  class="centrar"  class="box">
-            <input type="text" class="desactivar"  name="admin" value="<%="4"%>" />
-            <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
-            <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
-            <button class="btn btn-outline-success"  name="accion" value="Ingresar" type="submit">Ingresar como cliente</button>
-        </form>   
-  </div>
- </div>
+
+        <div  class="acc3">                  
+
+            <div class="accesos2" >
+                <!--botones de sesion -->
+                <form action="ControlUsuario" method="POST" class="centrar" class="box">
+                    <input type="text" class="desactivar"  name="admin" value="<%="2"%>" />
+                    <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
+                    <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
+                    <button class="btn btn-outline-success" name="accion" value="Ingresar" type="submit">Ingresar como empleado</button>
+                </form>   
+                <br>
+                <form action="ControlUsuario" method="POST"  class="centrar" class="box">
+                    <input type="text" class="desactivar"  name="admin" value="<%="3"%>" />
+                    <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
+                    <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
+                    <button class="btn btn-outline-success" name="accion" value="Ingresar" type="submit">Ingresar como proveedor</button>
+                </form>
+                <br>
+                <form action="ControlUsuario" method="POST"  class="centrar"  class="box">
+                    <input type="text" class="desactivar"  name="admin" value="<%="4"%>" />
+                    <input type="text" class="desactivar"  name="txt_nom" value="<%="hostaldc"%>" />
+                    <input type="text" class="desactivar" name="txt_clave" value="<%=123%>"/>
+                    <button class="btn btn-outline-success"  name="accion" value="Ingresar" type="submit">Ingresar como cliente</button>
+                </form>   
+            </div>
+        </div>
 
         <div >
             <a href="Principal_admin.jsp" class="boton verde">Volver</a>
@@ -259,7 +275,7 @@
         <br>
         <br>
         <br>
-       
+
         <div class="dere">
             <div style="color: white" id="copyright" style="text-align: center;" >Copyright&copy; 2020 - Todos los derechos reservados</div>
         </div>

@@ -50,7 +50,7 @@
 
                 <%
                     if (tipo == "Admin") {
-                        out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp'>Volver a admin</a>");
+                        out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp?id=ok'>Volver a admin</a>");
                     } else {
                         out.print(""
                                 + " <form action='ControlUsuario'>"

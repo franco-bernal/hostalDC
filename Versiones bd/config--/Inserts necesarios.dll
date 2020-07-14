@@ -58,4 +58,16 @@ INSERT INTO PROVEEDOR VALUES ('18565555k','hostaldc','hostal',6);
 INSERT INTO EMPLEADO VALUES ('18565555k','hostaldc','hostal',6);
 INSERT INTO CLIENTE VALUES ('18565555k','hostaldc','45265415','la calle 1364',6);
 
+alter table CONFIGURACION
+  add meta_visitas number default 0 not null;
+  
+alter table CONFIGURACION
+  add cod_seguridad number default 0 not null;
+    
+  insert INTO VISITAS VALUES(60,'13-06-2020');
+insert INTO VISITAS VALUES(50,'13-05-2020');
+insert INTO VISITAS VALUES(25,'13-04-2020');
+insert INTO VISITAS VALUES(51,'13-03-2020');
+insert INTO VISITAS VALUES(24,'13-02-2020');
 
+insert into CONFIGURACION VALUES(19,555,100);

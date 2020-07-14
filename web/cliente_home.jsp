@@ -94,7 +94,7 @@
                 </li>
                 <%
                     if (tipo == "Admin") {
-                        out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp'>Volver a admin</a>");
+                        out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp?id=ok'>Volver a admin</a>");
                     } else {
                         out.print(""
                                 + " <form action='ControlUsuario' method='POST'>"
@@ -249,14 +249,14 @@
             <br><br>
 
 
-            <h4>Pago Facturas</h4>
+            <h4>Generar factura</h4>
 
             <form action="ControlCliente" method="post">           
 
 
                 <div class="fac">  
                     <br><br>
-                    <label>Seleccionar Pago Facturas </label>
+                    <label>cantidad a facturar </label>
                     <br>
                     <select   name="select_opc" onChange="pagoOnChange(this)"  >
                         <option>uno</option>
@@ -264,7 +264,7 @@
                     </select>
                     <div  id="nTargeta" style="display:'';">
                         <br>
-                        <label for="">Ingrese codigo Factura a Pagar:</label>
+                        <label for="">Ingrese codigo a facturar:</label>
                         <br>
                         <input type="number"  name="cod_ord"> 
                         <br> 
@@ -273,7 +273,7 @@
 
                     <input type='text' class='form-control desactivar' name='txt_rut' value="<%=rut%>">
                     <div class="b">
-                        <button type="submit"  class="btn btn-dark btn-block" name="accion" value="generarFactura" style='width:100px; height:35px'>Pagar</button>
+                        <button type="submit"  class="btn btn-dark btn-block" name="accion" value="generarFactura" style='width:100px; height:35px'>Generar</button>
                     </div>
                 </div>
 

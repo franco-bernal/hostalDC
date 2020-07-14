@@ -58,4 +58,31 @@ public class Manejadora_hab {
         }
         return "";
     }
+    
+    public String ingresarHabitacion(Habitacion ha) {
+        return dao_ha.ingresarHabitacion(ha);
+    }
+    
+    public int cant() {
+        ArrayList<Habitacion> arrayh = dao_ha.ObtenerHabitacion();
+        int a=0;
+        for(int i=0;i<arrayh.size();i++){
+            a+=1;
+        }
+        return a;
+    }
+    
+    
+     public String actualizarHabitacion(Habitacion ha) {
+         return dao_ha.actualizarHabitacion(ha);
+     }
+ 
+     public String actualizarDisponibilidad0(int hab,String dis) {
+         return dao_ha.actualizarDisponibilidad0(hab, dis);
+     }
+     
+    public String darDeBajaoAlta(int hab,String dis){
+        return  dao_ha.darDeBajaoAlta(hab, dis);
+    }
+    
 }

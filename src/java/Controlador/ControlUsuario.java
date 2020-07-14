@@ -195,6 +195,7 @@ public class ControlUsuario extends HttpServlet {
                 }
                 if (r == 1) {
                     HttpSession rs = request.getSession();
+                    rs.setAttribute("per", "ok");
                     rs.setAttribute("desde", "login.jsp");
                     rs.setAttribute("pag", "Principal_admin.jsp");
                     rs.setAttribute("titulo", "Ingresado como");

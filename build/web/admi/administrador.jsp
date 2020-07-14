@@ -8,6 +8,24 @@
 <%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
 <%@page import="Modelo.Manejadoras.Manejadora_orden"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+            //Seguridad de pagina
+            String llave = "ok";
+            try {
+                String permiso = request.getParameter("id");
+                if (permiso == null) {
+                    response.sendRedirect("../login.jsp");
+                } else {
+                    if (permiso.compareToIgnoreCase(llave) == 0) {
+                        out.print(permiso + "-");
+                    } else {
+                        response.sendRedirect("../login.jsp");
+                    }
+                }
+            } catch (Exception e) {
+                response.sendRedirect("../login.jsp");
+            }
+        %>
 <!DOCTYPE html>
 <html>
     <head>

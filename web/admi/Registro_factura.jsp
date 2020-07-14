@@ -7,10 +7,30 @@
 <%@page import="Modelo.Manejadoras.Manejadora_factura"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>facturas</title>
+        <%
+            //Seguridad de pagina
+            String llave = "ok";
+            try {
+                String permiso = request.getParameter("id");
+                if (permiso == null) {
+                    response.sendRedirect("../login.jsp");
+                } else {
+                    if (permiso.compareToIgnoreCase(llave) == 0) {
+                        out.print(permiso + "-");
+                    } else {
+                        response.sendRedirect("../login.jsp");
+                    }
+                }
+            } catch (Exception e) {
+                response.sendRedirect("../login.jsp");
+            }
+        %>
         <%
             Manejadora_factura mane_fa = new Manejadora_factura();
         %>
@@ -68,7 +88,7 @@
                     </tbody>
                 </table>
                 <!-- TABLA FINALIZA -->
-
+                 
 
 
 

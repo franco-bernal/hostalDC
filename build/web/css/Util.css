@@ -11,6 +11,7 @@
     pointer-events: none; 
 }
 
+
 /* links sin color*/
 .li{
     * {outline: none !important;}
@@ -19,4 +20,6 @@ a {color: black; font-family: arial; text-decoration: none;}
 a:hover {color: black; font-family: arial; text-decoration: none;}
 a:visited {color: black; font-family: arial; text-decoration: none;}
 }  
+
+
 

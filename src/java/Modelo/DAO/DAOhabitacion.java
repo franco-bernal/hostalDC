@@ -27,7 +27,7 @@ public class DAOhabitacion {
         try {
             //inserto datos del usuario
             Connection con = c.getConnection();
-            String query1 = "INSERT INTO habitacion VALUES (?,?,?,?,?)";
+            String query1 = "INSERT INTO habitacion VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query1);
             ps = con.prepareStatement(query1);
             ps.setInt(1, ha.getNum_hab());
@@ -48,13 +48,12 @@ public class DAOhabitacion {
         return rs;
     }
 
-    
     public ArrayList<Habitacion> ObtenerHabitacion() {
         ArrayList<Habitacion> arrayHab = new ArrayList<Habitacion>();
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from habitacion";
+            String query = "select * from habitacion order by NUM_HAB";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -68,7 +67,7 @@ public class DAOhabitacion {
         }
     }
 
-     public ArrayList<Tipo_hab> obtener_tipos_hab() {
+    public ArrayList<Tipo_hab> obtener_tipos_hab() {
         ArrayList<Tipo_hab> arraytipo = new ArrayList<Tipo_hab>();
         try {
             Conexion c = new Conexion();
@@ -77,7 +76,7 @@ public class DAOhabitacion {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Tipo_hab tipo = new Tipo_hab(rs.getInt(1), rs.getString(2),rs.getInt(3));
+                Tipo_hab tipo = new Tipo_hab(rs.getInt(1), rs.getString(2), rs.getInt(3));
                 arraytipo.add(tipo);
             }
             ps.close();
@@ -86,6 +85,67 @@ public class DAOhabitacion {
             return null;
         }
     }
+
     
+    public String actualizarHabitacion(Habitacion ha) {
+        boolean resultado = false;
+        String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "update habitacion set ACCESORIO='" + ha.getAccesorio() + "',TIPO_HAB_ID_TIPO_HAB=" + ha.getTIPO_HAB_id_tipo_hab() + " WHERE NUM_HAB=" + ha.getNum_hab();
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOhabitacion/actualizarHabitacion err:" + ex.toString() + " fin/.";
+        }
+
+        return String.valueOf(resultado);
+    }
     
+    public String actualizarDisponibilidad0(int hab,String dis) {
+        boolean resultado = false;
+        String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "update habitacion set DISPONIBILIDAD='"+dis+"' WHERE NUM_HAB="+hab;
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOhabitacion/actualizarDisponibilidad err:" + ex.toString() + " fin/.";
+        }
+
+        return String.valueOf(resultado);
+    }
+
+    
+    public String darDeBajaoAlta(int hab,String dis){
+        boolean resultado = false;
+        String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "update habitacion set DISPONIBILIDAD='"+dis+"' WHERE NUM_HAB="+hab;
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOhabitacion/darDeBajaoAlta err:" + ex.toString() + " fin/.";
+        }
+
+        return String.valueOf(resultado);
+    }
+
 }

@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-07-2020, 17:17:44
+    Author     : Franco
+*/
+
+
+.abs-center {
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+.rayas{
+    background-color: white;
+}
+
+.confColor{
+    color: white;
+    background-color: #0088B2;
+    -webkit-box-shadow: -1px -1px 16px 0px rgba(0,153,255,1);
+    -moz-box-shadow: -1px -1px 16px 0px rgba(0,153,255,1);
+    box-shadow: -1px -1px 16px 0px rgba(0,153,255,1);
+}
+
+h1{
+    color: white;
+    text-align: center;
+}
+
