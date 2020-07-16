@@ -137,7 +137,7 @@
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <embed src="pdf/CASO.pdf#page=3" type="application/pdf" width="100%" height="600px" />
+                        <embed src="pdf/cliente.pdf" type="application/pdf" width="100%" height="600px" />
                     </div>
                 </div>
             </div>
