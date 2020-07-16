@@ -56,7 +56,7 @@ public class DAOvisitas {
         try {
             Conexion c = new Conexion();
             Connection con = c.getConnection();
-            String query = "select * from visitas";
+            String query = "select * from visitas ORDER BY fecha ASC";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

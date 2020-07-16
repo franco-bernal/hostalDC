@@ -78,6 +78,13 @@ public class Manejadora_minuta {
         return "";
     }
     
+   public String darDeBajaoAltaMinuta(int id,String det){
+       return dao_mi.darDeBajaoAltaMinuta(id,det);
+   }
+   
+   public String modificarMinuta(Minuta mi){
+       return dao_mi.modificarMinuta(mi);
+   }
     
     
 }

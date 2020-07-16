@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -59,7 +60,7 @@ public class DAOminuta {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Minuta min = new Minuta(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getString(4),rs.getInt(5));
+                Minuta min = new Minuta(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getInt(5));
                 arrayMin.add(min);
             }
             ps.close();
@@ -86,6 +87,47 @@ public class DAOminuta {
         } catch (SQLException ex) {
             return null;
         }
+    }
+
+    public String darDeBajaoAltaMinuta(int id, String detalle) {
+        boolean resultado = false;
+        String r = "false";
+
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "update MINUTA set DETALLE='" + detalle + "' WHERE ID_MINUTA=" + id;
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = ps.executeUpdate() == 1;
+            r = "true";
+            ps.close();
+
+        } catch (SQLException ex) {
+            r = "Exception en DAOminuta/darDeBajaoAltaMinuta err:" + ex.toString() + " fin/.";
+        }
+
+        return String.valueOf(resultado);
+    }
+
+    public String modificarMinuta(Minuta mi) {
+        String resultado = "false";
+        String r = "false";
+        java.util.Date utilDate = new java.util.Date(); //fecha actual
+        java.sql.Date hoy = new java.sql.Date(utilDate.getTime());
+        String fecha = new SimpleDateFormat("dd-MM-yyyy").format(hoy);
+        try {
+            Conexion c = new Conexion();
+            Connection con = c.getConnection();
+            String query = "update MINUTA set TITULO='" + mi.getTitulo() + "',F_CREADO='" + fecha + "',DETALLE='" + mi.getDetalle() + "',TIPO_MINUTA_ID_TIPO_MIN=" + mi.getId_tipo_min() + " where ID_MINUTA=" + mi.getId_minuta();
+            PreparedStatement ps = con.prepareStatement(query);
+            resultado = String.valueOf(ps.executeUpdate() == 1);
+            ps.close();
+
+        } catch (SQLException ex) {
+            resultado = "Exception en DAOminuta/modificarMinuta err:" + ex.toString() + " fin/.";
+        }
+
+        return String.valueOf(resultado);
     }
 
 }

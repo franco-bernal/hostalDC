@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-07-2020, 2:10:26
+    Author     : Enfoks
+*/
+body{
+   background-image: url("https://recreartte.files.wordpress.com/2013/08/fondo-verde-abstracto-1.jpg");
+    background-position: center center;
+    background-size: cover;
+    font-size:25px;
+
+    font: small-caps 100%/200% serif;
+  text-align: center;
+   
+}
+.centrar{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6px;
+}
+
+#customers {
+ text-align: center;
+  border-collapse: collapse;
+  width: 60%;
+   font: small-caps 100%/200% serif;
+     font-size:15px;
+    
+}
+
+#customers td, #customers th {
+  border: 1px solid black;
+  padding: 8px;
+  
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+
+.accesos {
+  box-shadow: 0 8px 0 0 #7ab602 inset;
+
+ 
+}
+
+@media (max-width: 550px) {
+  #accesos {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+
+}

@@ -26,13 +26,13 @@
         <title>Huesped</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <link href="css/pruebas.css" rel="stylesheet" type="text/css"/>
+        <link href="css/huesped.css" rel="stylesheet" type="text/css"/>
         <link href="css/Util.css" rel="stylesheet" type="text/css"/>
 
 
 
     </head>
-    <body >
+    <body class="bod">
         <%
             String usuario = "";
     String clave = "";
@@ -70,17 +70,20 @@
 
         %>
 
-        <div class="container col-lg-5 col-sm-12 col-xs-5"> 
+        
+        <br>
+        <br>
+        <div class="container col-lg-5 col-sm-12 col-xs-5" class="bod"> 
             <form action="AgregarHuesped" method="Post">
                 <div class="col-sm">
-                    <p class="p-3 mb-2 bg-dark text-white ">Agregar huespedes | <%=codigo%></p>
-                    <input type='text' class='form-control desactivar' name="txt_codigo" value="<%=codigo%>">
-                    <input type="text" class="form-control" name="txt_rut" placeholder="rut" required="ingrese rut" maxlength="18">
-                    <input type="text" class="form-control" name="txt_nombre" placeholder="nombre" required="true" maxlength="20">
-                    <input type="text" class="form-control" name="txt_apellido" placeholder="apellido" required="true" maxlength="20">
+                    <p class="p-3 mb-2 bg-dark text-white ">Agregar Huespedes | <%=codigo%></p>
+                    <input type='text'  class='form-control desactivar' name="txt_codigo" value="<%=codigo%>">
+                    <input type="text" class="form-control" name="txt_rut" placeholder="Rut" required="ingrese rut" maxlength="18">
+                    <input type="text" class="form-control" name="txt_nombre" placeholder="Nombre" required="true" maxlength="20">
+                    <input type="text" class="form-control" name="txt_apellido" placeholder="Apellido" required="true" maxlength="20">
                     <!--combobox habitaciones-->
                     <div class="form-group">
-                        <label for="sel1" class="mt-2">habitaciones</label>
+                        <label for="sel1" class="mt-2">Habitaciones</label>
                         <select class="form-control" name="select_habitacion" id="sel1">
                             <%
                                 tipo = "";
@@ -103,16 +106,16 @@
                 <hr>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input"  required="true">
-                    <label class="form-check-label" for="exampleCheck1">Revisé los datos</label>
+                    <label class="form-check-label" for="exampleCheck1">Revise los datos</label>
                 </div>
-                <button type="submit" class="btn btn-dark btn-block" name="accion" value="AgregarHue">Aceptar y agregar huesped</button>
+                <button type="submit" class="btn btn-dark" name="accion" value="AgregarHue">Agregar Huesped</button>
             </form>
             <hr>
             <form action="AgregarHuesped" method="Post">
-                <button type="submit" class="btn btn-dark btn-block" name="accion" value="Cancelar">Cancelar y volver</button>
+                <button type="submit" class="btn btn-dark text-center" style="align-content: center;" name="accion" value="Cancelar">Cancelar </button>
             </form>
             <hr>
-            <a href="cliente_home.jsp"  class="btn btn-dark btn-block">Volver</a>
+            <a href="cliente_home.jsp"  class="btn btn-dark ">Volver</a>
 
         </div>
 
@@ -121,13 +124,13 @@
 
         <!--...............................................................................................................................-->
         <hr>
-        <div class="container table-sm  col-lg-10 col-sm-12 col-xs-5 mb-5 mar"> 
+        <div class="container table-sm  col-lg-10 col-sm-12 col-xs-5" class="customers " > 
             <table class="table table-hover ">
                 <thead>
                     <tr>
-                        <th scope="col">rut</th>
-                        <th scope="col">nombre</th>
-                        <th scope="col">apellido</th>
+                        <th scope="col">Rut</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,7 +163,7 @@
                         int com = ma_ha.valorHab(2);
                         int solo = ma_ha.valorHab(1);
 
-                        out.print("<h1>precio total: " + precio + " </h1><p>  | Valor minuta:" + precio_mi + " | Valor habitacion compartida:" + com + " | Valor habitacion individual:" + solo + "</p>");
+                        out.print("<h1>Precio Total: " + precio + " </h1><p>  | Valor minuta:" + precio_mi + " | Valor habitacion compartida:" + com + " | Valor habitacion individual:" + solo + "</p>");
 
 
                     %>
@@ -180,7 +183,8 @@
                 </tbody>
             </table>
 
-
+                <br>
+                <br>
 
         </div> 
 

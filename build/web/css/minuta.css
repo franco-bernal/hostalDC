@@ -15,7 +15,7 @@ and open the template in the editor.
 body {
 	overflow-x: hidden;
 	font: 400 16px/1.8 'Crimson Text', serif;
-        
+        text-align: center;
         
 }
 
@@ -158,6 +158,7 @@ blockquote .small {
 .module-title,
 .callout-text {
 	font-size: 50px;
+        
 }
 
 .module-subtitle {
@@ -191,33 +192,8 @@ blockquote .small {
 	margin: 0;
 }
 
-/* ---------------------------------------------- /*
- * Progress bars
-/* ---------------------------------------------- */
 
-.progress,
-.progress-bar {
-	-webkit-box-shadow: none;
-			box-shadow: none;
-}
 
-.progress-bar {
-	background-color: #F5D76E;
-}
-
-/* ---------------------------------------------- /*
- * Tabs
-/* ---------------------------------------------- */
-
-.nav-pills, .nav-tabs {
-	margin-bottom: 20px;
-}
-
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
-	background: #F5D76E;
-}
 
 /* ---------------------------------------------- /*
  * Panels
@@ -438,7 +414,7 @@ textarea.form-control {
 .module {
 	position: relative;
 	background: #fff;
-	padding: 120px 0;
+	padding: 80px 0;
 }
 
 .module-gray {
@@ -677,100 +653,6 @@ textarea.form-control {
 }
 
 /* ---------------------------------------------- /*
- * Testimonials
-/* ---------------------------------------------- */
-
-.testimonial-text {
-	text-align: center;
-	margin: 0 0 60px;
-}
-
-.testimonial-avatar {
-	text-align: right;
-}
-
-.testimonial-avatar img {
-	height: 84px;
-	width: 84px;
-	-webkit-border-radius: 100%;
-	   -moz-border-radius: 100%;
-		 -o-border-radius: 100%;
-			border-radius: 100%;
-}
-
-.testimonial-info {
-	padding-top: 11px;
-	text-align: left;
-}
-
-.stars {
-	font-size: 12px;
-	color: #f1c40f;
-}
-
-.stars i {
-	margin: 0 2px 0 0;
-}
-
-.star-off {
-	color: #999;
-}
-
-/* ---------------------------------------------- /*
- * Gallery
-/* ---------------------------------------------- */
-
-.margin-0 {
-	margin: 0!important;
-}
-
-.position-relative {
-	position: relative;
-}
-
-.side-image {
-	position: absolute;
-	background: #fae7d7;
-	padding: 30px;
-	height: 100%;
-}
-
-.vertical-body {
-	position: relative;
-	border: 1px solid rgba(0,0,0,.1);
-	display: table;
-	height: 100%;
-	text-align: center;
-}
-
-.vertical {
-	display: table-cell;
-	vertical-align: middle;
-	width: 100%;
-	padding: 30px;
-}
-
-.gallery-no-padding {
-	background: #fff;
-}
-
-.gallery-no-padding > .row > .col-sm-4 {
-	padding: 0;
-}
-
-.gallery-detail {
-	border-bottom: 1px dotted #DDD;
-	text-align: center;
-	margin: 15px 0 20px;
-	padding: 0 0 10px;
-}
-
-.gallery-title {
-	font-size: 16px;
-	margin: 0 0 5px;
-}
-
-/* ---------------------------------------------- /*
  * Menu Classic, Gallery Overlay
 /* ---------------------------------------------- */
 
@@ -889,33 +771,6 @@ textarea.form-control {
 .ajax-response {
 	text-align: center;
 	padding: 20px;
-}
-
-/* ---------------------------------------------- /*
- * Footer
-/* ---------------------------------------------- */
-
-#footer {
-	background: #000;
-	text-align: center;
-	padding: 10px 0;
-	font-size: 14px;
-	color: #FFF;
-}
-
-.copyright {
-	margin: 0;
-}
-
-.social-links {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.social-links li {
-	display: inline-block;
-	margin: 0 5px;
 }
 
 /* ---------------------------------------------- /*
@@ -1380,46 +1235,17 @@ position: absolute;
  * Icons page
 /* ---------------------------------------------- */
 
-.sli-examples .item:hover {
-	background: #f0f0f0;
-	color: #000;
+
+.imgmodulo1 {
+  left:32px;
+  width: 80px;
+  margin: 20px 15px;
+
 }
 
-.sli-examples .item {
-	display: block;
-	width: 33%;
-	float: left;
-	padding: 0;
-	border: 1px solid #e5e5e5;
-	margin: -1px 0 0 -1px;
-	font-size: 13px;
-}
-
-.sli-examples .item > span {
-	display: inline-block;
-	margin-right: 5px;
-	min-width: 70px;
-	min-height: 70px;
-	border-right: 1px solid #f1f1f1;
-	line-height: 70px;
-	text-align: center;
-	font-size: 32px;
-}
-
-.fa-examples > div {
-	padding: 0;
-	border: 1px solid #e5e5e5;
-	margin: -1px 0 0 -1px;
-	font-size: 13px;
-}
-
-.fa-examples > div > i {
-	display: inline-block;
-	margin-right: 5px;
-	min-width: 40px;
-	min-height: 40px;
-	border-right: 1px solid #f1f1f1;
-	line-height: 40px;
-	text-align: center;
-	font-size: 14px;
+@media screen and (max-width: 900px){
+    .imgmodulo{
+       float: none;
+        margin-bottom: 0px;
+    }
 }

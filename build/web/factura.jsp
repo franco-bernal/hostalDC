@@ -105,9 +105,9 @@
 
 
     </head>
-    <body>
+    <body >
 
-    </div><div id="app" class="col-11">
+   <div id="app" class="bod">
 
         <h2>Factura</h2>
         <p>N°<%=fac.getCod_factura()%></p>
@@ -179,25 +179,30 @@
                 </tfoot>
             </table>
         </div>
+                    
+              
         <!-- -->
 
         <div class="cond row">
             <div class="col-12 mt-3">
                 <h4>Condiciones y formas de pago</h4>
-                <p>El pago se debe realizar en un plazo de 15 dias.</p>
-                <p>
+                <p>El pago se debe realizar en un plazo de 15 dias.<br>
+                
                     Banco Estado
                     <br />
                     Cuenta corriente 0075 20 20 4060
                     <br />
                 </p>
+                <div class="bo">
+                    <a href="cliente_home.jsp" class="btn btn-success">Cerrar<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>       
+                    </div>  
+
+                    <br>
+
             </div>
         </div>
     </div>
-
-
-
-
+     
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

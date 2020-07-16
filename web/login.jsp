@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login HDC</title>
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
-        
+
         <%
             response.setHeader("Cache-Control", "no-cache");
             response.setHeader("Cache-Control", "no-store");
@@ -62,14 +62,18 @@
                                 try {
                                     if (nom.compareToIgnoreCase("") == 0 || clave.compareToIgnoreCase("") == 0) {
                                         out.print("");
-                                    }
-                                    if (mane.obtenerUsuario(nom, clave) == null) {
-                                        out.print("no se encontró usuario");
+                                    } else {
+                                        if (mane.obtenerUsuario(nom, clave) == null) {
+                                            out.print("no se encontró usuario");
+                                        }
                                     }
 
                                 } catch (Exception ex) {
                                     out.print("");
                                 }
+
+                                HttpSession hue = request.getSession();
+                                hue.invalidate();
                             %>
                         </p>
                     </div>

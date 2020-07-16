@@ -9,23 +9,23 @@
 <%@page import="Modelo.Manejadoras.Manejadora_orden"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-            //Seguridad de pagina
-            String llave = "ok";
-            try {
-                String permiso = request.getParameter("id");
-                if (permiso == null) {
-                    response.sendRedirect("../login.jsp");
-                } else {
-                    if (permiso.compareToIgnoreCase(llave) == 0) {
-                        out.print(permiso + "-");
-                    } else {
-                        response.sendRedirect("../login.jsp");
-                    }
-                }
-            } catch (Exception e) {
+    //Seguridad de pagina
+    String llave = "ok";
+    try {
+        String permiso = request.getParameter("id");
+        if (permiso == null) {
+            response.sendRedirect("../login.jsp");
+        } else {
+            if (permiso.compareToIgnoreCase(llave) == 0) {
+                out.print(permiso + "-");
+            } else {
                 response.sendRedirect("../login.jsp");
             }
-        %>
+        }
+    } catch (Exception e) {
+        response.sendRedirect("../login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,38 +39,54 @@
         <script src="../js/configExcel/xlsx.full.min.js"></script>
         <script src="../js/configExcel/FileSaver.min.js"></script>
         <script src="../js/configExcel/tableexport.min.js"></script>
+
+        <link href="/hostalDC-master/css/administrador.css"  rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
     </head>
     <body>
-        <a>Informes y estadisticas</a>
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
-       
-        <button onclick="aPDF();"> Exportar a pdf </button>
-        <button type="button" onclick="javascript:window.print()">Imprimir</button>
-         <button onclick="Export2Doc('exportContent');">Export as .doc</button>
-        <button id="btnExportar">Exportar a excel</button>
 
+        <button class="btn btn-secondary btn-sm" onclick="aPDF();"> Exportar a pdf </button>
+        <button class="btn btn-secondary btn-sm" type="button" onclick="javascript:window.print()">Imprimir</button>
+        <button class="btn btn-secondary btn-sm" onclick="Export2Doc('exportContent');">Export as .doc</button>
+        <button class="btn btn-secondary btn-sm" id="btnExportar">Exportar a excel</button>
+        <a href="../Principal_admin.jsp?id=ok" class="btn btn-secondary btn-sm" aria-pressed="true">Volver</a>
 
+        <br>
+        <br>
+        <br>
+        <div class="centrar text-center">
+            <h1 class="page-header">
+                Informes y estadisticas <br>
+                Ordenes de compra           
+            </h1>
+        </div>
 
-        <div class="row">
-            <div class="col-xs-12  d-flex justify-content-center"  id="exportContent">
-                <h1 class="page-header">
-                    Ordenes de compra
-                </h1>
+        <div class="centrar" id="customers" class="text-center" >
+            <div  id="exportContent">
 
-
+                <div class="accesos">
+                    <br>
+                </div>
 
 
                 <!-- TABLA INICIA orden compra-->
 
 
-                <table border="2" width="1" cellpadding="5" id="tabla" class="table table-striped ">
+                <table   WIDTH="30" HEIGHT="40" border="2" width="2"  cellpadding="10"  class="table "  id="tabla" >
                     <thead>
                         <tr>
                             <td colspan="4">
-                                <input id="buscar" type="text" class="form-control" placeholder="Escriba algo para filtrar" />
+                                <input id="buscar" type="text" class="form-control" placeholder="Filtrar Busqueda" />
                             </td>
                         </tr>
                         <tr>

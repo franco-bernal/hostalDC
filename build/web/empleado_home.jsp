@@ -1,3 +1,4 @@
+<%@page import="Modelo.Entidades.Minuta"%>
 <%@page import="Modelo.Manejadoras.Manejadora_minuta"%>
 <%@page import="Modelo.Manejadoras.Manejadora_pedidos"%>
 <%@page import="Modelo.Manejadoras.Manejadora_proveedor"%>
@@ -12,7 +13,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <!DOCTYPE html>
-<html >
+<html>
     <head>
         <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
         <title>Home Empleado</title>
@@ -57,19 +58,14 @@
                 }
 
                 int tip = Integer.parseInt(aint);
-               
-                
-                  if (usuario.compareToIgnoreCase("hostaldc") == 0) {
+
+                if (usuario.compareToIgnoreCase("hostaldc") == 0) {
                     tipo = "Admin";
                 } else {
                     if (tip == 2) {
-                    tipo = "Empleado";
+                        tipo = "Empleado";
+                    }
                 }
-                }
-                
-               
-
-              
 
             %>
 
@@ -92,7 +88,7 @@
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-secondary nav-link" type="button"   href="#lista">Lista de Minutas</a>
                 </li>
-                 <%
+                <%
                     if (tipo == "Admin") {
                         out.print("<a class='btn btn-sm btn-outline-secondary nav-link' href='ad.jsp?id=ok'>Volver a admin</a>");
                     } else {
@@ -125,7 +121,7 @@
         <div class="fon" data-spy="scroll" data-target="#navbar-example2" data-offset="0" >  
 
 
-            
+
             <!------------------------------------------------------------------------------------------->
             <!-- ....................... -->
             <!--Recepción Huespedes listado -->
@@ -228,17 +224,17 @@
             <br>
             <h4>Recepción Pedidos </h4>
             <br>
-            
-            <div id="customers" class="centrar" >
-                
-            <div style="text-align:center;" >
 
-       
-               
+            <div id="customers" class="centrar" >
+
+                <div style="text-align:center;" >
+
+
+
 
                     <div class=" col-lg-5 col-sm-12 col-xs-5 " >
                         <div class="ex3" >
-                            
+
                             <table WIDTH="600"  >
 
                                 <thead  >
@@ -462,37 +458,162 @@
         <!--minutas----------------------------------------------------------------------------------------------->
 
         <h4  class="mb-5 mar">Lista de minutas </h4>
-
-
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target=".minuta">Presione para ver la Lista</button>
-
-        <div class="modal fade minuta" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content text-center">
-
-                    <!-- la siguiente linea incluye la minuta.jsp -->
-                    <jsp:include page="minuta.jsp" />
-                </div>
-            </div>
-        </div>
+        <a href="minuta.jsp" class="btn btn-sm btn-outline-secondary nav-link">ver minutas</a>
         <!--FIn:-minutas------------------------------------------------------------------------------------------>
 
+
+
+
+
+
         <br>
         <br>
         <br>
+        <hr>
+        <form action="C_Minuta" method="Post">
+            <!-- Cuadros de texto-->
+            <h1>Modificar Minuta</h1>
+            <label>seleccione minuta a modificar:</label>
+            <select class="form-control" name="select_mi" id="sel1" required="" >
+                <option></option>
+                <%                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
+                        Minuta min = mane_min.getMinuta().get(i);
+                        if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
+                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                out.print("<option>id:0" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + " ESTADO:" + min.getDetalle() + "</option>");
+
+                            } else {
+                                out.print("<option>id:" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + " ESTADO:" + min.getDetalle() + "</option>");
+
+                            }
+                        } else {
+                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                out.print("<option>id:0" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + "</option>");
+
+                            } else {
+                                out.print("<option>id:" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + "</option>");
+
+                            }
+                        }
+
+                    }
+                %>
+            </select>
+            <br>
+            <label>nuevo titulo:</label>
+            <input type="text-area" name="txt_titulo" placeholder="agregar título" required="true" maxlength="49">
+            <br>
+            <label>nueva descripcion:</label>
+            <textarea type="text-area" name="txt_descripcion" placeholder="agregar descripcion" required="true" maxlength="499"></textarea>
+            <br>      
+            <br>          
+            <label>nuevo tipo:</label>
+            <select class="form-control" name="select_tipo" id="sel1" required="true" >
+                <option></option>
+                <%
+                    int id = 10;
+                    tipo = "";
+                    for (int o = 0; o < mane_min.getTipo().size(); o++) {
+                        tipo = mane_min.getTipo().get(o).getNom_tipo();
+                        id = mane_min.getTipo().get(o).getId_tipo_minuta();
+
+                        out.print("<option>" + id + "   || " + tipo + "</option>");
+
+                    }
+                %>
+            </select>
+            <!--Checkbox-->
+            <div class="form-group form-check">
+                <input type="checkbox"  required="true">
+                <label>modificar</label>
+            </div>
+            <!--FIN: Checkbox-->
+            <button type="submit" class="btn btn-dark btn-block" name="accion" value="modificar_mi" style='width:220px; height:35px'>Actualizar</button>
+        </form>
+        <hr>
         <br>
         <br>
         <br>
+
+        <!--Eliminar minutas -->
+        <form action="C_Minuta" method="Post">
+            <!-- Cuadros de texto-->
+            <h1>Dar de baja minuta</h1>
+            <select class="form-control" name="select_min" id="sel1">
+                <option>seleccionar minuta</option>
+                <%                    tipo = "";
+
+                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
+                        if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
+
+                        } else {
+                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                out.print("<option>id:0" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                            } else {
+                                out.print("<option>id:" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                            }
+                        }
+
+                    }
+                %>      
+            </select>   
+            <!--Checkbox-->
+            <div class="form-group form-check">
+                <input type="checkbox"  required="true">
+                <label>modificar</label>
+            </div>          
+            <!--FIN: Checkbox-->
+            <button type="submit" class="btn btn-dark btn-block" name="accion" value="eliminar_mi" style='width:220px; height:35px'>Dar de baja</button>
+        </form>         
+        <!--FIn:Eliminar minutas  -->
+        <hr>
         <br>
+        <br>
+        <br>
+        <!--Eliminar minutas -->
+        <form action="C_Minuta" method="Post">
+            <!-- Cuadros de texto-->
+            <h1>Recuperar minuta</h1>
+            <select class="form-control" name="select_min" id="sel1">
+                <option>seleccionar minuta</option>
+                <%                    tipo = "";
+
+                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
+                        if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
+                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                out.print("<option>id:0" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                            } else {
+                                out.print("<option>id:" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                            }
+                        } else {
+
+                        }
+
+                    }
+                %>      
+            </select>   
+            <!--Checkbox-->
+            <div class="form-group form-check">
+                <input type="checkbox"  required="true">
+                <label>modificar</label>
+            </div>          
+            <!--FIN: Checkbox-->
+            <button type="submit" class="btn btn-dark btn-block" name="accion" value="recuperar_mi" style='width:220px; height:35px'>Recuperar</button>
+        </form>         
+        <!--FIn:Eliminar minutas  -->
 
 
         <!-- -->
-   
 
 
-<div>
 
-<br>
+        <div>
+
+            <br>
             <!--Modal de ayuda -->            
             <button type="button" class="button1 button1" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
 
@@ -507,40 +628,40 @@
 
             <!-- ....................... -->
             <!-- ....................... -->
-</div>
+        </div>
 
 
         <br>
-         <br>
- </div>
+        <br>
+    </div>
 
 
-<%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
-            sesion.setAttribute("user", null);
-            sesion.invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+    <%    if (sesion.getAttribute("user") == null || sesion.getAttribute("clave") == null) {
+                sesion.setAttribute("user", null);
+                sesion.invalidate();
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            HttpSession rs = request.getSession();
+            rs.setAttribute("desde", "empleado_home.jsp");
+            rs.setAttribute("pag", "login.jsp");
+            rs.setAttribute("titulo", "Inicie sesion otra vez.");
+            rs.setAttribute("detalle", "Algo ha salido mal en la pagina.");
+            rs.setAttribute("sms", "falló empleado_home + " + e);
+            rs.setAttribute("tip", "error");
+            response.sendRedirect("true.jsp");
+
         }
-    } catch (Exception e) {
-        HttpSession rs = request.getSession();
-        rs.setAttribute("desde", "empleado_home.jsp");
-        rs.setAttribute("pag", "login.jsp");
-        rs.setAttribute("titulo", "Inicie sesion otra vez.");
-        rs.setAttribute("detalle", "Algo ha salido mal en la pagina.");
-        rs.setAttribute("sms", "falló empleado_home + " + e);
-        rs.setAttribute("tip", "error");
-        response.sendRedirect("true.jsp");
-
-    }
-%>
+    %>
 
 
-<script src="js/form.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="js/form.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
 </body>
 </html>

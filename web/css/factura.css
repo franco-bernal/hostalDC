@@ -7,7 +7,15 @@ and open the template in the editor.
     Created on : 07-07-2020, 20:51:33
     Author     : Enfoks
 */
+.bod{ margin-left: auto;
+  margin-right: auto;
+  font: small-caps 100%/200% serif;
 
+  width: 60%;
+  height: 40%;
+  
+    
+}
 .factura {
   table-layout: fixed;
 }
@@ -17,7 +25,7 @@ and open the template in the editor.
 }
 
 .factura > thead {
-  border-top: solid 3px #000;
+  border-top: solid 5px #000;
   border-bottom: 3px solid #000;
 }
 
@@ -40,4 +48,8 @@ and open the template in the editor.
 
 .cond {
   border-top: solid 2px #000;
+}
+
+.bo{
+   margin-left: 80%;
 }

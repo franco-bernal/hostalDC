@@ -21,7 +21,8 @@ and open the template in the editor.
     
 }
 
-
+.let{ font: small-caps 100%/200% serif;
+text-align: center;}
 
 .tipo{
      margin-top: 5px;
@@ -99,7 +100,7 @@ fomu1{
     float: right;
 }
 
-h4{
+h4,th,tr{
     text-align: center;
 }
 

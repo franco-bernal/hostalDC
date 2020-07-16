@@ -7,13 +7,7 @@
 <%@page import="Modelo.Manejadoras.Manejadora_factura"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>facturas</title>
-        <%
+<%
             //Seguridad de pagina
             String llave = "ok";
             try {
@@ -31,55 +25,75 @@
                 response.sendRedirect("../login.jsp");
             }
         %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
+        <title>Facturas</title>
         <%
             Manejadora_factura mane_fa = new Manejadora_factura();
         %>
         <script src="../js/configExcel/xlsx.full.min.js"></script>
         <script src="../js/configExcel/FileSaver.min.js"></script>
         <script src="../js/configExcel/tableexport.min.js"></script>
+         <link href="/hostalDC-master/css/registro_factura.css"  rel="stylesheet" type="text/css"/>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     </head>
-    <body>
+    <body >
         <!-------------------------->
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
-        <button onclick="aPDF();"> Exportar a pdf </button>
+        <button class="btn btn-secondary btn-sm" onclick="aPDF();"> Exportar a pdf </button>
 
-        <button type="button" onclick="javascript:window.print()">Imprimir</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="javascript:window.print()">Imprimir</button>
 
-        <button onclick="Export2Doc('exportContent');">Export as .doc</button>
-        <button id="btnExportar">Exportar a excel</button>
+        <button class="btn btn-secondary btn-sm" onclick="Export2Doc('exportContent');">Export as .doc</button>
+        <button class="btn btn-secondary btn-sm" id="btnExportar">Exportar a excel</button>
+          <a href="/hostalDC-master/Principal_admin.jsp" class="btn btn-secondary btn-sm" aria-pressed="true">Volver</a>
+        
         <!---------------------->
 
-        <div class="row">
-            <div  class="col-xs-12  d-flex justify-content-center" id="exportContent">
-                <h1 class="page-header">
+        <div class="centrar" id="customers" class="text-center"  >
+            <div id="exportContent">
+                <h1  class="page-header" >
+                    <br>
+                    <br>
                     Facturas
                 </h1>
+                <div class="accesos">
+                    <br>
+                </div>
+                
                 <!-- TABLA INICIA orden compra-->
 
-                <table border="2" width="1" cellpadding="5" id="tabla" class="table table-striped ">
+                <table   WIDTH="30" HEIGHT="40" border="2" width="2"  cellpadding="10"  class="table "  id="tabla" >
                     <thead>
                         <tr>
-                            <td colspan="4">
-                                <input id="buscar" type="text" class="form-control" placeholder="Escriba algo para filtrar" />
+                            <td >
+                                <input id="buscar" type="text"  placeholder="Filtrar Busqueda" />
                             </td>
                         </tr>
                         <tr>
                             <th>Codigo</th>
-                            <th>fecha emicion</th>
+                            <th>Fecha Emisión</th>
                             <th>Valor total</th>
                         </tr>
 
                     </thead>
-                    <tbody>
+                    <tbody> 
                         <%
                             for (int i = 0; i < mane_fa.getFactura().size(); i++) {
                                 out.print(""
                                         + "<tr>"
-                                        + "<td>" + mane_fa.getFactura().get(i).getCod_factura() + "</td>"
+                                        + "<td WIDTH='30' HEIGHT='40' >" + mane_fa.getFactura().get(i).getCod_factura() + "</td>"
                                         + "<td>" + mane_fa.getFactura().get(i).getF_emicion() + "</td>"
                                         + "<td>" + mane_fa.getFactura().get(i).getValor_total() + "</td>"
                                         + "</tr>");
@@ -88,7 +102,7 @@
                     </tbody>
                 </table>
                 <!-- TABLA FINALIZA -->
-                 
+
 
 
 

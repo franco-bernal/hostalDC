@@ -14,12 +14,13 @@
 
     <title>Menú</title>
     <link href="css/minuta.css" rel="stylesheet">
-</head>
-
-<body>
     <%
     Manejadora_minuta mane_minuta = new Manejadora_minuta();
     %>
+</head>
+
+<body>
+    
     <section id="popular" class="module">
         <div class="container">
 
@@ -40,8 +41,10 @@
                     for(int i = 0;i<mane_minuta.getMinuta().size();i++){
                         int id_tipo=mane_minuta.getMinuta().get(i).getId_tipo_min();
                         int valor=mane_minuta.valorMinuta(id_tipo);
-                                    
-                        //se pueden cambiar todas las etiquetas
+                                     if(mane_minuta.getMinuta().get(i).getDetalle().compareToIgnoreCase("off")==0){
+                            
+                        }else{
+                                     //se pueden cambiar todas las etiquetas
                         out.print(""
                         + "<div class='menu'>"
                         +     "<div class='row'>"
@@ -53,7 +56,9 @@
                         +             "<h4 class='menu-price'>$"+valor+"</h4>"
                         +        "</div>"
                         +     "</div>"
-                        + "</div>");
+                        + "</div>");       
+                                     }
+                     
                         
                     }
                     %>
@@ -72,7 +77,7 @@
             </div><!-- .row -->
 
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
+                <div class="col-sm-6  col-sm-offset-3">
                     <div class="devider">
                     </div>
                 </div>

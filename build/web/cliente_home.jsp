@@ -73,7 +73,7 @@
 
 
     </head>
-    <body  data-spy="scroll" class="text-capitalize "  data-target="#navbar-example2">
+    <body  data-spy="scroll" class="text-capitalize let text-center"  data-target="#navbar-example2">
 
 
         <nav id="navbar-example2" class="navbar navbar-dark bg-dark men" style="position: fixed;">       
@@ -130,8 +130,9 @@
             <!-- cuerpo con identificadores reconocibles para el manejo del menu(nav,header) -->
 
 
-            <!--Modal de ayuda -->            
-            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
+            <!--Modal de ayuda -->    
+            <br>
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
 
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -148,11 +149,11 @@
             <!--..............-->
             <br><br>
             <!--.........Lista de compras.....-->
-            <div  class="customers" class="container">
-                <div class="container table-sm col-lg-10">
-                    <div>
-                        <h4 class="mb-5 mar" id="lista">Lista de compras</h4>
-                        <table class="table center-block" >
+            <div  class="customers " class="container"  >
+                <div class="container table-sm col-lg-10" >
+                    <div  class="let text-center">
+                        <h4 id="lista" >Lista de compras</h4>
+                        <table class="table center-block  " >
                             <thead>
                                 <tr>
                                     <th >Codigo</th>
@@ -196,18 +197,18 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <br><br><br><br>
+                        <br><br>
                     </div>
                 </div>
             </div>
             <!--......Fin lista de compras.......-->   
 
-            <br><br>
+<br>
             <!--.............-->   
 
             <h4  class="mb-5 mar" id="comprar">Comprar </h4>
 
-            <div class="container col-lg-5 col-sm-12 col-xs-5"> 
+            <div class="container col-lg-5 col-sm-12 col-xs-5" style="align-content: center;" > 
                 <form action="AgregarHuesped" method="Post">
 
                     <div class="col-sm">
@@ -239,7 +240,7 @@
                             <label class="form-check-label" for="exampleCheck1">Revise los datos</label>
                         </div>
                         <!--FIN: Checkbox-->
-                        <button type="submit" class="btn btn-dark btn-block" name="accion" value="Agregar" style='width:220px; height:35px'>Agregar Huesped</button>
+                        <button type="submit" class="btn btn-dark" style="align-content: center;" name="accion" value="Agregar" style='width:220px; height:35px'>Agregar Huesped</button>
                     </div>
                 </form>
             </div>
@@ -249,13 +250,13 @@
             <br><br>
 
 
-            <h4>Generar factura</h4>
+            <h4>Pago Facturas</h4>
 
             <form action="ControlCliente" method="post">           
 
 
                 <div class="fac">  
-                    <br><br>
+                    <br>
                     <label>cantidad a facturar </label>
                     <br>
                     <select   name="select_opc" onChange="pagoOnChange(this)"  >
@@ -264,23 +265,23 @@
                     </select>
                     <div  id="nTargeta" style="display:'';">
                         <br>
-                        <label for="">Ingrese codigo a facturar:</label>
+                        <label for="">Ingrese codigo orden a facturar</label>
                         <br>
                         <input type="number"  name="cod_ord"> 
                         <br> 
-                        <br> 
+                        <br>
                     </div>
 
                     <input type='text' class='form-control desactivar' name='txt_rut' value="<%=rut%>">
                     <div class="b">
-                        <button type="submit"  class="btn btn-dark btn-block" name="accion" value="generarFactura" style='width:100px; height:35px'>Generar</button>
+                        <button type="submit"  class="btn btn-dark btn-block" name="accion" value="generarFactura" style='width:100px; height:35px'>Pagar</button>
                     </div>
                 </div>
-
+ 
             </form>
             <br><br><br>
 
-
+ </div>
 
             <script>
                 function pagoOnChange(sel) {

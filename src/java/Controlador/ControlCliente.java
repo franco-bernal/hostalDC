@@ -5,6 +5,7 @@ import Modelo.Entidades.Orden_compra;
 import Modelo.Entidades.Usuario;
 import Modelo.Entidades.UsuarioCli_detalle;
 import Modelo.Manejadoras.Manejadora_cliente;
+import Modelo.Manejadoras.Manejadora_conf;
 import Modelo.Manejadoras.Manejadora_factura;
 import Modelo.Manejadoras.Manejadora_orden;
 import Modelo.Manejadoras.Manejadora_usuario;
@@ -135,8 +136,9 @@ public class ControlCliente extends HttpServlet {
                     int cod_ord = Integer.parseInt(request.getParameter("cod_ord"));
 
                     Orden_compra ord = mane_ord.devolverCompraCompleta(cod_ord);
+                    Manejadora_conf maneCo=new Manejadora_conf();
                     int iva = 0;
-                    iva = (int) Math.round((ord.getPrecio_total() * 0.19));
+                    iva = (int) Math.round((ord.getPrecio_total() * (maneCo.getConfig().get(0).getIva()/100)));
                     valor_total = ord.getTipo_hab() + iva;
 
                     Factura fac = new Factura(cod_factura, valor_total, f_emicion);

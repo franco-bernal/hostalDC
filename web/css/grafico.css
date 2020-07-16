@@ -9,7 +9,7 @@ no tocar
                 --bar-color:#F16335;
                 --bar-thickness:40px;
                 --bar-rounded: 3px;
-                --bar-spacing:10px;
+                --bar-spacing:30px;
 
                 font-family:sans-serif;
                 width:var(--chart-width);
