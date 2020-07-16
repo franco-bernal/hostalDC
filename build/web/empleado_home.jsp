@@ -324,8 +324,7 @@
         </div>
 
         <!--FIN: Recepción pedidos Listado-->
-        <br>
-        <br>
+        
 
 
         <!------------------------------------------------------------------------------------------->            
@@ -385,254 +384,255 @@
         <!------------------------------------------------------------------------------------------->
         <!------------------------------------------------------------------------------------------->
 
+        <div class="container col-lg-5">
+            <hr class="aba mar" id="minuta">
+            <br>
+            <br>
+            <h4>Agregar Minuta</h4>
+            <div class="container col-lg-12 col-sm-12 col-xs-5 mar"> 
+                <form action="C_Minuta" method="POST">
+                    <div class="col-sm">
+                        <p class="p-3 mb-2 bg-dark text-white text-center ">Agregar Minuta</p>
 
-        <hr class="aba mar" id="minuta">
-        <br>
-        <br>
-        <h4>Agregar Minuta</h4>
-        <div class="container col-lg-5 col-sm-12 col-xs-5 mar"> 
-            <form action="C_Minuta" method="POST">
-                <div class="col-sm">
-                    <p class="p-3 mb-2 bg-dark text-white text-center ">Agregar Minuta</p>
+                        <!--text area -->
+                        <input type="text" class="form-control" name="txt_titulo" placeholder="Titulo" required="true" maxlength="18">
+                        <!--FIn text area -->
 
-                    <!--text area -->
-                    <input type="text" class="form-control" name="txt_titulo" placeholder="Titulo" required="true" maxlength="18">
-                    <!--FIn text area -->
-
-                    <!--text area -->
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Descripción</span>
-                            <span class="input-group-text">-></span>
+                        <!--text area -->
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Descripción</span>
+                                <span class="input-group-text">-></span>
+                            </div>
+                            <textarea class="form-control" name="txt_detalle" aria-label="With textarea" maxlength="100"></textarea>
                         </div>
-                        <textarea class="form-control" name="txt_detalle" aria-label="With textarea" maxlength="100"></textarea>
-                    </div>
-                    <!--FIn text area -->
+                        <!--FIn text area -->
 
 
-                    <!-- select -->
-                    <div class="form-group">
-                        <label for="sel1" class="mt-2">Tipo de Minuta</label>
-                        <select class="form-control" name="select_min" id="sel1">
-                            <%                                    Manejadora_minuta mane_min = new Manejadora_minuta();
+                        <!-- select -->
+                        <div class="form-group">
+                            <label for="sel1" class="mt-2">Tipo de Minuta</label>
+                            <select class="form-control" name="select_min" id="sel1">
+                                <%                                    Manejadora_minuta mane_min = new Manejadora_minuta();
 
-                                try {
-                                    if (mane_min.getTipo().size() == 0) {
-                                        out.print("<option>Aún no hay minutas</option>");
-                                    } else {
-                                        for (int i = 0; i < mane_min.getTipo().size(); i++) {
-                                            out.print("<option>" + mane_min.getTipo().get(i).getNom_tipo() + "</option>");
+                                    try {
+                                        if (mane_min.getTipo().size() == 0) {
+                                            out.print("<option>Aún no hay minutas</option>");
+                                        } else {
+                                            for (int i = 0; i < mane_min.getTipo().size(); i++) {
+                                                out.print("<option>" + mane_min.getTipo().get(i).getNom_tipo() + "</option>");
+                                            }
                                         }
+                                    } catch (Exception e) {
+                                        out.print("<option>Error en esta area</option>");
                                     }
-                                } catch (Exception e) {
-                                    out.print("<option>Error en esta area</option>");
+
+
+                                %>
+                            </select>
+                            <!--FIn select -->
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input"  required="true">
+                        <label class="form-check-label" for="exampleCheck1">Revise los Datos</label>
+                    </div>
+                    <button type="submit" class="btn btn-dark" name="accion" value="RegistrarMin">Enviar Minuta</button>
+                </form>
+
+                <hr class="aba mar">
+            </div>
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+            <!------------------------------------------------------------------------------------------->
+
+            <br>
+            <br>
+            <br>
+
+
+            <!--minutas----------------------------------------------------------------------------------------------->
+
+            <h4  class="mb-5 mar">Lista de minutas </h4>
+            <a href="minuta.jsp" class="btn btn-sm btn-outline-secondary nav-link">ver minutas</a>
+            <!--FIn:-minutas------------------------------------------------------------------------------------------>
+
+
+
+
+
+
+            <br>
+            <br>
+            <br>
+            <hr>
+            <form action="C_Minuta" method="Post">
+                <!-- Cuadros de texto-->
+                <h1>Modificar Minuta</h1>
+                <label>seleccione minuta a modificar:</label>
+                <select class="form-control" name="select_mi" id="sel1" required="" >
+                    <option></option>
+                    <%                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
+                            Minuta min = mane_min.getMinuta().get(i);
+                            if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
+                                if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                    out.print("<option>id:0" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + " ESTADO:" + min.getDetalle() + "</option>");
+
+                                } else {
+                                    out.print("<option>id:" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + " ESTADO:" + min.getDetalle() + "</option>");
+
                                 }
+                            } else {
+                                if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                    out.print("<option>id:0" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + "</option>");
 
+                                } else {
+                                    out.print("<option>id:" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + "</option>");
 
-                            %>
-                        </select>
-                        <!--FIn select -->
-                    </div>
-                </div>
-                <hr>
+                                }
+                            }
+
+                        }
+                    %>
+                </select>
+                <br>
+                <label>nuevo titulo:</label>
+                <input type="text-area" name="txt_titulo" placeholder="agregar título" required="true" maxlength="49">
+                <br>
+                <label>nueva descripcion:</label>
+                <textarea type="text-area" name="txt_descripcion" placeholder="agregar descripcion" required="true" maxlength="499"></textarea>
+                <br>      
+                <br>          
+                <label>nuevo tipo:</label>
+                <select class="form-control" name="select_tipo" id="sel1" required="true" >
+                    <option></option>
+                    <%
+                        int id = 10;
+                        tipo = "";
+                        for (int o = 0; o < mane_min.getTipo().size(); o++) {
+                            tipo = mane_min.getTipo().get(o).getNom_tipo();
+                            id = mane_min.getTipo().get(o).getId_tipo_minuta();
+
+                            out.print("<option>" + id + "   || " + tipo + "</option>");
+
+                        }
+                    %>
+                </select>
+                <!--Checkbox-->
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input"  required="true">
-                    <label class="form-check-label" for="exampleCheck1">Revise los Datos</label>
+                    <input type="checkbox"  required="true">
+                    <label>modificar</label>
                 </div>
-                <button type="submit" class="btn btn-dark" name="accion" value="RegistrarMin">Enviar Minuta</button>
+                <!--FIN: Checkbox-->
+                <button type="submit" class="btn btn-dark btn-block" name="accion" value="modificar_mi" style='width:220px; height:35px'>Actualizar</button>
             </form>
-
-            <hr class="aba mar">
-        </div>
-        <!------------------------------------------------------------------------------------------->
-        <!------------------------------------------------------------------------------------------->
-        <!------------------------------------------------------------------------------------------->
-        <!------------------------------------------------------------------------------------------->
-        <!------------------------------------------------------------------------------------------->
-
-        <br>
-        <br>
-        <br>
-
-
-        <!--minutas----------------------------------------------------------------------------------------------->
-
-        <h4  class="mb-5 mar">Lista de minutas </h4>
-        <a href="minuta.jsp" class="btn btn-sm btn-outline-secondary nav-link">ver minutas</a>
-        <!--FIn:-minutas------------------------------------------------------------------------------------------>
-
-
-
-
-
-
-        <br>
-        <br>
-        <br>
-        <hr>
-        <form action="C_Minuta" method="Post">
-            <!-- Cuadros de texto-->
-            <h1>Modificar Minuta</h1>
-            <label>seleccione minuta a modificar:</label>
-            <select class="form-control" name="select_mi" id="sel1" required="" >
-                <option></option>
-                <%                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
-                        Minuta min = mane_min.getMinuta().get(i);
-                        if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
-                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
-                                out.print("<option>id:0" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + " ESTADO:" + min.getDetalle() + "</option>");
-
-                            } else {
-                                out.print("<option>id:" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + " ESTADO:" + min.getDetalle() + "</option>");
-
-                            }
-                        } else {
-                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
-                                out.print("<option>id:0" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + "</option>");
-
-                            } else {
-                                out.print("<option>id:" + min.getId_minuta() + " ,titulo:" + min.getTitulo() + " TIPO:" + mane_min.obtenerTipoMinuta(min.getId_tipo_min()) + "</option>");
-
-                            }
-                        }
-
-                    }
-                %>
-            </select>
+            <hr>
             <br>
-            <label>nuevo titulo:</label>
-            <input type="text-area" name="txt_titulo" placeholder="agregar título" required="true" maxlength="49">
             <br>
-            <label>nueva descripcion:</label>
-            <textarea type="text-area" name="txt_descripcion" placeholder="agregar descripcion" required="true" maxlength="499"></textarea>
-            <br>      
-            <br>          
-            <label>nuevo tipo:</label>
-            <select class="form-control" name="select_tipo" id="sel1" required="true" >
-                <option></option>
-                <%
-                    int id = 10;
-                    tipo = "";
-                    for (int o = 0; o < mane_min.getTipo().size(); o++) {
-                        tipo = mane_min.getTipo().get(o).getNom_tipo();
-                        id = mane_min.getTipo().get(o).getId_tipo_minuta();
+            <br>
 
-                        out.print("<option>" + id + "   || " + tipo + "</option>");
+            <!--Eliminar minutas -->
+            <form action="C_Minuta" method="Post">
+                <!-- Cuadros de texto-->
+                <h1>Dar de baja minuta</h1>
+                <select class="form-control" name="select_min" id="sel1">
+                    <option>seleccionar minuta</option>
+                    <%                    tipo = "";
 
-                    }
-                %>
-            </select>
-            <!--Checkbox-->
-            <div class="form-group form-check">
-                <input type="checkbox"  required="true">
-                <label>modificar</label>
-            </div>
-            <!--FIN: Checkbox-->
-            <button type="submit" class="btn btn-dark btn-block" name="accion" value="modificar_mi" style='width:220px; height:35px'>Actualizar</button>
-        </form>
-        <hr>
-        <br>
-        <br>
-        <br>
-
-        <!--Eliminar minutas -->
-        <form action="C_Minuta" method="Post">
-            <!-- Cuadros de texto-->
-            <h1>Dar de baja minuta</h1>
-            <select class="form-control" name="select_min" id="sel1">
-                <option>seleccionar minuta</option>
-                <%                    tipo = "";
-
-                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
-                        if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
-
-                        } else {
-                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
-                                out.print("<option>id:0" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+                        for (int i = 0; i < mane_min.getMinuta().size(); i++) {
+                            if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
 
                             } else {
-                                out.print("<option>id:" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+                                if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                    out.print("<option>id:0" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
 
+                                } else {
+                                    out.print("<option>id:" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                                }
                             }
-                        }
-
-                    }
-                %>      
-            </select>   
-            <!--Checkbox-->
-            <div class="form-group form-check">
-                <input type="checkbox"  required="true">
-                <label>modificar</label>
-            </div>          
-            <!--FIN: Checkbox-->
-            <button type="submit" class="btn btn-dark btn-block" name="accion" value="eliminar_mi" style='width:220px; height:35px'>Dar de baja</button>
-        </form>         
-        <!--FIn:Eliminar minutas  -->
-        <hr>
-        <br>
-        <br>
-        <br>
-        <!--Eliminar minutas -->
-        <form action="C_Minuta" method="Post">
-            <!-- Cuadros de texto-->
-            <h1>Recuperar minuta</h1>
-            <select class="form-control" name="select_min" id="sel1">
-                <option>seleccionar minuta</option>
-                <%                    tipo = "";
-
-                    for (int i = 0; i < mane_min.getMinuta().size(); i++) {
-                        if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
-                            if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
-                                out.print("<option>id:0" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
-
-                            } else {
-                                out.print("<option>id:" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
-
-                            }
-                        } else {
 
                         }
-
-                    }
-                %>      
-            </select>   
-            <!--Checkbox-->
-            <div class="form-group form-check">
-                <input type="checkbox"  required="true">
-                <label>modificar</label>
-            </div>          
-            <!--FIN: Checkbox-->
-            <button type="submit" class="btn btn-dark btn-block" name="accion" value="recuperar_mi" style='width:220px; height:35px'>Recuperar</button>
-        </form>         
-        <!--FIn:Eliminar minutas  -->
-
-
-        <!-- -->
-
-
-
-        <div>
-
+                    %>      
+                </select>   
+                <!--Checkbox-->
+                <div class="form-group form-check">
+                    <input type="checkbox"  required="true">
+                    <label>modificar</label>
+                </div>          
+                <!--FIN: Checkbox-->
+                <button type="submit" class="btn btn-dark btn-block" name="accion" value="eliminar_mi" style='width:220px; height:35px'>Dar de baja</button>
+            </form>         
+            <!--FIn:Eliminar minutas  -->
+            <hr>
             <br>
-            <!--Modal de ayuda -->            
-            <button type="button" class="button1 button1" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
+            <br>
+            <br>
+            <!--Eliminar minutas -->
+            <form action="C_Minuta" method="Post">
+                <!-- Cuadros de texto-->
+                <h1>Recuperar minuta</h1>
+                <select class="form-control" name="select_min" id="sel1">
+                    <option>seleccionar minuta</option>
+                    <%                    tipo = "";
 
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <embed src="pdf/CASO.pdf#page=3" type="application/pdf" width="100%" height="600px" />
+                        for (int i = 0; i < mane_min.getMinuta().size(); i++) {
+                            if (mane_min.getMinuta().get(i).getDetalle().compareToIgnoreCase("off") == 0) {
+                                if (mane_min.getMinuta().get(i).getId_minuta() < 10) {
+                                    out.print("<option>id:0" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                                } else {
+                                    out.print("<option>id:" + mane_min.getMinuta().get(i).getId_minuta() + " ," + mane_min.getMinuta().get(i).getTitulo() + "</option>");
+
+                                }
+                            } else {
+
+                            }
+
+                        }
+                    %>      
+                </select>   
+                <!--Checkbox-->
+                <div class="form-group form-check">
+                    <input type="checkbox"  required="true">
+                    <label>modificar</label>
+                </div>          
+                <!--FIN: Checkbox-->
+                <button type="submit" class="btn btn-dark btn-block" name="accion" value="recuperar_mi" style='width:220px; height:35px'>Recuperar</button>
+            </form>         
+            <!--FIn:Eliminar minutas  -->
+
+
+            <!-- -->
+
+
+
+            <div>
+
+                <br>
+                <!--Modal de ayuda -->            
+                <button type="button" class="button1 button1" data-toggle="modal" data-target=".bd-example-modal-lg">Ayuda</button>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <embed src="pdf/CASO.pdf#page=3" type="application/pdf" width="100%" height="600px" />
+                        </div>
                     </div>
                 </div>
+                <!--Fin Modal   <object  data="pdf/CASO.pdf#page=2"></object>                         <iframe  src="pdf/CASO.pdf#page=2"></iframe>-->
+
+                <!-- ....................... -->
+                <!-- ....................... -->
             </div>
-            <!--Fin Modal   <object  data="pdf/CASO.pdf#page=2"></object>                         <iframe  src="pdf/CASO.pdf#page=2"></iframe>-->
 
-            <!-- ....................... -->
-            <!-- ....................... -->
+
+            <br>
+            <br>
         </div>
-
-
-        <br>
-        <br>
     </div>
 
 
