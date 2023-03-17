@@ -1,0 +1,73 @@
+INSERT INTO tipo_hab VALUES (0,'pendiente',0);
+INSERT INTO tipo_hab VALUES (1,'individual',500);
+INSERT INTO tipo_hab VALUES (2,'compartida',1000);
+
+INSERT INTO HABITACION VALUES (0,'pendiente','pendiente',1);
+INSERT INTO HABITACION VALUES (1,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (2,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (3,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (4,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (5,'es bonito','disponible',1);
+INSERT INTO HABITACION VALUES (6,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (7,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (8,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (9,'sin ventana','disponible',2);
+INSERT INTO HABITACION VALUES (10,'sin ventana','disponible',2);
+
+INSERT INTO TIPO_MINUTA VALUES (1,'especial',2000);
+INSERT INTO TIPO_MINUTA VALUES (2,'general',3000);
+INSERT INTO TIPO_MINUTA VALUES (3,'servicios ejecutivos',2500);
+
+INSERT INTO MINUTA VALUES (1,'papapa','11-06-2020','muchas papas y de comida comeran comida...',1);
+INSERT INTO MINUTA VALUES (2,'pure poh','11-07-2020','muchas papas molidas y de comida comeran comida de papas...',2);
+INSERT INTO MINUTA VALUES (3,'aloz chino','11-09-2020','mulcielago al aloz y para tomal una celveza colona con musica de vilus, luna de miel ...',3);
+
+
+
+
+
+--4:cliente 3:proveedor 2:empleado 1:admin
+INSERT INTO USUARIO VALUES (0,'alicia','202cb962ac59075b964b07152d234b70','1234@hotmail.es',4,0);
+INSERT INTO CLIENTE VALUES ('12.555.555-k','alicia','45265412','la calle 1365',0);
+
+INSERT INTO USUARIO VALUES (1,'franco','202cb962ac59075b964b07152d234b70','12345@hotmail.es',4,0);
+INSERT INTO CLIENTE VALUES ('13.555.555-k','franco','45265415','la calle 1364',1);
+---
+
+INSERT INTO USUARIO VALUES (2,'daniel','202cb962ac59075b964b07152d234b70','12346@hotmail.es',2,0);
+INSERT INTO EMPLEADO VALUES ('15.555.555-k','daniel','sanchez',2);
+
+INSERT INTO USUARIO VALUES (3,'profe','202cb962ac59075b964b07152d234b70','1236@hotmail.es',2,0);
+INSERT INTO EMPLEADO VALUES ('13.255.555-k','profe','profesos',3);
+--
+INSERT INTO USUARIO VALUES (4,'camas','202cb962ac59075b964b07152d234b70','123a6@hotmail.es',3,0);
+INSERT INTO PROVEEDOR VALUES ('18.555.555-k','camas','todo camas',4);
+
+INSERT INTO USUARIO VALUES (5,'fruna','202cb962ac59075b964b07152d234b70','2123a6@hotmail.es',3,0);
+INSERT INTO PROVEEDOR VALUES ('18.565.555-k','fruna','heladeriaa',5);
+
+INSERT INTO PRODUCTOS VALUES (0,'mayo','kilo',1500,'18.565.555-k');
+INSERT INTO PRODUCTOS VALUES (1,'kechu','kilo',2800,'18.555.555-k');
+INSERT INTO PRODUCTOS VALUES (2,'papas fritas','kilo',2000,'18.565.555-k');
+
+insert into FACTURA values (0,0,'10/10/2020');
+
+
+INSERT INTO USUARIO VALUES (6,'hostaldc','202cb962ac59075b964b07152d234b70','2123a6@hotmail.es',1,0);
+INSERT INTO PROVEEDOR VALUES ('18565555k','hostaldc','hostal',6);
+INSERT INTO EMPLEADO VALUES ('18565555k','hostaldc','hostal',6);
+INSERT INTO CLIENTE VALUES ('18565555k','hostaldc','45265415','la calle 1364',6);
+
+alter table CONFIGURACION
+  add meta_visitas number default 0 not null;
+  
+alter table CONFIGURACION
+  add cod_seguridad number default 0 not null;
+    
+  insert INTO VISITAS VALUES(60,'13-06-2020');
+insert INTO VISITAS VALUES(50,'13-05-2020');
+insert INTO VISITAS VALUES(25,'13-04-2020');
+insert INTO VISITAS VALUES(51,'13-03-2020');
+insert INTO VISITAS VALUES(24,'13-02-2020');
+
+insert into CONFIGURACION VALUES(19,555,100);
